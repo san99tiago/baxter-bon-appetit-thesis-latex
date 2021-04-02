@@ -1,0 +1,393 @@
+% THE AMAZING BAXTER FEEDING ROBOT 
+\documentclass[11pt]{report} %Letter size, letter type and report article structure
+
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=40mm,
+ right=20mm,
+ top=40mm,
+ bottom=30mm,
+ }
+ 
+\usepackage[spanish, english]{babel} % Recognize Spanish language
+
+\usepackage[utf8]{inputenc} % Recognize Latin characters
+
+\usepackage{amsmath} % Insert math formulas/functions
+
+\usepackage{amsfonts} % Extended set of fonts
+
+\usepackage{graphicx} % Include graphics in document
+
+\usepackage{siunitx} % Consistent set of units with rules on how they are to be used
+
+\usepackage{caption} % Caption for images, formulas and tables
+
+\usepackage{natbib} % Cite library (to reference in APA format)
+\usepackage[breaklinks=true]{hyperref} % Handle cross-referencing commands
+\urlstyle{same}
+\usepackage{url}
+
+
+\usepackage{comment} % Extra big-comments functionalities
+
+\usepackage{textcomp} % For "R" and "TM" symbols
+
+\usepackage{subcaption} % For sub-figures
+
+\usepackage{array} % Usage of arrays
+
+\usepackage{booktabs} % Better quality tables
+
+\usepackage{longtable} % Allow tables to flow over page boundaries
+
+\usepackage{makecell} % Extra functionalities to table cells tabs
+
+\usepackage{multirow} % Extra functionalities to table cells row/cols
+
+\usepackage{float} % Improve figures/tables position in page
+
+\usepackage{algorithm} % Write algorithms easily
+
+\usepackage[noend]{algpseudocode} % Improve pseudo-code algorithms
+
+% Extra functionalities for vertical text
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\OK{\ding{51}}
+
+% Reestablish specific low-level configurations
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+% Remove first-indent in all document
+\setlength\parindent{0pt}
+
+% Avoid annoying "under full hbox oversize comment"
+\hbadness = 2147483647
+\vbadness = 2147483647
+
+% Extra math operators values
+\DeclareMathOperator{\T}{T}
+\DeclareMathOperator{\g}{g}
+\DeclareMathOperator{\f}{f}
+\DeclareMathOperator{\F}{F}
+\DeclareMathOperator{\h}{p}
+\DeclareMathOperator{\p}{p}
+\DeclareMathOperator{\U}{U}
+
+% ---------------------------------------------------------
+
+\begin{document}
+
+% ---------------------------------------------------------
+
+\begin{titlepage}
+
+\begin{center}
+
+\begin{Large}
+
+\vspace*{1cm}
+\textbf{ASSISTED ROBOTICS FOR FEEDING INDIVIDUALS WITH UPPER LIMB DISABILITIES}\\[6.5cm]
+
+\textbf{Santiago García Arango} \\
+\textbf{Elkin Javier Guerra Galeano}
+
+\end{Large}
+
+\vfill
+
+\includegraphics[width=6cm]{assets/imgs/logoeia.png}\\
+
+\begin{large}
+\textbf{EIA UNIVERSITY}\\
+\textbf{MECHATRONICS ENGINEERING}\\
+\textbf{ENVIGADO, COLOMBIA}\\
+\textbf{2021}\\
+\end{large}
+\end{center}
+\end{titlepage}
+
+% ---------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\begin{Large}
+
+\vspace*{1cm}
+\textbf{ASSISTED ROBOTICS FOR FEEDING INDIVIDUALS WITH UPPER LIMB DISABILITIES}\\[3.5cm]
+
+\textbf{Santiago García Arango}\\
+\textbf{Elkin Javier Guerra Galeano}\\[2cm]
+
+\end{Large}
+
+\begin{large}
+
+\textbf{Final project to obtain the degree of:}\\
+\textbf{Mechatronics Engineer}\\[2cm]
+
+\textbf{Director of the project:}\\
+\textbf{Dolly Tatiana Manrique Espíndola, M.Sc., Ph.D.}\\[1cm]
+
+\end{large}
+
+\vfill
+
+\includegraphics[width=5cm]{assets/imgs/logoeia.png}\\
+
+\begin{large}
+\textbf{EIA UNIVERSITY}\\
+\textbf{MECHATRONICS ENGINEERING}\\
+\textbf{ENVIGADO, COLOMBIA}\\
+\textbf{2021}\\
+\end{large}
+
+\end{center}
+\end{titlepage}
+
+% ---------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\begin{Large}
+
+\vspace*{1cm}
+\textbf{ACKNOWLEDGMENTS}\\[3.5cm]
+
+\textbf{Acknowledgments 1}\\
+
+\end{Large}
+
+\begin{Large}
+
+\vspace*{3cm}
+
+\textbf{Acknowledgments 2}\\
+
+\end{Large}
+
+\vfill
+
+\end{center}
+\end{titlepage}
+
+% ---------------------------------------------------------
+
+\tableofcontents
+
+% ---------------------------------------------------------
+
+\cleardoublepage
+\listoffigures
+
+% ---------------------------------------------------------
+
+\cleardoublepage
+\listoftables
+
+% ---------------------------------------------------------
+
+\cleardoublepage
+\chapter*{List of Symbols}
+
+\begin{longtable}{p{5mm} c p{120mm} }
+
+\multicolumn{3}{l}{\textbf{Position Variables}}\\
+\\
+$\zeta$ & --- & Vector of something...\\
+\\
+\multicolumn{3}{l}{\textbf{Robot's parameters}}\\
+\\
+$P$ & --- & Centroid of ...\\
+
+\\
+\multicolumn{3}{l}{\textbf{Control Theory parameters}}\\
+\\
+$t$ & --- & Time ...\\
+
+\\
+\multicolumn{3}{l}{\textbf{Probability functions}}\\
+\\
+$\g(.)$ & --- & Probability function for ...\\
+
+\\
+
+
+\end{longtable}
+
+% ---------------------------------------------------------
+
+\chapter*{Abstract}
+
+\pagenumbering{arabic} 
+
+The exponential growth of technology has made it possible to achieve new solutions to improve the human beings' quality of life. One of the areas that has experienced the greatest development in the last 20 years is robotics and its derivatives. Currently, there has been a significant increase in the number of people with motor disabilities in the upper limbs, including more than 10 million people with Parkinson's disease and a number of individuals who, due to other circumstances, have lost the mobility of their upper limbs. This group of people not only have major difficulties in the daily task of feeding, but can also experience severe problems of malnutrition and loss of self-esteem. This is why, in this project, an exploratory research will be conducted focused on the development of an active robotic solution, using Baxter Robot, which can give support in the feeding process for these individuals and, at the same time, has conditions of improvement compared to the robotic alternatives that exist in the current market.\\
+
+This development will seek a positive impact for all individuals who fit within the exposed problem and a design methodology will be carried out, oriented to the search for a scalable solution, with the ability to recognize the position of the mouth of individuals through Computer Vision algorithms and with the advantage of being Open Source. It is expected that, at the end of this research, relevant advances will be generated in the development of active robotic solutions for the assistance of this population and the scientific knowledge of robotics in Colombia and the world.\\
+
+
+\textbf{Keywords:} Robotics, Computer Vision, Control Theory, Denavit Hartenberg, Algorithms, Software, Anomalies, Active Feeding, Autonomous System.
+
+% ---------------------------------------------------------
+
+\chapter*{Introduction}
+
+The overall population that have upper limb special needs or suffer from motor disabilities are more likely to have problems of malnutrition, a reduction in the performance in the activities of daily living, and loss of self-esteem  \citep{cite_ICBF_technical_article, cite_upper_limb_disabilities_self_steem}.\\
+
+In this research project, we will dive into the design of a possible solution for these problems, using Baxter Robot as an active feeding solution that enables individuals to accomplish of the most important daily life activities: eating.\\
+
+The project covers some important stages for the complete design: \\
+
+\begin{enumerate}
+    \item General understanding of the overall design based on human-being needs.
+    \item Specific planning and implementation of each sub-system of the complete design.
+    \item Practical experiments to validate the functionalities of the designs.
+    \item Final results analysis and next steps for future improvements.
+\end{enumerate}
+
+Throughout this article, we will be exposing the theoretical and practical steps that were involved in the design of the Baxter Feeding Robot solution.\\
+
+At the end of the article, we will expose the most important ethical and real life considerations of designing a robotics solution that interacts with human beings.
+
+% ---------------------------------------------------------
+
+\chapter{Initial Steps}
+
+\section{Understanding the problem}
+
+\subsection{Problem's context and analysis}
+
+According to the Technical Guide of the Food and Nutrition Component for the Population with Disabilities of the Colombian Institute of Family Welfare (ICBF), this group of individuals are more likely to have nutritional problems \citep{cite_ICBF_technical_article}. Likewise, individuals with upper limb disabilities, have a significant reduction in activities of daily living (especially feeding) and may become impaired in their psychological state \citep{cite_upper_limb_disabilities_self_steem}.\\
+
+It is estimated that there are more than 10 million people with Parkinson worldwide, of which a significant percentage have critical mobility problems in their upper extremities \citep{cite_parkinson_foundation_total_cases}. The incidence of people with Parkinson's disability increases with the age of the individuals, but there is an approximate 4\% of them who are diagnosed before the age of 50 years. According to studies conducted by the Parkinson Foundation (PF), men are more likely than women to have this disease. Another factor that is of relevance to this problem is that there is currently a higher prevalence of pain and disabilities in upper limbs in young university populations, which implies an increase in the group of people who will have joint disabilities in the future and will be more likely to present malnutrition problems due to the difficulties of performing the task of feeding by their own hands \citep{cite_park_active_robot_assisted_feeding}.\\
+
+This is why it is necessary to look for technological solutions that allow this group of individuals to receive support and assistance in daily tasks, especially feeding. Considering this context, a branch of robotics known as "Assisted Robotics" is of interest, where robotic systems seek to support individuals with disabilities to perform daily tasks \citep{cite_assited_robotics_stanford_lecture_jaffe}.\\
+
+Advances in assisted robotics have led to the development of various systems that seek to assist people with disabilities in the task of feeding (scooping). There are commercial robotic platforms, which seek to fulfill the need to feed patients with upper limb motor disabilities, but these have a number of limitations that restrict and limit their ideal performance. The best known commercial robotic systems for these tasks, such as Myspoon, Bestic Arm, Meal Buddy, Mealtime and Obi, are passive in nature. This means that they do not have the ability to adapt to the dynamic conditions of the user's mouth position, nor the ability to detect anomalies in the feeding process \citep{cite_park_active_robot_assisted_feeding}.\\
+
+A restriction of great relevance found in commercial robotic systems is that they are not able to adapt their behavior to temporary changes in the position of the user's mouth, because their system is passive, limiting the ability to know this information that is required for a correct feeding action. Another limitation of these systems is that they fail to identify anomalies or strange behaviors in the feeding process, generating additional risks for the patient in case of any emergency or eventuality. Finally, these systems are implemented with restricted code, limiting their modifications in the source code and restricting the possibility of replicating these algorithms for the entire population that may need them.\\
+
+Taking into account this worldwide problem, with the aim of improving the quality of life for individuals who have motor disability problems in upper limbs, it is important and of great relevance to seek an active robotic solution that can support the feeding process of these individuals, with a number of significant improvements over current commercial robotic systems. This solution should be able to adapt its dynamic movements constantly according to the position of the user's mouth, be aware of the environment, check for possible anomalies that may occur in it, be accessible and affordable for the population affected by their motor disabilities, be scalable to any other similar robotic system that is programmable and, similarly, should promote and seek innovation and the technological development of related robotic systems in Colombia and the world.\\
+
+Finally, this research will aim to solve the question of:
+How to implement an active robotic system for feeding (scooping) patients with motor disabilities in upper extremities, using the Baxter cobot of the EIA University?\\
+
+
+
+% ---------------------------------------------------------
+
+
+\section{Objetivos del proyecto}
+
+\subsection{Objetivo general}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}
+	
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\end{itemize}
+
+\section{Marco de referencia} %Falta llenar
+
+\subsection{Tema1}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\begin{algorithm}
+    \caption{Nombre Algoritmo}\label{code: Filtro de partículas}
+    \begin{algorithmic}[1]
+        \Function{NombreDeFuncion}{$parameter1, parameter2$}
+        \For{$i = 1$; $M$}
+        \State Something ${\epsilon}_{k-1}(i) \sim N(0,{E}_{t})$ 
+        \Comment{Comment something}
+        \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+\section{Hipótesis}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+\chapter{Metodología}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\textbf{Etapa 1: Nombre Etapa 1}
+
+\begin{itemize}
+
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\end{itemize}
+
+\textbf{Etapa 2: Nombre Etapa 2}
+
+\begin{itemize}
+
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\end{itemize}
+
+
+\chapter{Desarrollo del proyecto}
+
+\section{Seccion 1 Desarrollo del proyecto}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\
+
+
+\chapter{Discusión de resultados}
+
+\section{Validación}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\
+
+
+\chapter{Conclusiones y consideraciones finales}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\\
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.65\linewidth]{assets/imgs/logoeia.png}
+		\caption{Pie de foto de imagen A, \cite{CITA1}}
+		\label{Fig: figure1name}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.65\linewidth]{assets/imgs/logoeia.png}
+		\caption{Pie de foto de imagen B, \cite{CITA2}}
+		\label{Fig: figure2name}
+	\end{subfigure}%
+	\caption{Pie de foto imagen general}
+	\label{Fig: figurename}
+\end{figure}
+
+
+%------------------------------------------------------
+% GENERATE BIBLIOGRAPHY BASED ON ALL CAPTIONS AND REFERENCES
+
+\begin{sloppypar}
+    \bibliography{references}
+    \bibliographystyle{apalike}
+\end{sloppypar}
+
+
+
+\end{document}
