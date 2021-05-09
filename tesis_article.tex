@@ -24,12 +24,14 @@
 \usepackage{siunitx} % Consistent set of units with rules on how they are to be used
 
 \usepackage{caption} % Caption for images, formulas and tables
+\DeclareCaptionType{equ}[][] % Add caption functionalities to equations
 
 \usepackage{natbib} % Cite library (to reference in APA format)
 \usepackage[breaklinks=true]{hyperref} % Handle cross-referencing commands
 \urlstyle{same}
 \usepackage{url}
 
+\usepackage{dirtytalk} % Add "in quotes" for specific parts of text (add "something")
 
 \usepackage{comment} % Extra big-comments functionalities
 
@@ -52,6 +54,21 @@
 \usepackage{algorithm} % Write algorithms easily
 
 \usepackage[noend]{algpseudocode} % Improve pseudo-code algorithms
+
+% Commands to generate list of equations
+\usepackage{tocloft} % Package to generate list of equations
+\newcommand{\listequationsname}{}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+\setlength{\cftmyequationsnumwidth}{2.5em}% Width of equation number in List of Equations
+
+
+% These commands help us generate the "subsubsubseciton{}" title
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
 
 % Extra functionalities for vertical text
 \newcommand*\rot{\rotatebox{90}}
@@ -78,6 +95,7 @@
 \DeclareMathOperator{\h}{p}
 \DeclareMathOperator{\p}{p}
 \DeclareMathOperator{\U}{U}
+
 
 % ---------------------------------------------------------
 
@@ -129,7 +147,7 @@
 
 \begin{large}
 
-\textbf{Final project to obtain the degree of:}\\
+\textbf{Bachelor's final project to obtain the degree of:}\\
 \textbf{Mechatronics Engineer}\\[2cm]
 
 \textbf{Director of the project:}\\
@@ -224,6 +242,13 @@ $\g(.)$ & --- & Probability function for ...\\
 
 % ---------------------------------------------------------
 
+\cleardoublepage
+\chapter*{List of Equations}
+
+\listofmyequations
+
+% ---------------------------------------------------------
+
 \chapter*{Abstract}
 
 \pagenumbering{arabic} 
@@ -243,7 +268,7 @@ The overall population that have upper limb special needs or suffer from motor d
 
 In this research project, we will dive into the design of a possible solution for these problems, using Baxter Robot as an active feeding solution that enables individuals to accomplish of the most important daily life activities: eating.\\
 
-The project covers some important stages for the complete design: \\
+The project's scope covers some important stages for the complete design: \\
 
 \begin{enumerate}
     \item General understanding of the overall design based on human-being needs.
@@ -268,7 +293,7 @@ According to the Technical Guide of the Food and Nutrition Component for the Pop
 
 It is estimated that there are more than 10 million people with Parkinson worldwide, of which a significant percentage have critical mobility problems in their upper extremities \citep{cite_parkinson_foundation_total_cases}. The incidence of people with Parkinson's disability increases with the age of the individuals, but there is an approximate 4\% of them who are diagnosed before the age of 50 years. According to studies conducted by the Parkinson Foundation (PF), men are more likely than women to have this disease. Another factor that is of relevance to this problem is that there is currently a higher prevalence of pain and disabilities in upper limbs in young university populations, which implies an increase in the group of people who will have joint disabilities in the future and will be more likely to present malnutrition problems due to the difficulties of performing the task of feeding by their own hands \citep{cite_park_active_robot_assisted_feeding}.\\
 
-This is why it is necessary to look for technological solutions that allow this group of individuals to receive support and assistance in daily tasks, especially feeding. Considering this context, a branch of robotics known as "Assisted Robotics" is of interest, where robotic systems seek to support individuals with disabilities to perform daily tasks \citep{cite_assited_robotics_stanford_lecture_jaffe}.\\
+This is why it is necessary to look for technological solutions that allow this group of individuals to receive support and assistance in daily tasks, especially feeding. Considering this context, a branch of robotics known as \say{Assisted Robotics} is of interest, where robotic systems seek to support individuals with disabilities to perform daily tasks \citep{cite_assited_robotics_stanford_lecture_jaffe}.\\
 
 Advances in assisted robotics have led to the development of various systems that seek to assist people with disabilities in the task of feeding (scooping). There are commercial robotic platforms, which seek to fulfill the need to feed patients with upper limb motor disabilities, but these have a number of limitations that restrict and limit their ideal performance. The best known commercial robotic systems for these tasks, such as Myspoon, Bestic Arm, Meal Buddy, Mealtime and Obi, are passive in nature. This means that they do not have the ability to adapt to the dynamic conditions of the user's mouth position, nor the ability to detect anomalies in the feeding process \citep{cite_park_active_robot_assisted_feeding}.\\
 
@@ -283,14 +308,14 @@ In order to find a solution for the lack of active commercial robotic systems fo
 
 This is why it is being proposed to develop a programmed robotic solution, which has an user interface activated by voice commands or friendly buttons, to generate a reliable and safe solution for the needs of people with motor disabilities in the upper limbs, to perform the daily activity of feeding. This solution, being open source, can be easily extrapolated to any programmable robotic platform, generating an additional step in the development of assisted robotic systems.\\
 
-Considering the concept of assisted robotics and the importance of helping these individuals, the answer to provide a viable, scalable and safe solution to this problem is the usage of collaborative robots under the approach of working with humans  \citep{cite_rethink_robotics_baxter_factory_worker}. This can be achieved through various robotic alternatives, but it was decided to use Baxter robot from the company Rethink Robotics, which was developed under the concept of "Cobot", that means, a collaborative robot to work together with humans and is available in the laboratories of the university campus \citep{cite_university_eia_general}.\\
+Considering the concept of assisted robotics and the importance of helping these individuals, the answer to provide a viable, scalable and safe solution to this problem is the usage of collaborative robots under the approach of working with humans  \citep{cite_rethink_robotics_baxter_factory_worker}. This can be achieved through various robotic alternatives, but it was decided to use Baxter robot from the company Rethink Robotics, which was developed under the concept of \say{cobot}, that means, a collaborative robot to work together with humans and is available in the laboratories of the university campus \citep{cite_university_eia_general}.\\
 
 Due to the arguments exposed above, we want to look for a solution with the Baxter cobot, using the internal architecture of the software components integrated with the infrastructure offered by this company. This solution must be able to integrate the development of the software architecture, computational algorithms, kinematic models, video processing with computer vision, user interface,  and the necessary connections of these components for the correct implementation of the robotic solution, which will be focused on improving the quality of life of individuals who will benefit from this technology. Likewise, the system will represent a series of elements scalable to any other robotic platform with similar operating conditions and will seek to generate a positive impact on the development of assisted robotic systems for the community.\\
 
 The development of a solution to this problem has multiple benefits, both for individuals with motor disabilities in the upper limbs, as well as for the scientific and medical community in Colombia. That is why, by developing this project, we want to take an additional step in the research and applications of assisted robotics, in order to seek to improve the quality of life of people with motor disabilities in the upper limbs.\\
 
 This contribution can allow a person with these conditions, to perform the essential activity of feeding, without the need of having an external person performing this task. In the same way, this generates an increase in self-esteem and quality of life for these individuals.
-At the same time, a key factor of the project is that it will positively contribute to the pursuit of three of the global objectives of sustainable development, especially: "Health and well-being", "Industry, innovation and infrastructure" and "Reduction of inequalities" \citep{cite_united_nations_sustainable_development}.\\
+At the same time, a key factor of the project is that it will positively contribute to the pursuit of three of the global objectives of sustainable development, especially: \say{Health and well-being}, \say{Industry, innovation and infrastructure} and \say{Reduction of inequalities} \citep{cite_united_nations_sustainable_development}.\\
 
 In addition to the previous reasons, one of the most important motives for carrying out this project is that there is a large gap between the robotics of the leading countries in technology and Colombian robotics. This is why the project will provide a methodological approach for robotics research and a technological progress that can be replicated in any Colombian institution that has access to robotic platforms, generating a community that aims to improve robotic developments at a national level.\\
 
@@ -341,16 +366,16 @@ The existing studies and researches related to robotics focused on patient feedi
 
 In order to effectively structure and summarize some of the researches, degree papers and patents related to the topic of assisted robotics, a literature review of the last few years was carried out to collect the objectives, methodologies, solutions, strategies and conclusions of these projects. Some of the most relevant ones are presented below:\\
 
-In the article "Active robot-assisted feeding with a general-purpose mobile manipulator: Design, evaluation, and lessons learned" \citep{cite_park_active_robot_assisted_feeding}, published in the scientific journal "Robotics and Autonomous Systems 124", an overview of robotic systems focused on patient feeding is presented, providing a contrast of commercial platforms and those under research and development. In this study, an algorithm and software architecture based on a PR2 robotic manipulator was implemented to achieve autonomous feeding of patients with upper extremity disabilities. The characteristics, methodologies and solutions found in similar projects were presented, making a contrast between them and exposing new proposals that made use of some of the knowledge found by all previous investigations. Besides, the article reflects an exhaustive work with a good overview of previous knowledge to develop similar robotic solutions in the future, as it not only exposes the development of their research in the particular context, but also proposes the most important elements to take into account in assisted robotics projects.\\
+In the article \say{Active robot-assisted feeding with a general-purpose mobile manipulator: Design, evaluation, and lessons learned} \citep{cite_park_active_robot_assisted_feeding}, published in the scientific journal \say{Robotics and Autonomous Systems 124}, an overview of robotic systems focused on patient feeding is presented, providing a contrast of commercial platforms and those under research and development. In this study, an algorithm and software architecture based on a PR2 robotic manipulator was implemented to achieve autonomous feeding of patients with upper extremity disabilities. The characteristics, methodologies and solutions found in similar projects were presented, making a contrast between them and exposing new proposals that made use of some of the knowledge found by all previous investigations. Besides, the article reflects an exhaustive work with a good overview of previous knowledge to develop similar robotic solutions in the future, as it not only exposes the development of their research in the particular context, but also proposes the most important elements to take into account in assisted robotics projects.\\
 
-Another study of major relevance to the state of the art of assisted robotics is "SAM, an Assistive Robotic Device Dedicated to Helping Persons with Quadriplegia: Usability Study" \citep{cite_SAM_an_assisted_robotic_device_to_help_quadriplegia_persons}. In this research, important concepts about assisted robotics and the current delimitation of various robotic applications in this area of knowledge are exposed. Likewise, the authors expose the importance of defining the factors for the success of robotic tasks, since the evaluation of the viability of implementation, is linked to correctly defining the success of the corresponding subroutines. Likewise, several interfaces that can be implemented for quadriplegic users are shown and their advantages and disadvantages are contrasted.\\
+Another study of major relevance to the state of the art of assisted robotics is \say{SAM, an Assistive Robotic Device Dedicated to Helping Persons with Quadriplegia: Usability Study} \citep{cite_SAM_an_assisted_robotic_device_to_help_quadriplegia_persons}. In this research, important concepts about assisted robotics and the current delimitation of various robotic applications in this area of knowledge are exposed. Likewise, the authors expose the importance of defining the factors for the success of robotic tasks, since the evaluation of the viability of implementation, is linked to correctly defining the success of the corresponding subroutines. Likewise, several interfaces that can be implemented for quadriplegic users are shown and their advantages and disadvantages are contrasted.\\
 
-Additionally, by researching related studies, a very important element was identified in the development of a robotic system that interacts with individuals: the detection of anomalies. To give context to this feature, two research articles were analyzed, which were "A Multimodal Execution Monitor with Anomaly Classification for Robot-Assisted Feeding" \citep{cite_multimodal_execution_monitor_with_anomaly_classification} and "A Multimodal Anomaly Detector for Robot-Assisted Feeding Using an LSTM-based Variational Autoencoder" \citep{cite_multimodal_anomaly_detector_for_robot_assisted_feeding_LSTM}. From these scientific papers, we gained a deeper insight into more than 5 mathematical methodologies for strategically detecting anomalies. Similarly, they expose analytical procedures that are of great importance in the structure of algorithms that focus on searching for anomaly patterns, enabling us to have these as a starting point to develop new strategies for future robotic implementations.\\
+Additionally, by researching related studies, a very important element was identified in the development of a robotic system that interacts with individuals: the detection of anomalies. To give context to this feature, two research articles were analyzed, which were \say{A Multimodal Execution Monitor with Anomaly Classification for Robot-Assisted Feeding} \citep{cite_multimodal_execution_monitor_with_anomaly_classification} and \say{A Multimodal Anomaly Detector for Robot-Assisted Feeding Using an LSTM-based Variational Autoencoder} \citep{cite_multimodal_anomaly_detector_for_robot_assisted_feeding_LSTM}. From these scientific papers, we gained a deeper insight into more than 5 mathematical methodologies for strategically detecting anomalies. Similarly, they expose analytical procedures that are of great importance in the structure of algorithms that focus on searching for anomaly patterns, enabling us to have these as a starting point to develop new strategies for future robotic implementations.\\
 
-Regarding patents, the United States patent called "Mobile human-friendly assistive robot" \citep{cite_patent_mobile_human_friendly_assistive_robot} was mainly reviewed. In this publication, it was possible to identify a viable structure for the communications architecture developed in assisted robotics projects, enabling the selection of the principal and secondary components in the infrastructure to be developed for robotic projects.\\
+Regarding patents, the United States patent called \say{Mobile human-friendly assistive robot} \citep{cite_patent_mobile_human_friendly_assistive_robot} was mainly reviewed. In this publication, it was possible to identify a viable structure for the communications architecture developed in assisted robotics projects, enabling the selection of the principal and secondary components in the infrastructure to be developed for robotic projects.\\
 
 
-A very interesting article for the understanding of assisted robotics projects is "Robots for humanity: Using collaborative robots to help people with disabilities" \citep{cite_robot_for_humanity_empower_people_with_disabilities}. In this document, it is exposed the relevance of simplifying the graphical user interface, through the use of mathematical tools such as elliptic coordinates and an interface compatible with sound commands. Similarly, the authors propose a strategic error detection system by translating the forces implemented by the robotic system in different mathematical approaches.\\
+A very interesting article for the understanding of assisted robotics projects is \say{Robots for humanity: Using collaborative robots to help people with disabilities} \citep{cite_robot_for_humanity_empower_people_with_disabilities}. In this document, it is exposed the relevance of simplifying the graphical user interface, through the use of mathematical tools such as elliptic coordinates and an interface compatible with sound commands. Similarly, the authors propose a strategic error detection system by translating the forces implemented by the robotic system in different mathematical approaches.\\
 
 
 \subsection{Theoretical background}
@@ -363,12 +388,232 @@ There are a number of preliminary concepts of critical importance for the unders
 
 Robotics is a field of engineering that has significantly impacted the technological development of manufacture, industrial, medical, security, and human support industries, among others \citep{cite_robots_in_automotive_manufactoring_top_6_applications}. In order to have a solid foundation of the theoretical and mathematical foundations of robotic systems models, it is necessary to go into detail on some concepts and terminology related to the subject. Some of these concepts and terminologies will be discussed in more detail below.\\
 
+\subsubsubsection{Transformation homogeneous matrices}
+
+A transformation matrix is an important mathematical tool to generate expressions of linear systems that have a combination of translational and rotational motions in space.
+
+Given the reference systems \{A\} and \{B\}, with unit vectors that meet the dextrorotating criteria of a linear system, a rotation matrix can be defined as a matrix representation that compacts the rotations that must be performed in space to bring the reference frame {A} to {B} by the three unit vectors expressing the directions of these spatial changes ${_B^A}\hat{X}$, ${_B^A}\hat{Y}$, ${_B^A}\hat{Z}$ \citep{cite_craig_robotics}.\\
+
+To generate the resulting rotation matrix between systems \{A\} and \{B\}, we proceed to create a matrix with the following structure:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:rotation_matrix_general_structure}
+    _{B}^{A}\textrm{R} = 
+    \begin{bmatrix}
+    {_B^A}\hat{X} & {_B^A}\hat{Y} & {_B^A}\hat{Z}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    r_{11} & r_{12} & r_{13}\\ 
+    r_{21} & r_{22} & r_{23}\\ 
+    r_{31} & r_{32} & r_{33}
+    \end{bmatrix}
+\end{equation}
+\myequations{Rotation matrix general structure}
+\caption{Rotation matrix general structure}
+\end{equ}
+
+As show in equation \ref{eq:rotation_matrix_general_structure}, the rotation matrix structure is a 3 by 3 matrix with orthogonal conditions with determinant 1. These properties are useful to compute some important matrix multiplications for different types of linear problems.\\
+
+The next relevant conceptual step for the creation of a homogeneous transformation matrix is the translation. To represent a translation from a coordinate system to a point P, at least one vector indicating the relative translations of each of the unit vectors governing the orthogonal basis is required $\hat{X}$, $\hat{Y}$, $\hat{Z}$ :
+
+\begin{equ}[H]
+\begin{equation} \label{eq:translation_vector_general_structure}
+    _{}^{A}\textrm{P} = \begin{bmatrix}
+    P_{x}\\ 
+    P_{y}\\ 
+    P_{z}
+    \end{bmatrix}
+\end{equation}
+\myequations{Position translation vector structure}
+\caption{Position translation vector structure}
+\end{equ}
+
+Finally, when a mathematical strategy is required to represent both the translation and rotation of a system in space, this transformation can be expressed as a transformation matrix with the following structure:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:tranformation_matrix_general_structure}
+    _{B}^{A}\textrm{T} = 
+    \begin{bmatrix}
+    _{B}^{A}\textrm{R} & _{}^{A}\textrm{P}\\ 
+    \O  & 1
+    \end{bmatrix} = 
+    \begin{bmatrix}
+    r_{11} & r_{12} & r_{13} & P_{x}\\ 
+    r_{21} & r_{22} & r_{23} & P_{y}\\ 
+    r_{31} & r_{32} & r_{33} & P_{z}\\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+\myequations{Transformation matrix general structure}
+\caption{Transformation matrix general structure}
+\end{equ}
+
+\subsubsubsection{Forward Pose kinematics}
+
+The Forward Pose Kinematics (FPK) transform are all those equations that relate the behavior of a robotic system, taking into account as input parameters the values of each of the joints associated with the degrees of freedom, allowing to obtain as output the absolute Cartesian coordinates for the robot's end effector \citep{cite_craig_robotics}.\\
+
+There are two main techniques for obtaining the Forward Pose Kinematics (FPK) of a robotic system, the geometrical method and the analytical method. In the geometrical method, a set of equations obtained from the model of the robot in the Cartesian space is formulated and a series of expressions is sought to represent the absolute spatial coordinates of the global system, that is, the expected position of the end effector. For this method, it is common to refer to the desired point as \say{Ptool} \citep{cite_craig_robotics}.\\
+
+The analytical approach is a systematic methodology where rigorous steps must be followed to obtain the transformation matrices that govern the robotic system. This approach is divided into three main stages, which are: locating the axes of rotation or translation of each degree of freedom (DOF), defining the origin and direction of rotation of the main axes of each degree of freedom and, finally, locating the missing axes to obtain a series of reference systems that fulfill the desired translations and rotations \citep{cite_barrientos_robotics_book}.\\
+
+The following is an example of the FPK of a revolute-revolute planar robot:
+
+\begin{center}
+\includegraphics[width= 0.4\textwidth]{\string "assets/pdfs/reference_framework/RR_general_draw".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{General schematic model for RR planar robot.}\label{fig_general_rr_drawing.}
+\end{minipage} \end{center}
+
+By solving the FPK of the RR robot, from fig[\ref{fig_general_rr_drawing.}], it can be shown that the equations governing the position and orientation of the robot tool are the following:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:results_rr_robot_fpk_example}
+    \begin{split}
+        P_{Tx} & = L_{1} \cdot cos(\theta_{1}) + L_{2} \cdot cos(\theta_{1} + \theta_{2}) \\
+        P_{Ty} & = L_{1} \cdot sin(\theta_{1}) + L_{2} \cdot sin(\theta_{1} + \theta_{2}) \\
+        \alpha & = \theta_{1} + \theta_{2}
+    \end{split}
+\end{equation}
+\myequations{Forward Pose Kinematics results for RR robot example.}
+\caption{Forward Pose Kinematics results for RR robot example.}
+\end{equ}
+
+\subsubsubsection{Inverse Pose Kinematics}
+
+The Inverse Pose Kinematics (IPK), are all those equations that relate the behavior of a robotic system, having as input parameters the absolute Cartesian values, allowing finding the equivalent values of each one of the degrees of freedom (DOF) of a robotic system \citep{cite_craig_robotics}.
+
+It is common for a robot to have different kinds of actuators for the linear and rotational movements of its joints, so it is of high importance to obtain a series of expressions that can describe the possible values of these joints, for a specific position of the robot's tool.\\
+
+Based on the following schematic, we can find the IPK of the given RR robot example:
+
+\begin{center}
+\includegraphics[width= 0.4\textwidth]{\string "assets/pdfs/reference_framework/RR_angles_convention".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{General schematic with the angles convention for RR planar robot.}\label{fig_rr_angles_exmple_schematic}
+\end{minipage} \end{center}
+
+
+The equations that describe the IPK of a planar RR robot, as shown in Fig[\ref{fig_rr_angles_exmple_schematic}], are shown as follows:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:results_rr_robot_ipk_example}
+    \begin{split}
+        L_{T} & = \sqrt{P_{Tx}^2 + P_{Ty}^2} \\
+        \gamma & = atan2(P_{Tx}, P_{Ty}) \\
+        \alpha & = acos \left( \frac{L_{T}^2 + L_{1}^2 - L_{2}^2}{2 \cdot L_{1} \cdot L_{T}} \right) \\
+        \beta & = acos \left( \frac{L_{1}^2 + L_{2}^2 - L_{T}^2}{2 \cdot L_{1} \cdot L_{2}} \right) \\
+        \theta_{1} & =  \gamma + \alpha \\
+        \theta_{2} & = \beta - \pi
+    \end{split}
+\end{equation}
+\myequations{Inverse Pose Kinematics results for RR robot example.}
+\caption{Inverse Pose Kinematics results for RR robot example.}
+\end{equ}
+
+It's important to state that in robotic systems with more than one degree of freedom, it is possible to reach the same point in space through different configurations of its joints, usually known as \say{elbow up} and \say{elbow down} for the same joint. For this reason, it should be kept in mind that there could be more possible solutions, as more degrees of freedom are available.\\
+
+\subsubsubsection{Path planning}
+
+Path planning refers to the strategy of generating spatial routes to achieve the movements of a robotic system between two points in space, using techniques to find the most appropriate route, taking into account the constraints of the environment. The methods to generate the paths may vary according to the type of robot and the dynamic conditions that it has to face in the context of the surrounding environment. It is relevant to mention that, in order to generate the planning of a given path, a series of preliminary elements of the environment must be previously known through integrated sensors that are able to translate their signals into valuable information for the robot \citep{cite_wheeled_robots_autonomous_book}.\\
+
+\subsubsubsection{Higher-order polynomials trajectories}
+
+Soft trajectories are parametric vectors that define all the points in space that a robotic manipulator must follow, in order to change its position in space from an initial point to an final point, having as input the desired position, velocity and acceleration conditions. There are two mathematical trajectories that allow an acceptable robotic performance, these are the 3\textsuperscript{rd} and 5\textsuperscript{th} order trajectories. The 5\textsuperscript{th} order trajectories are those that allow the control of any kind of dynamic system, with a correct control of variables such as jerk \citep{cite_craig_robotics}.
+In this section, it is important to understand in depth the mathematical expressions that govern a behavior with 3\textsuperscript{rd} and 5\textsuperscript{th} order trajectories.\\
+
+The 3\textsuperscript{rd} order trajectories fulfill the following mathematical expressions:
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:equations_for_third_order_trajectories}
+    \begin{split}
+        \theta(t) &= a_{0} + a_{1} \cdot t + a_{2} \cdot t^2 + a_{3} \cdot t^3\\
+        a_{0} &= \theta_{0}\\
+        a_{1} &= \dot{\theta_{0}} \\
+        a_{2} &= \frac{3(\theta_{f} - \theta_{0})}{t_{f}^2} - \frac{2 \dot{\theta_{0}}}{t_{f}} - \frac{\dot{\theta_{f}}}{t_{f}}\\
+        a_{3} &= \frac{2(\theta_{0} - \theta_{f})}{t_{f}^3} + \frac{(\dot{\theta_{0}} + \dot{\theta_{f}})}{t_{f}^2}
+    \end{split}
+\end{equation}
+\myequations{Equations for third order trajectories.}
+\caption{Equations for third order trajectories.}
+\end{equ}
+
+Similarly, the 5\textsuperscript{th} order polynomial trajectories, follow these mathematical equations:
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:equations_for_fifth_order_trajectories}
+    \begin{split}
+        \theta(t) &= a_{0} + a_{1} \cdot t + a_{2} \cdot t^2 + a_{3} \cdot t^3 + a_{4} \cdot t^4 + a_{5} \cdot t^5\\
+        a_{0} &= \theta_{0}\\
+        a_{1} &= \dot{\theta_{0}} \\
+        a_{2} &= \frac{\Ddot{\theta_{0}}}{2}\\
+        a_{3} &= \frac{20\theta_{f} - 20\theta_{0} - (8\dot{\theta_{f}} + 12\dot{\theta_{0}})t_{f} - (3\ddot{\theta_{0}} - \ddot{\theta_{f}})t_{f}^2}{2t_{f}^3}\\
+        a_{4} &= \frac{30\theta_{0} - 30\theta_{f} + (14\dot{\theta_{f}} + 16\dot{\theta_{0}})t_{f} + (3\ddot{\theta_{0}} - 2\ddot{\theta_{f}})t_{f}^2}{2t_{f}^4}\\
+        a_{5} &= \frac{12\theta_{f} - 12\theta_{0} - (6\dot{\theta_{f}} + 6\dot{\theta_{0}})t_{f} - (\ddot{\theta_{0}} - \ddot{\theta_{f}})t_{f}^2}{2t_{f}^5}
+    \end{split}
+\end{equation}
+\myequations{Equations for fifth order trajectories.}
+\caption{Equations for fifth order trajectories.}
+\end{equ}
+
+
+
+\subsubsubsection{Assistive robotics}
+
+A collaborative robot or \say{cobot} is a robotic device capable of manipulating objects in cooperation with or providing assistance to humans. Thus, cobots have the ability to perform critical tasks for humans or work in conjunction with them \citep{cite_robots_for_collaboration_with_human_operators}. A field of collaborative robotics is assisted robotics, defined as any robotic device that performs tasks for the benefit of people with disabilities in the context of activities of daily living \citep{cite_assited_robotics_stanford_lecture_jaffe}.\\
+
+\subsubsubsection{Robot's workspace}
+
+In the context of robotics, the workspace is defined as all possible spatial locations where a robotic manipulator is able to reach thanks to the strategic movement of its degrees of freedom independently. The mathematical delimitation of this is a process that requires finding multiple possible spatial solutions for the maximum access points and plotting them in a simulation environment. It is common for manufacturers of industrial robots to provide a detailed review and explanation of the workspace in the robot's data-sheets, because it varies not only by geometric constraints, but also by the mechanical restrictions existing in the joint connections \citep{cite_craig_robotics}.\\
+
+
+\subsubsubsection{Baxter cobot}
+
+Baxter is a collaborative robot developed for the industrial sector by the company Rethink Robotics. It was designed with a series of sensors, cameras and control systems that allows it to work in a cooperative environment and to adapt easily to its workspace \citep{cite_rethink_robotics_official_page}.\\
+
+Baxter was announced to the community in September 2011 and can be broadly defined as a two-armed robot with 7 degrees of freedom in each arm. Baxter was introduced to the market as a robot specialized in simple collaborative tasks, such as loading and unloading, organizing and interacting with materials \citep{cite_sdk_baxter_rethink_robotics}. Likewise, being a robot that seeks to interact with humans, it has a screen that simulates the face of the Baxter cobot and additional safety protection features that will be considered in the development of the project.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{assets/imgs/reference_framework/main_baxter.jpg}
+    \caption{Front view for Baxter cobot. Taken from \citep{cite_youtube_baxter_robot_future_employee}} 
+    \label{fig_baxter_main_image}
+\end{figure}
+
+Considering the general specifications, it is of major relevance to have a clear understanding of each one of the degrees of freedom that the Baxter joints have and their standard nomenclatures for their operation. The following figure is an image of the official technical data-sheet of Baxter's documentation, where the seven DOF and their names are illustrated:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{assets/imgs/reference_framework/baxter_joint_names.png}
+    \caption{Baxter left joint names for each DOF. Taken from \citep{cite_baxter_joint_names_from_sdk_wiki}} 
+    \label{fig_baxter_joint_names}
+\end{figure}
+
+When working and programming the Baxter cobot, it is essential to have a good understanding of the workspace conditions and the general restrictions of each of the degrees of freedom. The following image is a visual illustration of Baxter's workspace and its numerical limits for each joint:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{assets/imgs/reference_framework/baxter_workspace_side_view.png}
+    \caption{Baxter workspace side view. Taken from \citep{cite_baxter_workspace_from_sdk_wiki}} 
+    \label{fig_baxter_workspace_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{assets/imgs/reference_framework/baxter_workspace_top_view.png}
+    \caption{Baxter workspace top view. Taken from \citep{cite_baxter_workspace_from_sdk_wiki}} 
+    \label{fig_baxter_workspace_2}
+\end{figure}
+
 
 \subsubsection{Software concepts}
-
+Something
 
 \subsubsection{Control theory concepts}
-
+Something
 
 
 
@@ -456,13 +701,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=0.65\linewidth]{assets/imgs/logoeia.png}
-		\caption{Pie de foto de imagen A, \cite{CITA1}}
+		\cite{cite_craig_robotics}
 		\label{Fig: figure1name}
 	\end{subfigure}~
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=0.65\linewidth]{assets/imgs/logoeia.png}
-		\caption{Pie de foto de imagen B, \cite{CITA2}}
+		\caption{Pie de foto de imagen B, \cite{cite_craig_robotics}}
 		\label{Fig: figure2name}
 	\end{subfigure}%
 	\caption{Pie de foto imagen general}
