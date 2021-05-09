@@ -55,6 +55,8 @@
 
 \usepackage[noend]{algpseudocode} % Improve pseudo-code algorithms
 
+\usepackage[dvipsnames,table,xcdraw]{xcolor} % Color things
+
 % Commands to generate list of equations
 \usepackage{tocloft} % Package to generate list of equations
 \newcommand{\listequationsname}{}
@@ -198,7 +200,11 @@
 
 % ---------------------------------------------------------
 
+\pagenumbering{arabic} 
+
 \tableofcontents
+
+
 
 % ---------------------------------------------------------
 
@@ -251,7 +257,6 @@ $\g(.)$ & --- & Probability function for ...\\
 
 \chapter*{Abstract}
 
-\pagenumbering{arabic} 
 
 The exponential growth of technology has made it possible to achieve new solutions to improve the human beings' quality of life. One of the areas that has experienced the greatest development in the last 20 years is robotics and its derivatives. Currently, there has been a significant increase in the number of people with motor disabilities in the upper limbs, including more than 10 million people with Parkinson's disease and a number of individuals who, due to other circumstances, have lost the mobility of their upper limbs. This group of people not only have major difficulties in the daily task of feeding, but can also experience severe problems of malnutrition and loss of self-esteem. This is why, in this project, an exploratory research will be conducted focused on the development of an active robotic solution, using Baxter Robot, which can give support in the feeding process for these individuals and, at the same time, has conditions of improvement compared to the robotic alternatives that exist in the current market.\\
 
@@ -579,7 +584,7 @@ Baxter was announced to the community in September 2011 and can be broadly defin
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{assets/imgs/reference_framework/main_baxter.jpg}
-    \caption{Front view for Baxter cobot. Taken from \citep{cite_youtube_baxter_robot_future_employee}} 
+    \caption{Front view for Baxter cobot. Taken from \citep{cite_youtube_baxter_robot_future_employee}.} 
     \label{fig_baxter_main_image}
 \end{figure}
 
@@ -588,7 +593,7 @@ Considering the general specifications, it is of major relevance to have a clear
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{assets/imgs/reference_framework/baxter_joint_names.png}
-    \caption{Baxter left joint names for each DOF. Taken from \citep{cite_baxter_joint_names_from_sdk_wiki}} 
+    \caption{Baxter left joint names for each DOF. Taken from \citep{cite_baxter_joint_names_from_sdk_wiki}.} 
     \label{fig_baxter_joint_names}
 \end{figure}
 
@@ -597,70 +602,158 @@ When working and programming the Baxter cobot, it is essential to have a good un
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\linewidth]{assets/imgs/reference_framework/baxter_workspace_side_view.png}
-    \caption{Baxter workspace side view. Taken from \citep{cite_baxter_workspace_from_sdk_wiki}} 
+    \caption{Baxter workspace side view. Taken from \citep{cite_baxter_workspace_from_sdk_wiki}.} 
     \label{fig_baxter_workspace_1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\linewidth]{assets/imgs/reference_framework/baxter_workspace_top_view.png}
-    \caption{Baxter workspace top view. Taken from \citep{cite_baxter_workspace_from_sdk_wiki}} 
+    \caption{Baxter workspace top view. Taken from \citep{cite_baxter_workspace_from_sdk_wiki}.} 
     \label{fig_baxter_workspace_2}
 \end{figure}
 
 
 \subsubsection{Software concepts}
-Something
+
+In most robotic systems, it is critical to implement a series of algorithms, data-structures and architectures that allow the consistent and safe development of the robot's actual performance. These commands must be programmed through various software schemes and strategies, which are integrated with the electronic and mechanical components that govern the robot's joints and sensors. For this reason, the development of this project should be explained in a comprehensive way, from a software approach.\\
+
+\subsubsubsection{Python}
+
+Python is a multi-platform programming language, developed by Guido van Rossum in 1989 and formalized to public in 1991. It is interpreted, with the ability to update itself dynamically. Its philosophy is based on the simplicity and readability of the codes, allowing several programming paradigms, such as: object-oriented programming, imperative programming and functional programming. It has the advantage of being open source with a significant worldwide community \citep{cite_python_official_site}.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{assets/imgs/reference_framework/python_logo_main.png}
+    \caption{Python official logo. Taken from \citep{cite_python_official_site}.} 
+    \label{fig_python_main_logo}
+\end{figure}
+
+The advantage of using a language that is open source and with a flourishing community, is that there are a large number of libraries and tools that are fully accessible, in order to simplify and increase the development of technological solutions based on them. This is why, with the implementation of a single main syntax, multiple solutions can be achieved for software development approaches, such as graphical interfaces, web backend servers, the usage of simulation environments, artificial intelligence and computer vision algorithms.\\
+
+\subsubsubsection{Robot Operating System (ROS)}
+
+ROS stands for \say{Robot Operating System}, which is a set of tools, libraries and open source software for the management of robotic systems. These tools seek to standardize, simplify and perform robust robotic tasks through simple operating protocols for nodes and topics integration. ROS was built with the objective of improving and facilitating the development of software for collaborative robots and there is a growing open source community, which allows the migration of a large number of legacy technologies to these new tools \citep{cite_ROS_official_site}.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{assets/imgs/reference_framework/ros_main_logo.png}
+    \caption{ROS official logo. Taken from \citep{cite_ROS_official_site}.} 
+    \label{fig_ros_main_logo}
+\end{figure}
+
+In the context of a Robot Operating System, a node refers to an executable program used to communicate with other nodes through a \say{client} type resource library. There are also \say{messages}, which allow subscribing or publishing native information in ROS to a \say{topic}. Finally, topics are buses of information on which nodes exchange messages \citep{cite_ROS_understanding_nodes}.\\
+
+In any program that has a ROS infrastructure and architecture, there is a main element known as the \say{master}, which aims to verify and validate that the operation of the nodes and their networks for communication are performing their corresponding tasks and properly integrating with each other \citep{cite_ROS_understanding_nodes}.\\
+
+
+\subsubsection{Computer Vision Concepts}
+
+Computer Vision represents one of the most important fields in the robotic development of projects that must be able to detect dynamic conditions in a given environment. For the correct implementation and execution of this research, the fundamental and relevant concepts within this area of knowledge must be taken into account.\\
+
+\subsubsubsection{Overview of Computer Vision}
+
+Computer vision can be defined as the branch of study responsible for extracting information from one or multiple images through computational algorithms. There are many areas where it is applied, one of the most complicated being the creation of robotic trajectories, where this information is used to control robotic manipulators or autonomous vehicles \citep{cite_computer_vision_advances_in_computers}.\\
+
+One of the most important applications of computer vision is face detection and face recognition. This utility allows detecting a human face through relevant features found by image processing. It can be divided into two processes: identification of an unknown face and validation of a specific face that can be found encoded in a database \citep{cite_computer_vision_techniques_for_face_recognition}. In this project, it will be implemented a face-detection algorithm.
+
+\subsubsubsection{Face detection algorithms}
+
+\begin{itemize}
+    \color{red}
+    \item TO-DO
+\end{itemize}
+
+\subsubsubsection{Stereoscopic Camera}
+
+These are frames acquisition devices, which have the ability to acquire images or videos, while being able to identify the spatial quality associated with a third dimension, i.e., they are able to capture the depth of the surfaces of the image. These cameras use strategies based on the morphology of mammalian eyes to map a three-dimensional structure of the captured scene \citep{cite_stereoscopic_camera_techniques}.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{assets/imgs/reference_framework/vuze_stereo_camera.jpeg}
+    \caption{Vuze stereo camera 3D device. Taken from \citep{cite_photo_vuze_stereo_camera_device}.} 
+    \label{fig_vuz_stereo_camera_device}
+\end{figure}
+
 
 \subsubsection{Control theory concepts}
-Something
+
+Within the framework of preliminary knowledge for the development of this research, it is very important to have a solid prior knowledge of classical control theory, in order to propose and validate robust control strategies that attempt to achieve the correct trajectory tracking of the dynamic system to be implemented.\\
+
+\subsubsubsection{Motion control systems}
+
+A motion control system aims to follow a given defined trajectory and seeks to reduce the error between the actual performance of the system and its planned trajectory. This control system is very important at the industrial level and are usually guided by 3 integrated control loops: position, velocity and torque. These motion control tasks have a high degree of complexity and usually involve variables such as system load, actuator saturation and robot workspace limitations \citep{cite_position_control_for_linear_motion_servo_systems}.
+
+\subsubsubsection{Decentralized control systems}
+
+A decentralized control system is one that has the ability to integrate multiple independent control systems and handle these global inputs to a master processing of each of the individual controllers, allowing the generation of independent control events managed by a master algorithm \citep{cite_centralized_control_systems_book}.
+
+\subsubsubsection{Impedance control systems}
+
+In the context of a motion control system, there is a relevant term known as \say{impedance}. This concept refers to the relationship between force and position and/or velocity variables. Taking into account this definition, a completely rigid system is one that has simple impedance.\\
+
+Based on these concepts, an impedance control seeks to carry out an intermediate regulation between the force variables of a system, applied to the desired positions in a specific trajectory.\\
 
 
+\begin{itemize}
+    \color{red}
+    \item TO-DO (EXPAND THEORY FROM CANUDAS BOOK)
+\end{itemize}
 
+\citep{cite_advanced_robot_control_canudas}.
 
+\subsubsubsection{Model predictive controller}
 
+Model Predictive Controllers, known as MPC, are control algorithms in which the dynamics of the system must be known through a previous identification of itself, by traditional methods of system identification. These algorithms have advantages such as simplicity, robustness, convenience in implementation, taking into account the system's constraints and a good handling of Multiple-Inputs/Multiple-Outputs (MIMO) systems.\\
 
+Model Predictive Controllers seek to predict the changes in the dependent variables of the system model, which will be caused by the influence of the changes in the independent variables of the system. Similarly, they are widely used in systems with multiple constraints, such as those in which the actuators or sensors have saturation points \citep{cite_mpc_industrial_processes_automation_systems}.
 
+\begin{itemize}
+    \color{red}
+    \item TO-DO (EXPAND THEORY FROM CANUDAS BOOK)
+\end{itemize}
 
-
-
-
-
-
-
-
-
+\citep{cite_advanced_robot_control_canudas}.
 
 
 % ---------------------------------------------------------
 
 \newpage
 
-\section{Hipótesis}
+\chapter{Methodology}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ There are several methodologies for scientific design to carry out a process of research divulgation. In this investigation it was decided to implement a methodology applied to engineering processes, where there are a series of iterative designs that seek to achieve a final detailed product \citep{cite_dieter_engineering_design}.\\
+ 
+It is also important to point out that the development of this research will have an exploratory approach to the technological and practical solution of the problem to be solved, so the design stages focused on the market study and the financial components to generate a start-up plan at a commercial level will not be developed. Because of this statements, these two stages will be left as a proposal for future research.\\
+
+\section{User requirements identification}
+
+The selection process of the most relevant characteristics in terms of user requirements was carried out taking into account the existing literature on assisted robotics focused on feeding-systems and the general considerations that were determined to be relevant for the considerations of Baxter robot. In this choice for the user requirements, the following needs were identified:\\
 
 
-\chapter{Metodología}
+\begin{table}[H]
+\scalebox{0.78}{
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+    \textbf{\#} & \textbf{Requirements}                                                    & \textbf{Relevance} & \textbf{Measurement} \\ \hline
+    1           & User must feel safe                                                      & 5                  & Subjective           \\ \hline
+    2           & System must be able to be initialize through an user-interface           & 4                  & Objective            \\ \hline
+    3           & System must be able to detect the user's mouth                           & 5                  & Binary               \\ \hline
+    4           & System must be able to generate a trajectory between two points in space & 5                  & Objective            \\ \hline
+    5           & System must be able to measure the current end-effector's position       & 5                  & Objective            \\ \hline
+    6           & System must be able to move the end-effector following a trajectory      & 5                  & Objective             \\ \hline
+    7           & System must be able to move the end-effector close to the user's moth    & 5                  & Objective            \\ \hline
+    8           & System must be able to stop in case of an anomaly detection              & 5                  & Subjective           \\ \hline
+    \end{tabular}
+}
+\end{table}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-\textbf{Etapa 1: Nombre Etapa 1}
 
-\begin{itemize}
 
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-\end{itemize}
-
-\textbf{Etapa 2: Nombre Etapa 2}
-
-\begin{itemize}
-
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\end{itemize}
-
+% ---------------------------------------------------------
 
 \chapter{Desarrollo del proyecto}
 
