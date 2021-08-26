@@ -655,14 +655,33 @@ Computer Vision represents one of the most important fields in the robotic devel
 
 Computer vision can be defined as the branch of study responsible for extracting information from one or multiple images through computational algorithms. There are many areas where it is applied, one of the most complicated being the creation of robotic trajectories, where this information is used to control robotic manipulators or autonomous vehicles \citep{cite_computer_vision_advances_in_computers}.\\
 
-One of the most important applications of computer vision is face detection and face recognition. This utility allows detecting a human face through relevant features found by image processing. It can be divided into two processes: identification of an unknown face and validation of a specific face that can be found encoded in a database \citep{cite_computer_vision_techniques_for_face_recognition}. In this project, it will be implemented a face-detection algorithm.
+One of the most important applications of computer vision is face detection and face recognition. This utility allows detecting a human face through relevant features found by image processing. It can be divided into two processes: identification of an unknown face and validation of a specific face that can be found encoded in a database \citep{cite_computer_vision_techniques_for_face_recognition}. In this project, it will be implemented a face-detection algorithm.\\
 
 \subsubsubsection{Face detection algorithms}
 
-\begin{itemize}
-    \color{red}
-    \item TO-DO
-\end{itemize}
+Face detection is a specific field of computer vision algorithms that involve Machine Learning. The main purpose of this field is to estimate the face position and direction from a given image \citep{cite_face_detection_science_direct_article}. Facial recognition algorithms started around 1960s and there have been multiple improvements of different approaches to solve the objective of detecting human faces.\\
+
+One of the most recognized and significant article in the history of face detection is the famous \say{Rapid object detection using a boosted cascade of simple features}, popularly known as \say{Viola–Jones object detection framework} \citep{cite_viola_jones_face_detection_algorithm}. This algorithm enabled the fast processing of digital images with great accuracy via machine learning algorithms for object detection.\\
+
+Viola Jones Algorithms, established three main relevant literature contributions \citep{cite_viola_jones_face_detection_algorithm}. These are:\\
+
+\begin{enumerate}
+    \item The introduction of a new image abstraction known as the \say{Integral Image}. This allowed the quick processing of an analyzed image.
+    \item A learning algorithm that is based on \say{AdaBoost}, that selects few relevant features from a big data-set and enables an efficient classifier.
+    \item A innovative method to combine separate classifiers that increased their complexity in a cascade approach. These allowed the background sections of an image to be discarded quickly in the process of detection.\\
+\end{enumerate}
+
+Taking into account these considerations, most modern algorithms use features that were developed by Paul Viola and Michael Jones and evolved their specific classifiers in diverse aspects. One example of the importance of these features is the recognized open-source project called \say{OpenCV}, that implements some variants of these algorithms in their previously trained \say{Face Detection} libraries \citep{cite_opencv_classifier_face_detection_general}.\\
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{assets/imgs/reference_framework/face_detection_example_us.png}
+    \caption{Face detection algorithm in action. Own development.}
+    \label{fig_face_detection_us_with_baxter}
+\end{figure}
+
 
 \subsubsubsection{Stereoscopic Camera}
 
@@ -682,38 +701,49 @@ Within the framework of preliminary knowledge for the development of this resear
 
 \subsubsubsection{Motion control systems}
 
-A motion control system aims to follow a given defined trajectory and seeks to reduce the error between the actual performance of the system and its planned trajectory. This control system is very important at the industrial level and are usually guided by 3 integrated control loops: position, velocity and torque. These motion control tasks have a high degree of complexity and usually involve variables such as system load, actuator saturation and robot workspace limitations \citep{cite_position_control_for_linear_motion_servo_systems}.
+A motion control system aims to follow a given defined trajectory and seeks to reduce the error between the actual performance of the system and its planned trajectory. This control system is very important at the industrial level and are usually guided by 3 integrated control loops: position, velocity and torque. These motion control tasks have a high degree of complexity and usually involve variables such as system load, actuator saturation and robot workspace limitations \citep{cite_position_control_for_linear_motion_servo_systems}.\\
 
 \subsubsubsection{Decentralized control systems}
 
-A decentralized control system is one that has the ability to integrate multiple independent control systems and handle these global inputs to a master processing of each of the individual controllers, allowing the generation of independent control events managed by a master algorithm \citep{cite_centralized_control_systems_book}.
+A decentralized control system is one that has the ability to integrate multiple independent control systems and handle these global inputs to a master processing of each of the individual controllers, allowing the generation of independent control events managed by a master algorithm \citep{cite_centralized_control_systems_book}.\\
 
 \subsubsubsection{Impedance control systems}
 
 In the context of a motion control system, there is a relevant term known as \say{impedance}. This concept refers to the relationship between force and position and/or velocity variables. Taking into account this definition, a completely rigid system is one that has simple impedance.\\
 
-Based on these concepts, an impedance control seeks to carry out an intermediate regulation between the force variables of a system, applied to the desired positions in a specific trajectory.\\
+Based on these concepts, an impedance control seeks to carry out an intermediate regulation between the force variables of a system, applied to the desired positions in a specific trajectory. The underlying goal of this control strategy is to assign a prescribed dynamic behaviour of the motion system while its components are interacting with their environment \citep{cite_canudas_theory_of_robotic_control}.\\
 
+Impedance control seeks to model a real-life system into a \say{Generalize Dynamic Impedance}, by a set of linear or non-linear second order differential equations representing a spring-damper-mass system \citep{cite_canudas_theory_of_robotic_control}.\\
 
-\begin{itemize}
-    \color{red}
-    \item TO-DO (EXPAND THEORY FROM CANUDAS BOOK)
-\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{assets/imgs/reference_framework/mass_damper_mass_system_for_impedance_control.png}
+    \caption{Abstraction model of motion system for implementing an Impedance Controller. Taken from \citep{cite_mass_spring_damper_system_ic}.} 
+    \label{fig_vuz_stereo_camera_device}
+\end{figure}
 
-\citep{cite_advanced_robot_control_canudas}.
 
 \subsubsubsection{Model predictive controller}
 
 Model Predictive Controllers, known as MPC, are control algorithms in which the dynamics of the system must be known through a previous identification of itself, by traditional methods of system identification. These algorithms have advantages such as simplicity, robustness, convenience in implementation, taking into account the system's constraints and a good handling of Multiple-Inputs/Multiple-Outputs (MIMO) systems.\\
 
-Model Predictive Controllers seek to predict the changes in the dependent variables of the system model, which will be caused by the influence of the changes in the independent variables of the system. Similarly, they are widely used in systems with multiple constraints, such as those in which the actuators or sensors have saturation points \citep{cite_mpc_industrial_processes_automation_systems}.
+Model Predictive Controllers seek to predict the changes in the dependent variables of the system model, which will be caused by the influence of the changes in the independent variables of the system. Similarly, they are widely used in systems with multiple constraints, such as those in which the actuators or sensors have saturation points \citep{cite_mpc_industrial_processes_automation_systems}.\\
 
-\begin{itemize}
-    \color{red}
-    \item TO-DO (EXPAND THEORY FROM CANUDAS BOOK)
-\end{itemize}
+MPC literature has been developed significantly over the last decades. One of the reasons that impulsed the community research in MPC algorithms is attributed to the fact that MPCs is a wide-open domain. It integrates and involves: optimal control, control processes, stochastic control, multi-variable control and future set-points of variables \citep{cite_model_predictive_control_camacho_bordons}.\\ 
 
-\citep{cite_advanced_robot_control_canudas}.
+One great advantage of Model Predictive Controllers is the fact that they allow to predict a behaviour based on a prediction horizon that considers input constraints of the system and the affected variables. This is done with linear and non-linear processes, allowing MPC to interact with a lot of important industrial processes.\\
+
+Another great conditions that has been a golden-key for the development of MPC algorithms, are the fact that embedded system's processors are being improved with exponential characteristics over the last years. This has come with the circumstance that there are plenty of open-source projects that implement the mathematical approach of convex-optimization problems, an intermediate feature in MPC control strategies.\\
+
+
+\begin{center}
+\includegraphics[width= 1.01\textwidth]{\string "assets/pdfs/reference_framework/mpc_general_graph".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{General Model Predictive Control plot for relevant variables. Taken from \citep{cite_mpc_article_plot_thermal_control}.}\label{fig_general_mpc_explained_plot_thermal_article}
+\end{minipage} \end{center}
+
+
 
 
 % ---------------------------------------------------------
