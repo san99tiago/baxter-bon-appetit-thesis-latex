@@ -773,11 +773,37 @@ The selection process of the most relevant characteristics in terms of user requ
     4           & System must be able to generate a trajectory between two points in space & 5                  & Objective            \\ \hline
     5           & System must be able to measure the current end-effector's position       & 5                  & Objective            \\ \hline
     6           & System must be able to move the end-effector following a trajectory      & 5                  & Objective             \\ \hline
-    7           & System must be able to move the end-effector close to the user's moth    & 5                  & Objective            \\ \hline
+    7           & System must be able to move the end-effector close to the user's mouth    & 5                  & Objective            \\ \hline
     8           & System must be able to stop in case of an anomaly detection              & 5                  & Subjective           \\ \hline
     \end{tabular}
 }
 \end{table}
+
+
+\section{House of Quality}
+
+The House of Quality (HoQ), is a design tool that enables a simple and powerful approach for a \say{quality function deployment}. The tool was originated at the Mitsubishi’s Kobe shipyard site and it has helped the development of multiple industrial solutions, such as home appliances, infrastructures, electronics, clothing, integrated circuits and more \citep{cite_house_of_quality}.\\
+
+The methodology of a House of Quality, maps the corresponding requirements with important engineering conditions that are measurable. The result of these characteristics, generate two important parts: the main matrix and the roof correlation matrix. These matrices are important to understand the underlying relationships and their importance in a measurable way.\\
+
+The result of the HoQ for an active feeding system for patients with motor disabilities in upper extremities, can be seen at fig[\ref{fig_hoq}].\\
+
+\begin{center}
+    \includegraphics[width= 0.98\textwidth]{\string "assets/pdfs/methodology/HoQ".pdf}
+    \bigbreak
+    \begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+    \captionof{figure}{HoQ for an active feeding robotic system. Own development.}\label{fig_hoq}
+\end{minipage} \end{center}
+
+As a general conclusion for the House of Quality design analysis, it is important to notice that the three most important engineering conditions are:\\
+
+\begin{enumerate}
+    \item Robot's processor (GHz)
+    \item Robot's accuracy for joint-encoders (rad)
+    \item Robot's memory (RAM)
+\end{enumerate}
+
+As a general result, the camera conditions are similarly important and there is no significant difference on the relative relevance for those aspects. As well as that, the robot's payload is not a key aspect, because there is no need for high amounts of robotic load to manipulate.\\
 
 
 \section{List of activities}
