@@ -60,7 +60,6 @@
 
 \usepackage[dvipsnames,table,xcdraw]{xcolor} % Color things
 
-
 % Commands to generate list of equations
 \usepackage{tocloft} % Package to generate list of equations
 \newcommand{\listequationsname}{}
@@ -587,8 +586,8 @@ Baxter was announced to the community in September 2011 and can be broadly defin
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\linewidth]{assets/imgs/reference_framework/main_baxter.jpg}
-    \caption{Front view for Baxter cobot. Taken from \citep{cite_youtube_baxter_robot_future_employee}.} 
+    \includegraphics[width=0.65\linewidth]{assets/imgs/reference_framework/baxter_front_view_general_photo.png}
+    \caption{Front view for Baxter cobot. Taken at EIA University Laboratory.} 
     \label{fig_baxter_main_image}
 \end{figure}
 
@@ -1354,13 +1353,137 @@ As mentioned before, the \say{Stop State} is a condition that guarantees that th
 
 \chapter{Baxter Robot}
 
+The robot that will be implemented in this research is the Baxter robot from Rethink Robotics (founded by Rodney Brooks)\citep{cite_baxter_main_wiki}. Baxter cobot is a collaborative robot with two arms and an interactive head. This robot has a series of tools and internal safety systems that makes it possible to develop robotic solutions at the industrial and academic levels.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{assets/imgs/baxter_robot/baxter_general_photo_us.png}
+    \caption{General view of Baxter Robot. Taken at the EIA University Laboratory} 
+    \label{fig_baxter_general_photo_us}
+\end{figure}
+
 \section{Baxter Robot Discovery and Characterization}
+
+To work with Baxter robot, it is important to refer to the official Baxter Rethink Robotics Wiki. This website has multiple valuable features and information about the setup, functionalities, SDKs, considerations and development of solutions with Baxter \citep{cite_baxter_main_wiki}.\\
+
+To dive into the official documentation of Baxter robot, please refer to:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://sdk.rethinkrobotics.com/wiki/Home}{Baxter Rethink Robotics Wiki}
+\end{itemize}
+
+In this section, it will be discussed some important aspects of Baxter's initial discovery and characterization for the research work.\\
+
+\subsection{Baxter Initial Setup}
+
+To correctly configure Baxter for the first time, it is important to refer to the \say{Initial Setup} tutorials. These tutorials can be found at:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://sdk.rethinkrobotics.com/wiki/Getting_Started}{Baxter Initial Setup}
+\end{itemize}
+
+For the development of this research project, Baxter was already assembled with its pedestal and physical connections already plugged in.\\
+
+The first steps to configure and check Baxter right performance, was to connect a physical keyboard to Baxter's back USB connector. This connections was done as it can be seen in fig[\ref{pendiente}]:\\
+
+PHOTO KEYBOARD (TO DO)
+
+
+After that connection, we ran a pre-boot configuration to validate low-level hardware checks to confirm that each one of Baxter components was working correctly. The tests passed successfully in the validation.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_calibration_setup.png}
+    \caption{Implementation of low-level hardware checks in the FSM menu. Taken at the EIA University Laboratory} 
+    \label{fig_low_level_checks_fsm}
+\end{figure}
+
+
+As well as the hardware checks, the official documentation implies that it is important to run Baxter joint-controller calibrations every month \citep{cite_baxter_arms_calibartion}. This process is relevant in order to guarantee that the robot's arms responding reliable on its movements and on its specific sensor signals.\\
+
+This calibration was implemented with an internal Baxter ROS node that ran a programmatic routine for about 30 minutes. The step-by-step documentations are found in this wiki:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://sdk.rethinkrobotics.com/wiki/Arm_Calibration}{Baxter Arm Calibration}
+\end{itemize}
+
+After this initial configurations, it was concluded that Baxter general low-level conditions and controller calibrations were working perfectly.\\
+
+
+\subsection{Baxter Components Specifications}
+
+It is mandatory to have a clear and descent understanding of Baxter components. This knowledge can help to determine the way in which the robotic solutions are developed and optimized. A robotic system is usually assembled with default general parts, such as arm(s), end tools, sensor and security components. In this section, Baxter components will be examined in a general point of view.\\
+
+The main Baxter components are:
+
+\subsubsubsection{Robot}
+
+As clear as it could be seen, Baxter robot has a central computer unit that is located inside of its torso. This
+CPU is able to run multi thread programs to perform complex robotic operations that involve multiple applications.\\
+
+It is also important to specify that the most important interactive safety measure is known as the \say{Emergency Button}. This E-Button is able to completely shutdown Baxter robot and kill all the underlying processes that are being executed at any time. This acts similarly as an \say{Enable/Disable} condition.\\
+
+
+\subsubsubsection{Grippers}
+
+Grippers, also known as end effectors, are the final part of a robotic arm. The grippers act as a crucial part of a robot because they enable the manipulation of external elements in a workspace.\\
+
+Baxter robot supports two default type of pre-built grippers. These are: electric grippers and suction grippers. Many applications require one of these end effectors as a primary tool for the correct development of an automation task.\\
+
+Baxter robot, also allows external \say{own-made} grippers to be attached to its hands, making it possible to design multiple solutions that are not initially considered.\\
+
+\subsubsubsection{Head}
+
+Baxter head is a subtle but fundamental component of the robot, because it can be used as an interactive tool to display friendly images and show possible tasks to the user. The head is also a way to demonstrate that Baxter is designed for collaborative environments that are easily adapted to multiple scenarios with people around him.\\ 
+
+The head is also capable of panning a total of 180\textdegree \space in horizontal directions and nodding vertically as well. This condition is a way to implement an extra layer of interactions with the work-space's users.\\
+
+\subsubsubsection{Screen}
+
+The screen is a 1024 x 600 SVGA LCD display that is completely integrated with Baxter internal components. This screen is intended to be an extension of the robot's functionalities.\\
+
+\subsubsubsection{Arms}
+
+One of the particularities of Baxter robot, is that is has two independent arms (which is different than most industrial robots that only have one). The fact that Baxter was developed in this way, is a design strategy to show that the robot is a \say{friendly system} that looks similar to human being, increasing the trust that users have for it.\\
+
+Each arm is composed of seven degrees of freedom that are moved, controlled and measured with internal electro-mechanical components. These arms are also conceived to have multiple \say{Series Elastic Actuators (SEAs)}, that enhance different available control modes, to ensure the overall safety of the system \citep{cite_baxter_arms_wiki}.\\
+
+Baxter hands also implement extra signals sensors, such as cameras, infrared sensors, accelerometers and navigators. These sensors are totally integrated with the internal electronic and software architecture of the system.\\
+
+
+\subsubsubsection{Cameras}
+
+A key component of the whole system is the fact that it has multiple high-resolution cameras. These cameras are named the \say{left\_hand\_camera}, \say{right\_hand\_camera} and \say{head\_camera}. All cameras are internally connected with Baxter software architecture and enable extra processes such as computer vision algorithms based on the analyzed images.\\
+
+One important limitation to keep in mind is that the hardware conditions do not allow Baxter to operate more than two cameras at the same time (this is because of an internal USB hardware requirement).\\
+
+Baxter also allows to individually configure camera conditions, i.e, window width, window height and max frame rate.\\
+
+
+\subsubsubsection{Input and Output}
+
+Although the other components may have internal I/O systems, Rethink Robotics considered the \say{Input/Output} conditions as a key feature of the final solution. These I/O are the direct conditions to interact with Baxter robot, and are designed in a robust, secure and easy-to-program way.\\
+
+The three main I/O categories are \say{Analog I/Os}, \say{
+Digital I/Os} and \say{Navigator Interface I/Os} \citep{cite_baxter_io_wiki}. All three have different electronic signal behaviours and are composed of: sensors, buttons, switches, lights, then navigators, then digitals and analog IOs.\\
+
+
+\subsection{Baxter Hardware Specifications}
+
+\subsection{Baxter Software Specifications}
+
+
 
 \section{Baxter Robot Mathematical Approach}
 
 \section{Baxter Robot Algorithms}
 
 \section{Baxter Robot Work-Space}
+
+Calibrations...
 
 \section{Baxter Robot Tool}
 
