@@ -1386,9 +1386,15 @@ To correctly configure Baxter for the first time, it is important to refer to th
 
 For the development of this research project, Baxter was already assembled with its pedestal and physical connections already plugged in.\\
 
-The first steps to configure and check Baxter right performance, was to connect a physical keyboard to Baxter's back USB connector. This connections was done as it can be seen in fig[\ref{pendiente}]:\\
+The first steps to configure and check Baxter right performance, was to connect a physical keyboard to Baxter's back USB connector. This connections was done in the back of Baxter with the USB entry as can be seen in fig[\ref{fig_baxter_back_part_closeup}]:\\
 
-PHOTO KEYBOARD (TO DO)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_back_connections_zoom_labeled.jpg}
+    \caption{Back view of Baxter robot. Taken at the EIA University Laboratory} 
+    \label{fig_baxter_back_part_closeup}
+\end{figure}
 
 
 After that connection, we ran a pre-boot configuration to validate low-level hardware checks to confirm that each one of Baxter components was working correctly. The tests passed successfully in the validation.\\
@@ -1473,8 +1479,177 @@ Digital I/Os} and \say{Navigator Interface I/Os} \citep{cite_baxter_io_wiki}. Al
 
 \subsection{Baxter Hardware Specifications}
 
+Baxter robot is documented officially in the Rethink Robotics Wiki with multiple measurements and information about its hardware components.\\
+
+As it is said in the robot's data-sheet, Baxter was designed for continuous operation and can run 24/7 for expended periods of time without the risk of damaging the hardware of the robot\citep{cite_baxter_hardware_specifications}. \\
+
+In this section, we will dive into important characteristics and features that are going to be essential in the future chapters. All of these measurements are taken from the official documentation and were guarantee to have minor errors.\\
+
+\subsubsection{Baxter Arm Specifications}
+
+Both Baxter arms are exactly the same in terms of distances, angles and internal conditions, with the only exception of being symmetrical.\\
+
+In the following image (fig[\ref{fig_baxter_hand_measurements}]), there is a detailed explanation of Baxter hand with the notation of its angle names (that are used for the internal processing and execution of Baxter commands):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{assets/imgs/baxter_robot/baxter_arm_specifications.png}
+    \caption{Hand measurements and angle names for Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.} 
+    \label{fig_baxter_hand_measurements}
+\end{figure}
+
+
+\begin{table}[H]
+\begin{center}
+\scalebox{0.81}{
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Joint} & \textbf{(Degrees) Min limit} & \textbf{Max limit} & \textbf{Range} & \textbf{(Radians) Min limit} & \textbf{Max limit} & \textbf{Range} \\ \hline
+        S0 & -97.494 & +97.494 & 194.998 & -1.7016 & +1.7016 & 3.4033 \\ \hline
+        S1 & -123 & +60 & 183 & -2.147 & +1.047 & 3.194 \\ \hline
+        E0 & -174.987 & +174.987 & 349.979 & -3.0541 & +3.0541 & 6.1083 \\ \hline
+        E1 & -2.864 & +150 & 153 & -0.05 & +2.618 & 2.67 \\ \hline
+        W0 & -175.25 & +175.25 & 350.5 & -3.059 & +3.059 & 6.117 \\ \hline
+        W1 & -90 & +120 & 210 & -1.5707 & +2.094 & 3.6647 \\ \hline
+        W2 & -175.25 & +175.25 & 350.5 & -3.059 & +3.059 & 6.117 \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:max_min_values} Joint range values for Baxter Robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
+\end{center}
+\end{table}
+
+Another interesting condition that is required for implementing control solutions is the torque and speed of the arms. In the following chart, those conditions are going to be shown.\\
+
+
+\begin{table}[H]
+\begin{center}
+\scalebox{1.0}{
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Joint} & \textbf{Maximum Speed (rad/sec)} & \textbf{Peak Torque (Nm)} \\ \hline
+        S0 & 2.0 & 50 \\ \hline
+        S1 & 2.0 & 50 \\ \hline
+        E0 & 2.0 & 50 \\ \hline
+        E1 & 2.0 & 50 \\ \hline
+        W0 & 4.0 & 15 \\ \hline
+        W1 & 4.0 & 15 \\ \hline
+        W2 & 4.0 & 15 \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:max_joint_conditions} Maximum joint speed values and torques for Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
+\end{center}
+\end{table}
+
+
+These joint speed values and torques are considered to be fast, considering the normal operating conditions of collaborative robots.\\
+
+To correctly acquire Baxter current joint angles, Baxter has high quality sensor at each on of its degrees of freedom. These sensors have the following specifications:
+
+\begin{itemize}
+    \item The resolution for the joint sensors is 14 bits (over 360 degrees); so 360/(2\^14) = 0.021972656 degrees per tick resolution.
+    \item The joints have a waveform non-linearity, based on an accuracy on the order of about +/-0.10 degrees, worst case +/-0.25 degrees accuracy when reaching the joint limits.
+\end{itemize}
+
+\subsubsection{Baxter Camera Specifications}
+
+Camera signals play a fundamental role in the development of autonomous solutions. For Baxter robot, these conditions are similar for each on of the cameras and are the typical values are the following:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{1.0}{
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Description} & \textbf{Spec} & \textbf{Unit} \\ \hline
+        Max Resolution & 1280 x 800 & pixels \\ \hline
+        Effective Resolution & 640 x 400 & pixels \\ \hline
+        Frame Rate & 30 & frames per second \\ \hline
+        Focal Length & 1.2 & mm \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:camera_specifications} Camera specifications for Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
+\end{center}
+\end{table}
+
+It is important to notice that these conditions will be analyzed better in the computer vision algorithms developed in the final sections of this research.\\
+
+
+\subsubsection{Baxter CPU Specifications}
+
+CPU specifications are a direct limitation for any robotic solution, because the processor is in charge of executing multiple complex threads for the correct real-time applications.\\
+
+\begin{table}[H]
+\begin{center}
+\scalebox{0.9}{
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Description} & \textbf{Spec} \\ \hline
+        Processor & 3rd Gen Intel Core i7-3770 Processor (8MB, 3.4GHz) w/HD4000 Graphics \\ \hline
+        Memory & 4GB, NON-ECC, 1600MHZ DDR3 \\ \hline
+        Hard Drive & 128GB Solid State Drive \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:cpu_specifications} CPU specifications for Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
+\end{center}
+\end{table}
+
+
+\subsubsection{Baxter Additional Specifications}
+
+There are some final additional important specifications that Rethink Robotics has considered as relevant to consider in order to develop disruptive robotic solutions. These considerations are specified in table[\ref{tab:aditional_specifications}]:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{0.82}{
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Description} & \textbf{Spec} \\ \hline
+        Battery Operation & DC-to-120V AC Inverter \\ \hline
+        Max Consumption & 6A at 120V AC, 720W max per unit \\ \hline
+        Total weight (with pedestal) & 298 lbs / 135.2 kg \\ \hline
+        Screen Resolution & 1024 x 600 pixels \\ \hline
+        Positional Accuracy & +/- 5 mm \\ \hline
+        Max Payload (including end-effector) & 5 lb / 2.2 kg \\ \hline
+        Infrared Sensor Range & 1.5 – 15 in / 4 – 40 cm \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:additional_specifications} Additional specifications for Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
+\end{center}
+\end{table}
+
+
 \subsection{Baxter Software Specifications}
 
+Robots are devices that must integrate multiple sensors, actuators, protocols, validations, security features, programmable processes and more. This requirements are only possible with the right software and hardware integration for the desired robot features. Based on this statement, there must be an overall layer of abstraction for controlling the specified aspects and executing the robot´s functionalities in a reliable way. For Baxter robot, this software and hardware conditions are run on based on a \say{Robot Operating System} (ROS) \citep{cite_ROS_official_site}.
+
+Baxter runs on ROS Indigo and implements an Ubuntu 14.04 Linux distribution. This software requirements can be eventually upgraded to newer versions with minor work, but is not a straight-forward approach, because some important functionalities could get unstable or not compatible. For this reason, for this research these software requirements are going to be used.\\
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/imgs/baxter_robot/ros_indigo.png}
+		\caption{ROS Indigo Igloo implemented in Baxter robot. Taken from \citep{cite_ros_indigo_main_page}}
+		\label{fig_ros_indigo_logo}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.55\linewidth]{assets/imgs/baxter_robot/ubuntu_logo.jpg}
+		\caption{Ubuntu 14.04 Linux distribution implemented in Baxter robot. Taken from \citep{cite_ubuntu_download_1404}}
+		\label{fig_ubuntu_1404_logo}
+	\end{subfigure}%
+	\caption{Required software dependencies for running Baxter robot.}
+	\label{fig_required_baxter_software}
+\end{figure}
 
 
 \section{Baxter Robot Mathematical Approach}
