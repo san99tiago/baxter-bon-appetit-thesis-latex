@@ -722,7 +722,7 @@ Impedance control seeks to model a real-life system into a \say{Generalize Dynam
     \centering
     \includegraphics[width=0.4\linewidth]{assets/imgs/reference_framework/mass_damper_mass_system_for_impedance_control.png}
     \caption{Abstraction model of motion system for implementing an Impedance Controller. Taken from \citep{cite_mass_spring_damper_system_ic}.} 
-    \label{fig_vuz_stereo_camera_device}
+    \label{fig_mass_spring_damper_system}
 \end{figure}
 
 
@@ -1296,7 +1296,7 @@ It is important to notice that there are multiple states that have transitions b
 \includegraphics[width= 0.9\textwidth]{\string "assets/pdfs/methodology/GeneralFiniteStateMachine".pdf}
 \bigbreak
 \begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
-\captionof{figure}{General software diagram for system's functionalities. Own work.}\label{fig_general_software_architecture}
+\captionof{figure}{General software diagram for system's functionalities. Own work.}\label{fig_general_finite_machine}
 \end{minipage} \end{center}
 
 \subsection{Shutdown state}
@@ -1603,7 +1603,7 @@ CPU specifications are a direct limitation for any robotic solution, because the
 
 \subsubsection{Baxter Additional Specifications}
 
-There are some final additional important specifications that Rethink Robotics has considered as relevant to consider in order to develop disruptive robotic solutions. These considerations are specified in table[\ref{tab:aditional_specifications}]:
+There are some final additional important specifications that Rethink Robotics has considered as relevant to consider in order to develop disruptive robotic solutions. These considerations are specified in table[\ref{tab:additional_specifications}]:
 
 \begin{table}[H]
 \begin{center}
@@ -1653,6 +1653,109 @@ Baxter runs on ROS Indigo and implements an Ubuntu 14.04 Linux distribution. Thi
 
 
 \section{Baxter Robot Mathematical Approach}
+
+The mathematical approach of any dynamic system, has its foundations on reference frames that enable the absolute and relative Cartesian systems. For robotic systems, it is common to define a main workspace reference and start developing models to transform these coordinates into multiple other references throughout the system.\\
+
+Baxter is a completely symmetrical two armed hyper-redundant 7DOF humanoid robot. This condition makes it useful to define a central reference as the workspace center, so that the transforms are similar in each one of the arms. It's also relevant to notice that both limbs are exactly the same in measurements and the only key difference the sign of an angle.Each arm has a total of seven degrees of freedom (DOF) of rotational joint type (\textbf{R}).\\
+
+In order to be determine the position and orientation of Baxter end effector in a mathematical way, it is important to understand that Baxter has multiple joint-encoder sensors that are only able to measure the angle of an articulation based on the angle that it makes with respect of the previous one.\\
+
+These encoders are already calibrated and are the main way to map the end effector to the central reference frame. To do this mapping, it is mandatory to have a mathematical representation with Transformation Matrices for each one of the reference frames that are in Baxter's joints.\\
+
+
+\subsection{Baxter Fixed Transformation Matrices}
+
+There are some important transformation matrices that enable the mapping of Baxter arms with respect of the main reference frame (this is from \{W0\} to \{BR\} or from \{W0\} to \{BL\}, as it can be seen in figures fig[\ref{fig_baxter_schematic_general}] and fig[\ref{fig_baxter_schematic_torso_to_arm}]. These transforms are considered \say{fixed}, because they are constant in time. That means that we do not need to implement any addition algorithm to calculate the current values (those calculations are only be relevant in the angles for Baxter arms).\\
+
+
+The transformation matrices from the central reference, to the beginning of Baxter arms, are:\\
+
+
+
+
+TO-DO: ADD TMs
+
+
+
+
+
+
+
+
+\begin{center}
+\includegraphics[width= 0.98\textwidth]{\string "assets/pdfs/baxter_robot/general_distance_schematic".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{General Baxter schematic with reference frames. Adapted from \citep{cite_baxter_humanoid_robot_kinematics_ohio}.}\label{fig_baxter_schematic_general}
+\end{minipage} \end{center}
+
+
+\begin{center}
+\includegraphics[width= 0.9\textwidth]{\string "assets/pdfs/baxter_robot/body_to_shoulder_schematic".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Torso to arm schematic with reference frames. Adapted from \citep{cite_baxter_humanoid_robot_kinematics_ohio}.}\label{fig_baxter_schematic_torso_to_arm}
+\end{minipage} \end{center}
+
+
+
+
+\subsection{Baxter Robot Denavit-Hartenberg Parameters}
+
+In robotics, Denavit-Hartenberg Parameters (DH params), are used to specify the relationships and notations of multiple reference frames that are present in a chain-wise robotic system. This algorithm makes it possible to standardize the coordinate frames for spatial linkages easily \citep{cite_denativ_hartenberg}.\\
+
+For Baxter DH Parameters, it is going to be used the modified Denavit-Hartenberg algorithm, also known as the \say{Craig Style DH Params}. This modification only differs in a rotation of frames that happens directly at a joint, instead of a distal joint) \citep{cite_craig_robotics}.\\
+
+\begin{center}
+\includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/baxter_robot/right_arm_schematic".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Right arm schematic with reference frames. Adapted from \citep{cite_baxter_humanoid_robot_kinematics_ohio}.}\label{fig_baxter_schematic_right_arm}
+\end{minipage} \end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Baxter Robot Algorithms}
 
