@@ -1662,24 +1662,40 @@ In order to be determine the position and orientation of Baxter end effector in 
 
 These encoders are already calibrated and are the main way to map the end effector to the central reference frame. To do this mapping, it is mandatory to have a mathematical representation with Transformation Matrices for each one of the reference frames that are in Baxter's joints.\\
 
+In this section, there are some important values to keep in mind for the mathematical results of the transformation matrices. These values correspond to the distances shown in figures fig[\ref{fig_baxter_schematic_general}], fig[\ref{fig_baxter_schematic_torso_to_arm}] and fig[\ref{fig_baxter_schematic_right_arm}]:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{0.82}{
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Length} & \textbf{Value (mm)} \\ \hline
+        L0 & 270.35 \\ \hline
+        L1 & 69.00 \\ \hline
+        L2 & 364.35 \\ \hline
+        L3 & 69.00 \\ \hline
+        L4 & 374.29 \\ \hline
+        L5 & 10.00 \\ \hline
+        L6 & 368.30 \\ \hline
+        L & 278.00 \\ \hline
+        h & 64.00 \\ \hline
+        H & 1104.00 \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:lengths_of_baxter} Lengths of Baxter robot. Adapted from \citep{cite_baxter_humanoid_robot_kinematics_ohio}.}
+\end{center}
+\end{table}
+
+There is an extra consideration for these values, because the final distance \say{L6}, is considered as the distance from the wrist pitch center, to the final part of the end effector. Keep in mind that the current value specifies the distance without any tool attached to it. This distance changes based on the distance of the tool that is implemented on Baxter.\\
+
 
 \subsection{Baxter Fixed Transformation Matrices}
 
-There are some important transformation matrices that enable the mapping of Baxter arms with respect of the main reference frame (this is from \{W0\} to \{BR\} or from \{W0\} to \{BL\}, as it can be seen in figures fig[\ref{fig_baxter_schematic_general}] and fig[\ref{fig_baxter_schematic_torso_to_arm}]. These transforms are considered \say{fixed}, because they are constant in time. That means that we do not need to implement any addition algorithm to calculate the current values (those calculations are only be relevant in the angles for Baxter arms).\\
+There are some important transformation matrices that enable the mapping of Baxter arms with respect of the main reference frame (this is from \{W0\} to \{BR\} or from \{W0\} to \{BL\}, as it can be seen in figures fig[\ref{fig_baxter_schematic_general}] and fig[\ref{fig_baxter_schematic_torso_to_arm}]. These transforms are considered \say{fixed}, because they are constant in time. That means that we do not need to implement any addition algorithm to calculate the current values (those calculations are only relevant in the angles for Baxter arms).\\
 
-
-The transformation matrices from the central reference, to the beginning of Baxter arms, are:\\
-
-
-
-
-TO-DO: ADD TMs
-
-
-
-
-
-
+In the following figures, it is possible to determine the relevant reference frames to do the initial transformation matrices:
 
 
 \begin{center}
@@ -1698,6 +1714,90 @@ TO-DO: ADD TMs
 \end{minipage} \end{center}
 
 
+The transformation matrices from the central reference, to the beginning of Baxter arms, are:\\
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrix_w0_bl_and_w0_br}
+    \begin{bmatrix}
+    _{B_L}^{W_0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 & L \\ 
+    -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 & -h \\ 
+    0 & 0 & 1 & H \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    \phantom{0000}
+    \begin{bmatrix}
+    _{B_R}^{W_0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 & -L \\ 
+    -\frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} & 0 & -h \\ 
+    0 & 0 & 1 & H \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+\myequations{Transformation matrices from W0 to BL and from W0 to BR}
+\caption{Transformation matrices from W0 to BL and from W0 to BR.}
+\end{equ}
+
+These matrices have exactly the same absolute values in terms of the distances, but the only key difference is the sign of the translations and rotations. This difference is due to the fact that the robot is symmetrical and thus, the values are the opposite respect to X-axis in translation and a 90 degree difference in Z-axis the rotation (with respect to each other).\\
+
+After these fixed transformation matrices are taken into consideration, there are two extra constant transformations that must be done before applying the DH parameters algorithm. These transformations are based on the frames specified on fig[\ref{fig_baxter_schematic_right_arm}]:
+
+\begin{itemize}
+    \item Transformation from the reference frame of the arm of Baxter (\{BR\} or \{BL\}) to the beginning of the variable part of Baxter's arm (\{0\}).
+    \item Transformation from the reference frame of the end of Baxter arm (\{7\}) to the end effector (\{GL\} or \{GR\}).
+\end{itemize}
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrices_fixed_init_of_arm_and_end_of_arm}
+    \begin{bmatrix}
+    _{0}^{B_L}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{0}^{B_R}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 1 & L_0 \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    \phantom{0000}
+    \begin{bmatrix}
+    _{G_L}^{7}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{G_R}^{7}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 1 & L_6 \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+\myequations{Transformation matrices from BR/BL to 0 and from 7 to GL/GR}
+\caption{Transformation matrices from BR/BL to 0 and from 7 to GL/GR.}
+\end{equ}
+
+
+\begin{center}
+\includegraphics[width= 0.92\textwidth]{\string "assets/pdfs/baxter_robot/baxter_transformations_explained".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Visual complete transformation matrices for Baxter left hand. Own development.}\label{fig_baxter_transformations_graphic_way}
+\end{minipage} \end{center}
+
+After these fixed transformation matrices were explained by inspection, the next section is going to explain how to use the \say{DH notation} to specify how to calculate the missing transformations of the reference frames from \{0\} to \{7\}.\\
 
 
 \subsection{Baxter Robot Denavit-Hartenberg Parameters}
@@ -1713,51 +1813,172 @@ For Baxter DH Parameters, it is going to be used the modified Denavit-Hartenberg
 \captionof{figure}{Right arm schematic with reference frames. Adapted from \citep{cite_baxter_humanoid_robot_kinematics_ohio}.}\label{fig_baxter_schematic_right_arm}
 \end{minipage} \end{center}
 
+\begin{table}[H]
+\begin{center}
+\scalebox{0.98}{
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        % \textbf{i} & \textbf{\alpha_{i-1}} & \textbf{a_{i-1}} & \textbf{d_{i}} & \textbf{\theta_{i}} \\ \hline
+        $i$ & $\alpha_{i-1}$ & $a_{i-1}$ & $d_{i}$ & $\theta_{i}$ \\ \hline
+        1 & 0 & 0 & 0 & $\theta_{1}$ \\ \hline
+        2 & -90\textdegree & $L_1$ & 0 & $\theta_{2} + 90$\textdegree \\ \hline
+        3 & 90\textdegree & 0 & $L_{2}$ & $\theta_{3}$ \\ \hline
+        4 & -90\textdegree & $L_{3}$ & 0 & $\theta_{4}$ \\ \hline
+        5 & 90\textdegree & 0 & $L_{4}$ & $\theta_{5}$ \\ \hline
+        6 & -90\textdegree & $L_{5}$ & 0 & $\theta_{6}$ \\ \hline
+        7 & 90\textdegree & 0 & 0 & $\theta_{7}$ \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:dh_params} Denavit Hartenberg Parameters for the arms of Baxter robot. Adapted from \citep{cite_denativ_hartenberg}.}
+\end{center}
+\end{table}
 
+One great advantage of Baxter robot is that the Denavit Hartenberg parameters are identical for both of its arms, making it simple to describe the kinematics and dynamics of the entire system, due to the symmetrical configuration. The main difference will only be considered for the fixed transformation matrices shown in the last section in equations eq[\ref{eq:transformation_matrix_w0_bl_and_w0_br}] and eq[\ref{eq:transformation_matrices_fixed_init_of_arm_and_end_of_arm}].\\
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+After inspecting and analyzing the Baxter DH parameters table, it is now possible to determine a specific transformation matrix of any of its joints, based on the measurement of the encoder sensors of all of its degrees of freedom. This affirmation will be extremely important, for future calculations that require multiple transformation matrices at a given time.\\ 
 
 
 \section{Baxter Robot Algorithms}
+
+Two important mathematical algorithms for robot kinematics are the \say{Forward Pose Kinematics} (FPK) and \say{Inverse Pose Kinematics} (IPK). These approaches have different purposes and create the basis of any robotic solution. In FPK, the length of each one of the links and the angles of the DOF are known and the goal is to calculate the position and orientation of the end effector (or any intermediate part) in the physical space of the robot. In the IPK, the length of each one of the links is known and the current position of the end effector is given, and the goal is to calculate the value of the angles for each one of the DOF \citep{cite_fpk_and_ipk_explained_simple}.\\
+
+The FPK and IPK algorithms will be explained in the following sub-sections:
+
+\subsection{Baxter Forward Pose Kinematics}
+
+The objective of the FPK for Baxter, is to determine the position and orientation of the end-effector frame. To solve this problem, we can proceed to implement the DH parameters in the following way:
+
+\begin{enumerate}
+    \item Substitute each line of Denavit-Hartenberg Parameters shown in table tab[\ref{tab:dh_params}] with the current joint angle values.
+    \item Then, apply the necessary rotations and translations in the DH axes, to determine the intermediate transformation matrices for each one of the links.
+    \item Calculate the overall end-effector transformation matrix from the result of matrix multiplication of each one of the intermediate matrices. 
+\end{enumerate}
+
+The previous steps can be expressed in a matrix-wise way as it follows (these abbreviations are used: c$\theta_{i}$=cos$\theta_{i}$, s$\theta_{i}$=sin$\theta_{i}$, c$\alpha_{i-1}$=cos$\alpha_{i-1}$, s$\alpha_{i-1}$=sin$\alpha_{i-1}$ ):
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrices_for_dh_algorithm}
+    \begin{bmatrix}
+    _{i}^{i-1}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    c\theta_{i} & -s\theta_{i} & 0 & a_{i-1} \\ 
+    s\theta_{i}c\alpha_{i-1} & c\theta_{i}c\alpha_{i-1}& -s\alpha_{i-1} & -d_{i}s\alpha_{i-1} \\ 
+    s\theta_{i}s\alpha_{i-1} & c\theta_{i}s\alpha_{i-1} & c\alpha_{i-1} & d_{i}c\alpha_{i-1} \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    =
+    \left[ \begin{array}{ *{4}{c} }
+        & & & \\
+        & & & \\
+        \multicolumn{3}{c}
+            {\raisebox{\dimexpr\normalbaselineskip+.5\ht\strutbox-.5\height}[0pt][0pt]
+            {\scalebox{1.0}{$_{i}^{i-1}\textrm{R}$}}} & 
+            {\raisebox{\dimexpr\normalbaselineskip+.5\ht\strutbox-.5\height}[0pt][0pt]
+            {\scalebox{1.0}{$_{}^{i-1}\textrm{P}_i$}}} \\
+        0 & 0 & 0 & 1
+    \end{array} \right]
+\end{equation}
+\myequations{Transformation matrices for Denavit Hartenberg algorithm}
+\caption{Transformation matrices for Denavit Hartenberg algorithm.}
+\end{equ}
+
+The transformation matrices specified in eq[\ref{eq:transformation_matrices_for_dh_algorithm}], correspond to the position and orientation of the desired joint articulation that we want to analyze, and if the final reference frame of Baxter arm is the goal, this transformation matrix would become to the values that go from \{0\} to \{7\}.\\
+
+To obtain the complete matrix transformation from \{0\} to \{7\}, it can apply the properties of homogeneous transformation matrices, like this:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrix_from_0_to_7_process}
+    \begin{bmatrix}
+    _{7}^{0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{1}^{0}\textrm{T}(\theta_{1})
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{2}^{1}\textrm{T}(\theta_{2})
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{3}^{2}\textrm{T}(\theta_{3})
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{4}^{3}\textrm{T}(\theta_{4})
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{5}^{4}\textrm{T}(\theta_{5})
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{6}^{5}\textrm{T}(\theta_{6})
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{7}^{6}\textrm{T}(\theta_{7})
+    \end{bmatrix}
+\end{equation}
+\myequations{Complete Baxter arm transformation matrix from frame \{0\} to frame \{7\} using DH intermediate transforms.}
+\caption{Complete Baxter arm transformation matrix from frame \{0\} to frame \{7\} using DH intermediate transforms.}
+\end{equ}
+
+As it can be perceived in the transformation matrix obtained in eq[\ref{eq:transformation_matrix_from_0_to_7_process}], it only takes into consideration the frames that change in time, which correspond to the shoulder, wrist and elbow of Baxter arm. However, to apply a complete transform from the defined center of reference \{W0\} to the final end-effector \{GL\} or \{GR\}, the already discussed fixed transformation matrices must be applied correctly.\\
+
+To mathematically express the absolute final position and orientation of the end-effector expressed in homogeneous transformation matrix, the successive expression must be calculated:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrix_from_w0_to_GL}
+    \begin{bmatrix}
+    _{G_L}^{W_0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{B_L}^{W_0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{0}^{B_L}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{7}^{0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{G_L}^{7}\textrm{T}
+    \end{bmatrix}
+\end{equation}
+\myequations{Expression to calculate absolute transformation matrix from the reference frame \{W0\} to the left end-effector frame \{GL\}}
+\caption{Expression to calculate absolute transformation matrix from the reference frame \{W0\} to the left end-effector frame \{GL\}.}
+\end{equ}
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrix_from_w0_to_GR}
+    \begin{bmatrix}
+    _{G_R}^{W_0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{B_R}^{W_0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{0}^{B_R}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{7}^{0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{G_R}^{7}\textrm{T}
+    \end{bmatrix}
+\end{equation}
+\myequations{Expression to calculate absolute transformation matrix from the reference frame \{W0\} to the right end-effector frame \{GR\}}
+\caption{Expression to calculate absolute transformation matrix from the reference frame \{W0\} to the right end-effector frame \{GR\}.}
+\end{equ}
+
+An important remark is that for these equations, the only variable matrices are the ones that go from the frames \{0\} to \{7\}, and the value is obtained from the current measurement of the joint encoders angles $\theta_{1}$ to $\theta_{7}$. The other ones were explained before and are constant in time.\\
+
+
+\subsection{Baxter Inverse Pose Kinematics}
+
+
+
 
 \section{Baxter Robot Work-Space}
 
