@@ -1974,17 +1974,341 @@ To mathematically express the absolute final position and orientation of the end
 
 An important remark is that for these equations, the only variable matrices are the ones that go from the frames \{0\} to \{7\}, and the value is obtained from the current measurement of the joint encoders angles $\theta_{1}$ to $\theta_{7}$. The other ones were explained before and are constant in time.\\
 
+The software implementation of the FPK algorithm for this research project can be found at our GitHub repository \say{baxter-bon-appetit}:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/src/baxter_essentials/baxter_fpk.py}{Baxter-Bon-Appetit Forward Pose Kinematic Algorithm (Source Code)}
+\end{itemize}
+
 
 \subsection{Baxter Inverse Pose Kinematics}
 
+The goal of the IPK for Baxter, is to determine the current angles of each one of the degrees of freedom, based on the Cartesian position and orientation of the end effector. To solve this problem, we can proceed to derive a general expression based on an analytical solution.\\
 
+One key condition to consider is that Baxter has 7 DOF, which makes him an hyper-redundant robot that can usually get to a given point in space in many different ways. This redundancy makes it more complex to calculate an analytical solution taking into consideration each one of the angles as variables. This problem will be solved by a strategic approach in which one of the degrees of freedom will be fixed at a constant value.\\
+
+This degree of freedom that will have its angle fixed to zero will be the one corresponding to the first elbow joint (\say{E0}, which is $\theta_{3}$), as it can be seen in fig[\ref{fig_baxter_fixed_e0_dof}]:
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_left_tucked_no_background_showing_e0.jpg}
+    \caption{Baxter e0 joint that will be fixed for the analytical IPK.} 
+    \label{fig_baxter_fixed_e0_dof}
+\end{figure}
+
+Another important distance that will be discarded for this analytical calculation, is $L_5$, which is really small compared to the other limb distances. This assumption will make it simpler to obtain the analytical IPK Baxter solution.\\
+
+After the $\theta_{3}$ and $L_5$ condition are said, the next part of the problem is to understand the inputs and outputs for getting the IPK.:\\
+
+\textbf{Input Matrix:}
+
+\begin{equ}[H]
+\begin{equation} \label{eq:input_for_ipk}
+    _{6}^{0}\textrm{T} = 
+    \begin{bmatrix}
+    r_{11} & r_{12} & r_{13} & _{}^{0}\textrm{x}_{6}\\ 
+    r_{21} & r_{22} & r_{23} & _{}^{0}\textrm{y}_{6}\\ 
+    r_{31} & r_{32} & r_{33} & _{}^{0}\textrm{z}_{6}\\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+\myequations{Input matrix for Inverse Pose Kinematic analytic solution.}
+\caption{Input matrix for Inverse Pose Kinematic analytic solution.}
+\end{equ}
+
+\textbf{Output variables:}
+
+\begin{equ}[H]
+\begin{equation} \label{eq:output_for_ipk}
+    [\theta_{1}, \theta_{2}, \theta_{4}, \theta_{5}, \theta_{6}, \theta_{7}]
+\end{equation}
+\myequations{Output variables for Inverse Pose Kinematic analytic solution.}
+\caption{Output variables for Inverse Pose Kinematic analytic solution.}
+\end{equ}
+
+It is important to notice that the indices of the frames are assuming that $\theta_{3}$ is none, so they are shifted to the next one by one after the third DOF. This means that frames \say{4, 5, 6, 7} are now \say{3, 4, 5, 6}.\\
+
+As well as that, keep in mind that the distance from the reference frames of joints \{2\} to \{4\}, is the euclidean distance from the center of each frame, that corresponds to: $\sqrt{L_{2}^2 + L_{3}^2}$.\\
+
+The analytical solution can be proved by starting with equation shown in eq[\ref{eq:expression_to_obtain_analytical_ipk}], and applying linear algebra concepts for each one of the DOF.\\
+
+\begin{equ}[H]
+\begin{equation} \label{eq:expression_to_obtain_analytical_ipk}
+    \begin{bmatrix}
+    _{G_L}^{W_0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{B_L}^{W_0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{0}^{B_L}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{6}^{0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{G_L}^{6}\textrm{T}
+    \end{bmatrix}
+\end{equation}
+\myequations{Expression to obtain the analytical IPK solution.}
+\caption{Expression to obtain the analytical IPK solution.}
+\end{equ}
+
+
+The final angle values are:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:angle_1_ipk}
+    \theta_{1} = atan2(_{}^{0}\textrm{y}_{4}, _{}^{0}\textrm{x}_{4})
+\end{equation}
+\myequations{Joint angle 1 for the IPK solution}
+\caption{Joint angle 1 for the IPK solution}
+\end{equ}
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:angle_2_ipk}
+\begin{split}
+    x & = _{}^{0}\textrm{y}_{4} \\
+    z & = _{}^{0}\textrm{z}_{4} \\
+    E & = 2 \cdot L_{h} \cdot \left[L_{1} - \frac{x}{c_{1}}\right] \\
+    F & = 2 \cdot L_{h} \cdot z \\
+    G & = \frac{x^2}{c_{1}^2} + L_{1}^2 + L_{h}^2 - L_{4}^2 + z^2 - 2 \cdot \frac{L_{1} x}{c_{1}} \\
+    t_{1,2} & = \frac{-F \pm \sqrt{E^2 + F^2 - G^2}}{G - E} \\
+    \theta_{2_{1,2}} & = 2 atan(t_{1,2})
+\end{split}
+\end{equation}
+\myequations{Joint angle 2 for the IPK solution}
+\caption{Joint angle 2 for the IPK solution}
+\end{equ}
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:angle_3_ipk}
+    \theta_{4_{1,2}} = atan2(-z - L_{h}s_{2_{1,2}}, \frac{x}{c_{1}} - L_{1} - L_{h}c_{2_{1,2}}) - \theta_{2_{1,2}}
+\end{equation}
+\myequations{Joint angle 4 for the IPK solution}
+\caption{Joint angle 4 for the IPK solution}
+\end{equ}
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:rotation_matrix_3_6_for_ipk}
+    \begin{bmatrix}
+    _{6}^{3}\textrm{R}(\theta_{5}, \theta_{6}, \theta_{7})
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    R_{11} & R_{12} & R_{13} \\ 
+    R_{21} & R_{22} & R_{23} \\ 
+    R_{31} & R_{32} & R_{33}
+    \end{bmatrix}
+\end{equation}
+\myequations{Rotation matrix from reference frame 3 to reference frame 6 for the IPK procedure.}
+\caption{Rotation matrix from reference frame 3 to reference frame 6 for the IPK procedure.}
+\end{equ}
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:angle_5_ipk}
+    \theta_{5} = atan2(R_{33}, R_{13})
+\end{equation}
+\myequations{Joint angle 5 for the IPK solution}
+\caption{Joint angle 5 for the IPK solution}
+\end{equ}
+
+\begin{equ}[H]
+\begin{equation} \label{eq:angle_6_ipk}
+    \theta_{6} = atan2(\frac{R_{21}}{c_{7}}, -R_{23})
+\end{equation}
+\myequations{Joint angle 6 for the IPK solution}
+\caption{Joint angle 6 for the IPK solution}
+\end{equ}
+\begin{equ}[H]
+\begin{equation} \label{eq:angle_7_ipk}
+    \theta_{7} = atan2(-R_{22}, R_{21})
+\end{equation}
+\myequations{Joint angle 7 for the IPK solution}
+\caption{Joint angle 7 for the IPK solution}
+\end{equ}
+
+
+The Baxter IPK analytical solution will be a necessary algorithm to develop robotic solutions that map the Cartesian space to the joint space. This solution could be improved with a 7 DOF Inverse Pose Kinematics, but the cost of developing a solution that involves every join value, would represent a higher computational cost with lower response times for the robot.\\
+
+
+To dive deeper into the software implementation of this algorithm, please feel free to explore our GitHub repository \say{baxter-bon-appetit} with the source code for the IPK:\\
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/src/baxter_essentials/baxter_ipk.py}{Baxter-Bon-Appetit Inverse Pose Kinematic Algorithm (Source Code)}
+\end{itemize}
 
 
 \section{Baxter Robot Work-Space}
 
-Calibrations...
+A robot workspace is defined as the set of all reachable end-effector positions \citep{cite_robot_academy}. These multiple configurations could be theoretically infinite, but a general understanding of the workspace can be achieved with a rigorous mapping of the area.\\
+
+For the further understanding of Baxter robot, this research developed a mapping algorithm that works in the following way:
+
+\begin{center}
+\includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/baxter_robot/baxter_mapping_delaunay_block_diagram".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Baxter mapping algorithm for calculating robot's workspace. Own development.}\label{fig_baxter_general_mapping_workspace_block_diagram}
+\end{minipage} \end{center}
+
+As it can be seen in fig[\ref{fig_baxter_general_mapping_workspace_block_diagram}], the mapping algorithm has the following steps:
+
+\begin{enumerate}
+    \item Move Baxter arms to the reachable positions and orientations to replicate multiple trajectories.
+    \item From a JointState ROS Message, get the current Joint Angles measurements from the internal Baxter encoder sensors.
+    \item Calculate current Cartesian coordinates from the Forward Pose Kinematics algorithms explained in the previous chapter.
+    \item Repeat previous steps multiple times, appending the Cartesian coordinates to a database that holds multiple values for the Baxter mapping process.
+    \item After the data is collected, apply these Cartesian values to the Delaunay Triangulation to obtain the desired workspace plot results.
+\end{enumerate}
+
+When the algorithm was implemented for the mapping, the first results were the \say{General Mapping Workspace Trajectories}, that would cover most of Baxter workspace. These trajectories were taken with the explained algorithm for 30 minutes in each of Baxter's arms. It is important to notice, that to avoid robot damage, the trajectories were implemented by moving Baxter arms manually by touching the cuff sensor and driving the arms as much as possible.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\linewidth]{assets/imgs/baxter_robot/baxter_workspace_general_mapping.png}
+    \caption{Baxter robot general mapping for the workspace. Own development.} 
+    \label{fig_baxter_general_workspace}
+\end{figure}
+
+After the database of the trajectories for the Cartesian values was filled, the Delaunay Triangulation was applied to the overall results. The objective of this process, was to obtain the maximum reachable spherical surface for Baxter robot workspace. The result is extremely valuable, because it gives us some important information, such as:
+
+\begin{itemize}
+    \item Baxter robot's workspace shape and symmetry.
+    \item Baxter robot's limits for X, Y, and Z dimensions.
+    \item Overview of good and bad manoeuvrability positions for both of Baxter's arms.
+    \item A good understanding of the mathematics to relate joint-states with Cartesian-coordinates.
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/baxter_robot/baxter_workspace_delaunay_triangulation.png}
+    \caption{Baxter workspace after Delaunay Triangulation. Own development.} 
+    \label{fig_workspace_after_delaunay_triangulation}
+\end{figure}
+
+
+The algorithms to map Baxter workspace can be analyzed at our GitHub repository \say{baxter-bon-appetit} with the source code for both processes explained in fig[\ref{fig_baxter_general_mapping_workspace_block_diagram}]:\\
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/matlab/Baxter_Workspace.m}{Baxter-Bon-Appetit MATLAB Delaunay Triangulation Algorithm (Source Code)}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/scripts/map_workspace.py}{Baxter-Bon-Appetit Map Workspace Algorithm (Source Code)}
+\end{itemize}
+
 
 \section{Baxter Robot Tool}
+
+A robot's tool corresponds to a functional extension of the robot's basic capabilities. This final component not only implies a change in the mathematical equations governing the robot's dynamics, but also allows extending the practical behavior of the features that the robot can perform in its classical programming.\\
+
+For this application (Baxter-Bon-Appetit), the most important capability to be implemented with Baxter robot, is to be able to carry out food for an user. This circumstances, imply that the tool designed for Baxter robot must follow up a series of requirements, such as:
+
+\begin{itemize}
+    \item The tool must be able to be placed firmly on Baxter hand.
+    \item The tool must carry out (hold) food.
+    \item The tool must be able to carry different cutlery utensils, so that they can be changed easily depending on the patient and type of food. 
+\end{itemize}
+
+After taking into consideration these requirements, it was chosen that a 3D printed design would satisfy all the requirements and be cost-efficient for the economic budget of this research project. The 3D printed approach was a viable way to develop an accurate mechanical tool, that would match the necessary tolerances of Baxter's arms.\\
+
+First of all, the software in which the design was made, was Autodesk Fusion 360, a cloud-based 3D modeling, CAD, CAM, CAE, and PCB software platform for product design and manufacturing \citep{cite_autodesk_fusion}. This allowed us to work simultaneously on the design and develop a practical re-usable tool system.\\
+
+The design of tool had to match the following Baxter hand attaching system, so that it could be placed correctly and guarantee a stable connection to Baxter arm:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_hand_before_tool.jpeg}
+    \caption{Baxter hand for attaching the tool. Taken at EIA University Laboratory.} 
+    \label{fig_baxter_hand_for_attaching_the_tool}
+\end{figure}
+
+Based on the hand, it was developed a design that matched the default Baxter mechanism for adding external tools designed by the user. This solution was developed as a stereo-lithography CAD design (also known as STL), which is an universal format that can be understood by most CAD-CAM software and 3D printers.\\
+
+The overall mechanical solution achieved for Baxter-Bon-Appetit research project with Fusion 360 software can be seen at figs[\ref{fig_baxter_tool_fusion_front_view}, \ref{fig_baxter_tool_fusion_multiple_views}]:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_spoon_fusion_front_view.png}
+    \caption{Baxter tool front view in Fusion 360 software. Own development.} 
+    \label{fig_baxter_tool_fusion_front_view}
+\end{figure}
+
+
+One important advantage that is full-filled with the developed design, is that there can be multiple cutlery coupled in the tool, so that the user can change the necessary cutlery, based on the food that he or she wants and also be able to change them based on the user (for more than one different patient).\\
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.65\linewidth]{assets/imgs/baxter_robot/baxter_spoon_fusion_side_view_closed.png}
+		\caption{Baxter tool general view closed. Own development.}
+		\label{fig_general_view_baxter_tool_closed}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.65\linewidth]{assets/imgs/baxter_robot/baxter_spoon_fusion_side_view_opened.png}
+		\caption{Baxter tool general view opened. Own development.}
+		\label{fig_general_view_baxter_tool_opened}
+	\end{subfigure}%
+	\caption{Baxter tool viewed opened and closed for attaching the cutlery. Own development.}
+	\label{fig_baxter_tool_fusion_multiple_views}
+\end{figure}
+
+
+After the general measurements were implemented and verified at the CAD STL design, the next step was to print it into a real tool by a 3D printer. This process was achieved successfully with the \say{Ender-3 V2 3D Printer}, a low-price system, suitable for business start-ups and research projects \citep{cite_3d_printer_for_tool}.\\
+
+This 3D printer was able to create the tool in 4 hours and 30 minutes. The reason of this time, is because the tool was created with a high-density speed constant, so that it would be more resistant to fatigue and mechanical stresses.\\
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.87\linewidth]{assets/imgs/baxter_robot/baxter_spoon_process_printing.png}
+		\caption{Printing process of Baxter tool in action.}
+		\label{fig_3d_prniter_in_action_1}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{assets/imgs/baxter_robot/baxter_spoon_process_end.jpeg}
+		\caption{Printing process of Baxter tool finished.}
+		\label{fig_3d_prniter_in_action_2}
+	\end{subfigure}%
+	\caption{Baxter tool 3D printing process.}
+	\label{fig_baxter_tool_printing_process}
+\end{figure}
+
+
+When the design was completely printed, the next part of the methodology was to verify that it could fit correctly (and properly) into Baxter's hand. This was verified and was achieved successfully at EIA University Laboratory.\\
+
+The following images show the final result of Baxter's tool to correctly be able to give food to the users in a correct and natural way:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_tool_real_life_implementation.jpg}
+    \caption{Baxter tool general view implemented on real life. Taken at EIA University Laboratory.} 
+    \label{fig_baxter_tool_real_life_general_view}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{assets/imgs/baxter_robot/baxter_tool_real_life_implementation_side_view.jpg}
+    \caption{Baxter tool side view implemented on real life. Taken at EIA University Laboratory.} 
+    \label{fig_baxter_tool_real_life_side_view}
+\end{figure}
+
+The results of Baxter tool for giving food correctly, will be considered as an important condition to take into account in the mathematical calibrations of the FPK algorithm (as an additional offset of the final Baxter hand transformation).\\
+
 
 % ---------------------------------------------------------
 \chapter{Computer Vision}
