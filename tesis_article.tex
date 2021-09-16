@@ -1349,6 +1349,22 @@ At the end of the \say{Feeding States}, the user can decide to stop the system o
 As mentioned before, the \say{Stop State} is a condition that guarantees that the robot does not move or execute any motion command. This pause is a software condition that does not mean that the controllers are off, instead of that, this state works based on a series of conditions and regulations that stop the robot in a safe way.\\
 
 
+\section{Important Project Remarks}
+
+This research project will be designed implementing an active robotic solution with Baxter cobot. There are some important concepts to understand for the reach of this investigation.\\
+
+The first key condition, is that the project will be named \say{Baxter Bon Appetit}, referring to the french common expression that has the objective of positively implying someone to enjoy their meal. The purpose of this name, is to create an etymological meaning that transcends in an outstanding robotic solution, that generates a safety feeling of appreciating a good meal.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{assets/imgs/methodology/baxter_bon_appetit_logo.png}
+    \caption{Baxter Bon Appetit project logo. Own development.} 
+    \label{fig_baxter_bon_appetit_logo}
+\end{figure}
+
+Another valuable appreciation, is that the initial experiments of this research project, will be tested on the authors (Santiago Garcia Arango and Elkin Javier Guerra Galeano), but for future improvements, there will be a greater development of quality assurance tests in multiple patients. This will be discussed in the \say{Ethical Considerations} on the final chapters.\\
+
+
 % ---------------------------------------------------------
 
 \chapter{Baxter Robot}
@@ -2309,15 +2325,88 @@ The following images show the final result of Baxter's tool to correctly be able
 
 The results of Baxter tool for giving food correctly, will be considered as an important condition to take into account in the mathematical calibrations of the FPK algorithm (as an additional offset of the final Baxter hand transformation).\\
 
+\section{Baxter Physical Configuration}
+
+For Baxter-Bon-Appetit project, the physical workspace configuration for the robot/patient space is a differential factor to fulfill the development of an active feeding system. This configuration is a deterministic decision that will guide the design of the solution and will modify the evolution of the project based on how it is chosen.\\
+
+To determine the physical configuration, there are some key values to take into consideration:
+
+\begin{enumerate}
+    \item The patient must be seated facing directly to one of Baxter's cameras.
+    \item The patient must be located in a place where Baxter maneuverability is high.
+    \item The position of the camera and the patient should be always the same (or really similar).
+\end{enumerate}
+
+Based on these user requirements, the chosen configuration for Baxter and the patient is the one shown in figures fig[\ref{fig_baxter_configuration_1},\ref{fig_baxter_configuration_2}]:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{assets/imgs/TODO.png}
+    \caption{Physical configuration for Baxter and the patient (side view). Taken at EIA University Lab.} 
+    \label{fig_baxter_configuration_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{assets/imgs/TODO.png}
+    \caption{Physical configuration for Baxter and the patient (front view). Taken at EIA University Lab.} 
+    \label{fig_baxter_configuration_2}
+\end{figure}
+
+As it can be seen in the shown figures, the configuration was chosen because Baxter's right arm can reach the user's mouth directly in order to do the feeding action. This will enable Baxter cobot to have a great functionality of helping the patient to eat his meal in a dynamic and active way.\\
+
+Another remarkable condition of the exposed arrangement, is that camera that is going to be used is directly embedded on Baxter's left arm, implying that it can be changed in position and orientation (something that would not be achievable with the camera on Baxter's head). As well as this extra translation and rotation approach, one advantage of using a camera that is directly designed into Baxter's arm, is that, with the encoder measurements, it will always be possible to find the current position of the camera (even after external modifications). This measurements will be explained in future chapters.\\
+
+One extra interesting benefit of implementing this physical layout, is that the patient will always be facing directly to the camera, and even after having its meal given to his mouth, his face will be mostly visible to the camera, resulting in a great clear-vision approach for constantly detecting the user's face.\\
+
+The research will use the exposed configuration for the control, computer vision and integration algorithms.\\
 
 % ---------------------------------------------------------
 \chapter{Computer Vision}
 
-\section{Baxter Camera Characterization}
+Most robotic systems that are aware of their environment, use sensors of various types to ensure proper data acquisition to provide valuable information for the dynamic variables of interest for the system.\\
+
+For the case in which cameras are used as primary sensors, it is extremely important to understand that the acquired signal can not go directly to a control scheme, but must be processed and debugged through computational algorithms that transform the multiple RGB matrices obtained by these cameras, in more accurate variables according to the control scheme.\\
+
+The computer vision algorithms that will be implemented on Baxter robot, will start directly from the embedded robot's cameras, as it was described in the design exposed at fig[\ref{fig_general_morphological_matrix}]. This decision
+
+\section{Baxter Camera Configuration and Setup}
+
+To implement a computer vision algorithm, it is relevant to have a deep understanding on the camera specifications. The most relevant characteristics for Baxter cameras are exposed in table tab[\ref{tab:camera_specifications}] and it is important to guarantee that the camera's resolution is fixed in a constant value (so that the trained networks work properly).\\
+
+The chosen value for the camera resolution is \say{640x400 pixels}. This value is obtained from the best practices specifications given in Baxter camera SDK documentation \citep{cite_baxter_hardware_specifications}.\\
+
+The software and mathematical implementations for this chapter, will be calculated based on the chosen resolution of Baxter's left hand camera, so that the algorithms work in a proper way.\\
 
 \section{Baxter Camera Manipulation}
 
-\section{Face Detect Algorithms}
+To understand how Baxter's cameras work, we highly recommend to dive deeper into the official SDK documentation, so that every detail can be considered \citep{cite_baxter_cameras_wiki}.\\
+
+Baxter cameras are relevant sensors designed to gather direct information from Baxter's environment as fast as possible. These devices are assembled and integrated with Baxter functionalities through ROS. To control the cameras and the information acquired, we must understand some key features:
+
+\begin{itemize}
+    \item Cameras are controlled with an Application Programming Interface (API) that makes it possible to interact with their software configurations.
+    \item Camera information is understood as ROS messages and topics that are constantly being updated and published based on the requirements.
+    \item To read Baxter's cameras photos/videos, they must be transformed into a standard image matrix-wise format.
+    \item Only two out of the three Baxter's cameras can operated at the same time.
+\end{itemize}
+
+For the discovery of Baxter's cameras and their functionalities, 
+the robot was controlled and operated through the official camera control algorithms given by Rethink Robotics:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/RethinkRobotics/baxter_tools/blob/master/scripts/camera_control.py}{RethinkRobotics/baxter\_tools: camera control (Source Code)}
+\end{itemize}
+
+After understanding the underlying low-level configurations, the computer vision algorithms designed for this research, were developed using the internal messages of Baxter robot regarding its cameras and the necessary subscribers to their information. A deeper analysis of these implementations, will be discussed in the source code and in ROS integration section.\\
+
+
+\section{Face Detection Algorithms}
+
+For Baxter-Bon-Appetit project, the face detection algorithms are considered to be one on the first key components of the whole control structure. This is due because they convert the original images obtained from Baxter's cameras (complex matrices that do not give straight valuable information), into strategical information that is understood as a reference feature for mapping the user's face.\\
+
+
 
 \section{Selection of Face Detect Algorithm}
 
