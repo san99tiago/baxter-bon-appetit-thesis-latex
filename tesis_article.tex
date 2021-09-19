@@ -2355,7 +2355,7 @@ Based on these user requirements, the chosen configuration for Baxter and the pa
 
 As it can be seen in the shown figures, the configuration was chosen because Baxter's right arm can reach the user's mouth directly in order to do the feeding action. This will enable Baxter cobot to have a great functionality of helping the patient to eat his meal in a dynamic and active way.\\
 
-Another remarkable condition of the exposed arrangement, is that camera that is going to be used is directly embedded on Baxter's left arm, implying that it can be changed in position and orientation (something that would not be achievable with the camera on Baxter's head). As well as this extra translation and rotation approach, one advantage of using a camera that is directly designed into Baxter's arm, is that, with the encoder measurements, it will always be possible to find the current position of the camera (even after external modifications). This measurements will be explained in future chapters.\\
+Another remarkable condition of the exposed arrangement, is that the camera that is going to be used is directly embedded on Baxter's left arm, implying that it can be tweaked in position and orientation (something that would not be achievable with the camera on Baxter's head). As well as this extra translation and rotation approach, one advantage of using a camera that is directly designed into Baxter's arm, is that, with the encoder measurements, it will always be possible to find the current position of the camera (even after external modifications). This measurements will be explained in future chapters.\\
 
 One extra interesting benefit of implementing this physical layout, is that the patient will always be facing directly to the camera, and even after having its meal given to his mouth, his face will be mostly visible to the camera, resulting in a great clear-vision approach for constantly detecting the user's face.\\
 
@@ -2406,9 +2406,189 @@ After understanding the underlying low-level configurations, the computer vision
 
 For Baxter-Bon-Appetit project, the face detection algorithms are considered to be one on the first key components of the whole control structure. This is due because they convert the original images obtained from Baxter's cameras (complex matrices that do not give straight valuable information), into strategical information that is understood as a reference feature for mapping the user's face.\\
 
+The two algorithms that are going to be developed for this research, are variants of:
+
+\begin{enumerate}
+    \item Vioja-Jones Classifier with Haar Cascade Feature Selection.
+    \item Face Recognition API based on deep learning using dblib.
+\end{enumerate}
+
+Both face detection algorithms are going to be built on top of the ones mentioned, as a particular extension of their functionalities.\\
+
+\subsection{Viola-Jones Classifier}
+
+The Viola-Jones classifier was developed by Paul Viola , Michael Jones, and it was one of the pioneer programs to correctly solve the face detection problem in a fast and accurate way \citep{cite_viola_jones_face_detection_algorithm}. The problem that it solved was to be able to detect any face in a given input image.\\
+
+This algorithm expects the face to be positioned directly to the camera so that it is arranged as a frontal upright face. As well as this, it important that the face is not tilted to either one of the sides, avoiding inclinations.\\
+
+\begin{center}
+\includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_haar_cascade_block_diagram".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Face detection block diagram implementing Viola-Jones Haar Cascade Classifier and AdaBost. Own development.}\label{fig_computer_vision_block_diagram_haar_cascade}
+\end{minipage} \end{center}
+
+The algorithm that was developed on top of Viola-Jones classifier, has multiple extra inputs, such as frequency, video acquisition, scale factors, minimum neighbors, minimum size and other internal parameters.\\
+
+The described face detection algorithm was developed with Python programming language with the libraries of OpenCV and numpy. The source code of Baxter Bon Appetit project for face detection with Viola-Jones approach, can be found at \say{baxter-bon-appetit} GitHub repository:
 
 
-\section{Selection of Face Detect Algorithm}
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/tree/main/python/computer_vision/face_detect_haar_cascade}{Baxter-Bon-Appetit Face Detecion Algorithm based on Viola-Jones Framework (Source Code)}
+\end{itemize}
+
+
+Each one of the steps of the block diagram is going to be explained with a high level of abstraction:
+
+\subsubsection{Get frames of video based on desired frequency}
+
+This process is the one that manages how the input to the OpenCV Haar Cascade Classifier is going to be analyzed. This implies, that the sample time and video conditions are configured as general inputs to the algorithm.\\
+
+To do this step, a continuous loop is processing the video input in a Python Thread, and it has specific wait times to only process the video input at a desired time. This processing converts the video frames into specific images with a given window size.\\
+
+\subsubsection{Haar feature selection}
+
+Feature selection is a mandatory step in object detection algorithms. For Viola-Jones detection framework, the Haar feature selection has to process and analyze more than 180.000 features (in a 24x24 average image), and has the main goal of getting the useful features and reducing the overall processing time.\\
+
+The four basic Haar features implemented in Viola-Jones algorithm are:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{assets/imgs/computer_vision/viola_jones_haar_features.png}
+    \caption{Example of Haar features used for Viola-Jones algorithm. Taken from \citep{cite_haar_features_example_viola_jones}.} 
+    \label{fig_viola_jones_features_example}
+\end{figure}
+
+These features will play a special role in the determination of what is a face or not. These features must be calculated and analyzed in a short amount of time and the selection of the relevant ones is usually implemented with criteria such as:
+
+\begin{enumerate}
+    \item Horizontal white-black feature.
+    \item Vertical white-black feature.
+    \item Vertical white-black-white feature.
+    \item Diagonal white-black feature.
+\end{enumerate}
+
+\subsubsection{Integral Image}
+
+The integral image approach, also known as summed-area-table is a data structure and algorithm that is commonly used in computer vision and computer graphics \citep{cite_matlab_integral_image}. This process calculates the sum of the values of a matrix in a subsection of the grid. This implies that the original matrix is then processed into a new integral matrix that has relevant values of the inner elements sums.\\
+
+The advantage of generating integral images, is that they reduce significantly the amount of operations involved in computer vision algorithms, and therefore, they improve the performance of the algorithm undoubtedly.\\
+
+The process of generating an integral image is based on the following equation:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:integral_image_equation}
+    \begin{split}
+        ii(x, y) = \sum_{x'<=x,y'<=y}^{} i(x', y') \\
+        ii(x, y) = \text{Integral Image} \\
+        i(x, y) = \text{Original Image} \\
+    \end{split}
+\end{equation}
+\myequations{Equations for integral image calculation}
+\caption{Equations for integral image calculation}
+\end{equ}
+
+This algorithm sums up the corresponding image pixels, and generates the final integral image that will be implemented in the following steps.\\
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/imgs/computer_vision/integral_image_calculation_part01.png}
+		\caption{Original image. Taken from \citep{cite_integral_image_photo_wikipedia}}
+		\label{fig_integral_image_part01}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.55\linewidth]{assets/imgs/computer_vision/integral_image_calculation_part02.png}
+		\caption{Result of integral image calculation. Taken from \citep{cite_integral_image_photo_wikipedia}}
+		\label{fig_integral_image_part02}
+	\end{subfigure}%
+	\caption{Example of a process of integral image calculation.}
+	\label{fig_integral_image_complete}
+\end{figure}
+
+
+
+\subsubsection{AdaBoost Training}
+
+The AdaBoost training, also called Adaptive Boosting, is an ensemble method in Machine Learning algorithms. In order to understand the adaBoost method, it is necessary to know how the boosting algorithm actually works, this technique makes 'n' number of decisions trees during the data training time, as the first decision tree/model is made, the incorrectly classified record in the first model is given priority. Only these records are sent as input for the second model. The process goes on until we specify a number of base learners we want to create \citep{cite_adaboost_explained}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{assets/imgs/computer_vision/decition_trees.png}
+    \caption{Example of the decision trees created in the training period by boosting technique. Taken from \citep{cite_adaboost_explained}.} 
+    \label{fig_adaboost_explained}
+\end{figure}
+
+In AdaBoost algorithm, the main objective is to improve the performance of other type of learning classifiers. It combines the output of the other given learning algorithms, into a weighted sum that ends up in the output of the boosted classifier. The algorithm is adaptive due to its abilities to improve the performance from the weak learners. The most interesting part of AdaBoost process, is that even if the performance of the intermediate algorithms is not that great, by guaranteeing that their accuracy is better than guessing, the final model can be proven to converge to a strong-wise learner \citep{cite_adaboost_patrick_winston}.\\
+
+For the Viola-Jones algorithm, the training data-sets are composed of:
+
+\begin{enumerate}
+    \item 4960 images of faces.
+    \item 9544 non-face images.
+\end{enumerate}
+
+
+\subsubsection{Cascade Classifier}
+
+A cascade classifier is the strategical union of individual classifiers, attaching them to gather an input as the output of the previous classifier.
+These classifiers are trained individually based on a series of \say{positive} inputs and \say{negative} inputs \citep{cite_cascade_classifier_generalization}.\\
+
+The importance of developing cascading classifier solutions, is that they can be applied directly to a region of a matrix (in this case, image), and detect object from it.\\
+
+The main advantage of Viola-Jones cascade classifier, was not only the fact that it had a great accuracy, but also the speed of the calculations, meaning that it could be ran in low-power CPU devices \citep{cite_viola_jones_face_detection_algorithm}.\\
+
+
+
+\subsection{Face Recognition Deep Learning Framework}
+
+The second approach to achieve face detection for Baxter Bon Appetit project, is by implementing a deep learning library that focuses on face detection and face recognition \citep{cite_face_detect_face_recognition_github_repo}.\\
+
+The library is called \say{Face Recognition} and it implements multiple low-level deep neural networks and convolutional networks built on top of o the famous C++ library called \say{dlib}. This dlib C++ library is a modern framework that has robust machine learning algorithms and tools for developing complex software solutions for real-life problems \citep{cite_dlib_github_repo}.\\
+
+The advantage of implementing \say{dlib} with the Face Recognition module, is that it's built on top of C++, increasing its performance and the speed of the algorithms.\\
+
+The principal author of the library, Adam Geitgey, has an amazing series of articles explaining the undelying processes of the deep neural networks algorithms that generate the amazing results of his Face Recognition Framework. Some of the articles can be found in his tech blogs:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://medium.com/@ageitgey/machine-learning-is-fun-part-3-deep-learning-and-convolutional-neural-networks-f40359318721}{Deep Learning and Convolutional Neural Networks, by Adam Geitgey}
+\end{itemize}
+
+To understand how the library works in a high-level of abstraction, we can think that it works as a convolutional complex neural network that receives an input image and has multiple multi-threading processes with many layers, that is able to learn complicated patterns based on a hierarchy or conceptual structure that propagates through the network \citep{cite_face_detect_face_recognition_github_repo}.\\
+
+The processes of the library, can be simplified as follows:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.01\linewidth]{assets/imgs/computer_vision/face_recognition_convolutional_neural_network_explained.png}
+    \caption{Example of a convolution neural network explained in a simple way. Taken from \citep{cite_adam_geitgey_machine_learning_convolutional_network_fun}.} 
+    \label{fig_convolutional_neural_network_easy}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.01\linewidth]{assets/imgs/computer_vision/face_recognition_convolutional_neural_network_more_steps.png}
+    \caption{Example of a convolution neural network explained in a mathematical way. Taken from \citep{cite_adam_geitgey_machine_learning_convolutional_network_fun}.} 
+    \label{fig_convolutional_neural_network_complex}
+\end{figure}
+
+
+The previous figures fig[\ref{fig_convolutional_neural_network_easy}, \ref{fig_convolutional_neural_network_easy}], are the basic blocks to implement the face detection algorithms for our research project. These mathematical concepts and algorithms are implemented in the libraries, and they are the low-level steps that make it possible to detect a patients face on a given video.\\
+
+The development of the face detection solution implementing the face recognition framework can be found at:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/tree/main/python/computer_vision/face_detect_face_recognition}{Baxter-Bon-Appetit Face Detection Algorithm based on Face Recognition Framework (Source Code)}
+\end{itemize}
+
+
+\section{Selection of Face Detection Algorithm}
 
 \section{Mouth Pose Estimation Algorithm}
 
