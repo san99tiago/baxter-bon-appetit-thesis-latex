@@ -2590,6 +2590,297 @@ The development of the face detection solution implementing the face recognition
 
 \section{Selection of Face Detection Algorithm}
 
+Now that we have two face detection algorithms written in Python and compatible with the conditions of the operating system of the Baxter robot, it is time to perform a series of real tests to validate which one of the algorithms has better performance.\\
+
+This performance will be validated through some criteria established previously, and a series of tests will be performed with the same conditions for both algorithms, in order to decide which one is the most appropriate for this research.\\
+
+There will be a total of 3 tests validating the following features:
+
+\begin{itemize}
+    \item Time to process a single image frame.
+    \item Percentage of correctly detected face frames in video.
+    \item Ability to only detect the biggest face frame in video.
+    \item CPU resources.
+    \item Memory resources.
+    \item Software dependencies.
+\end{itemize}
+
+\subsection{Test 1: general movements facing camera}
+
+The first test had the objective of validating if the face detection algorithms were able to correctly detect the patient's face in a real controlled scenario. This test is the most similar one to a real user's environment for Baxter Bon Appetit.\\
+
+The input video was the same for both algorithms, making the input of the system identical. Both processes performed really well in terms of the most important parameters.\\
+
+The video had a person looking directly into the camera and moving its face in a vertical and horizontal way (always being facing the camera without any angle).\\
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_1_hc.png}
+		\caption{Sample frame of face detection algorithm in test 1 with Viola-Jones approach. Own development.}
+		\label{fig_computer_vision_test_1_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_1_fr.png}
+		\caption{Sample frame of face detection algorithm in test 1 with Face Recognition approach. Own development.}
+		\label{fig_computer_vision_test_1_b}
+	\end{subfigure}%
+	\caption{Sample execution of test 1 for face detection algorithms.}
+	\label{fig_computer_vision_test_1}
+\end{figure}
+
+As it can be analyzed in figure fig[\ref{fig_computer_vision_test_1}], both algorithms had a great performance in terms of detecting the face. However, it is clear that the square of the face is slightly different for each algorithm. For example, in the second picture, the square tends to be lower than the first one. This remark will be important for estimating the exact position of the mouth of the user.\\
+
+In terms of performance, some important results of this test are:
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_1_hc_cpu.png}
+		\caption{Results of CPU percentage plot for test 1 with Viola-Jones approach. Own development.}
+		\label{fig_computer_vision_test_1_cpu_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_1_fr_cpu.png}
+		\caption{Results of CPU percentage plot for test 1 with Face Recognition approach. Own development.}
+		\label{fig_computer_vision_test_1_cpu_b}
+	\end{subfigure}%
+	\caption{Execution of test 1 for face detection algorithms CPU percentages.}
+	\label{fig_computer_vision_test_1_cpu}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_1_hc_memory.png}
+		\caption{Results of memory percentage plot for test 1 with Viola-Jones approach. Own development.}
+		\label{fig_computer_vision_test_1_memory_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_1_fr_memory.png}
+		\caption{Results of memory percentage plot for test 1 with Face Recognition approach. Own development.}
+		\label{fig_computer_vision_test_1_memory_b}
+	\end{subfigure}%
+	\caption{Execution of test 1 for face detection algorithms memory percentages.}
+	\label{fig_computer_vision_test_1_memory}
+\end{figure}
+
+
+After running the comparison scripts for both algorithms, the compact results were:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{0.9}{
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Measurement} & \textbf{Viola-Jones} & \textbf{Face Recognition} \\ \hline
+        Time to process single image & 0.45s & 0.52s \\ \hline
+        Percentage of correctly detected face frames in video & 100\% & 100\% \\ \hline
+        Does it only detect the biggest face frame? & Yes & Yes \\ \hline
+        Spent CPU resources & 57.97\% & 22.75\% \\ \hline
+        Spent memory resources & 80.04\% & 79.83\% \\ \hline
+        Software dependencies & 15 & 21 \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:results_of_test_1_for_face_detection} Results of test 1 for face detection algorithms. Own development.}
+\end{center}
+\end{table}
+
+As shown in table tab[\ref{tab:results_of_test_1_for_face_detection}], the most important criteria (which is the percentage of correctly detected face frames in the video), had a 100\% success rate for both algorithms. However, the overall performance of CPU and memory resources was better with the Face Recognition approach.\\
+
+The time of processing a single image (assuming loading libraries and initial dependencies), was really similar for both algorithms, so its not a relevant differential condition.\\
+
+Both algorithms did a great job in this test.\\
+
+\subsection{Test 2: general movements with face rotations}
+
+The second test had the goal of validating if the face detection algorithms were able to correctly detect the patient's face in a scenario where the user would rotate its face with extreme angles (greater than 90\textdegree).\\
+
+The input video was the same for both algorithms, making the input of the system identical. The video had a person that started looking directly to the camera, and after that, the person rotated his face around in the 2 principal axis directions (horizontal and vertical rotations). The main objective of this inclinations, was to determine which of the algorithm was able to perform better in extreme scenarios where the user would tilt his head.\\
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_2_hc.png}
+		\caption{Sample frame of face detection algorithm in test 2 with Viola-Jones approach. Own development.}
+		\label{fig_computer_vision_test_2_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_2_fr.png}
+		\caption{Sample frame of face detection algorithm in test 2 with Face Recognition approach. Own development.}
+		\label{fig_computer_vision_test_2_b}
+	\end{subfigure}%
+	\caption{Sample execution of test 2 for face detection algorithms.}
+	\label{fig_computer_vision_test_2}
+\end{figure}
+
+
+The previous figure fig[\ref{fig_computer_vision_test_2}], shows that both algorithms did an excellent job when it was necessary to detect the user's face when the person is looking to the side. These results are a great example of showing that Baxter Bon Appetit project will be reliable, even the the patients look extremely to the sides, scenario common for when someone is being called by another person in a room.\\
+
+When analyzing the performance, the results were the following:
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_2_hc_cpu.png}
+		\caption{Results of CPU percentage plot for test 2 with Viola-Jones approach. Own development.}
+		\label{fig_computer_vision_test_2_cpu_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_2_fr_cpu.png}
+		\caption{Results of CPU percentage plot for test 2 with Face Recognition approach. Own development.}
+		\label{fig_computer_vision_test_2_cpu_b}
+	\end{subfigure}%
+	\caption{Execution of test 2 for face detection algorithms CPU percentages.}
+	\label{fig_computer_vision_test_2_cpu}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_2_hc_memory.png}
+		\caption{Results of memory percentage plot for test 2 with Viola-Jones approach. Own development.}
+		\label{fig_computer_vision_test_2_memory_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_2_fr_memory.png}
+		\caption{Results of memory percentage plot for test 2 with Face Recognition approach. Own development.}
+		\label{fig_computer_vision_test_2_memory_b}
+	\end{subfigure}%
+	\caption{Execution of test 2 for face detection algorithms memory percentages.}
+	\label{fig_computer_vision_test_2_memory}
+\end{figure}
+
+
+After running the comparison scripts for both algorithms, the compact results were:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{0.9}{
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Measurement} & \textbf{Viola-Jones} & \textbf{Face Recognition} \\ \hline
+        Time to process single image & 0.45s & 0.52s \\ \hline
+        Percentage of correctly detected face frames in video & 80.70\% & 71.05\% \\ \hline
+        Does it only detect the biggest face frame? & Yes & Yes \\ \hline
+        Spent CPU resources & 61.03\% & 25.63\% \\ \hline
+        Spent memory resources & 80.05\% & 79.89\% \\ \hline
+        Software dependencies & 15 & 21 \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:results_of_test_1_for_face_detection} Results of test 1 for face detection algorithms. Own development.}
+\end{center}
+\end{table}
+
+These results are really interesting, because on the \say{Percentage of correctly detected face frames in video} measurement, there is a significant gap between both approaches, being more accurate the Viola-Jones processes, when detecting faces that are rotated. This is a major discovery, because it will be a crucial factor for the selection of the final face detection algorithm.\\
+
+The Viola-Jones algorithm had the best results on this test.\\
+
+
+\subsection{Test 3: multiple faces in video}
+
+The final test for the comparison of both face detection algorithms was a video with multiple faces on it. The importance of this test, was to prove that each process was able to only detect the biggest face in the frame, and that face would be the one of the patient in a real-life scenario.\\
+
+In order to be able to replicate the same conditions for the test, two main factors were considered. The first one was that the processing was done on the same video, and the second one, is that the faces involved in the video were exactly the same (and only changed in size through time).\\
+
+The expected results, were that the algorithms would be able to alternate in the selected face, according to the size of the biggest face at any given time.\\
+
+The results were amazing for both algorithms, and they did show only the biggest one in the video.\\
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_3_hc1.png}
+		\caption{Example of video frame executing face detection algorithm with Viola-Jones approach and detecting biggest face.}
+		\label{fig_face_detect_biggest_face_hc_1_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_3_hc2.png}
+		\caption{Example of video frame executing face detection algorithm with Viola-Jones approach and detecting biggest face.}
+		\label{fig_face_detect_biggest_face_hc_1_b}
+	\end{subfigure}%
+	\caption{Sample video frames executing face detection algorithm with Viola-Jones approach and detecting biggest face.}
+	\label{fig_face_detect_biggest_face_hc_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_3_fr1.png}
+		\caption{Example of video frame executing face detection algorithm with Face Recognition approach and detecting biggest face.}
+		\label{fig_face_detect_biggest_face_fr_1_a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/face_detection_ex_3_fr2.png}
+		\caption{Example of video frame executing face detection algorithm with Face Recognition approach and detecting biggest face.}
+		\label{fig_face_detect_biggest_face_fr_1_b}
+	\end{subfigure}%
+	\caption{Sample video frames executing face detection algorithm with Face Recognition approach and detecting biggest face.}
+	\label{fig_face_detect_biggest_face_fr_1}
+\end{figure}
+
+
+After getting the results for both algorithms in test 3, the results were outstanding. Both were able to only detect the biggest face and correctly do this process at all frames of the video. The results can be shown in figures fig[\ref{fig_face_detect_biggest_face_hc_1}, \ref{fig_face_detect_biggest_face_fr_1}].\\
+
+One important remark, is that the rectangle of the detected frame had some variations in size and position for each algorithm, a relevant aspect that will be important to consider in the development of Baxter Bon Appetit project.\\
+
+
+\subsection{Source code for Baxter Bon Appetit Computer Vision Algorithms}
+
+The algorithms that enabled the plots and information gathering, were developed using Python programming language and can be found at Baxter Bon Appetit GitHub repository:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/computer_vision/face_detect_haar_cascade/samples/sample_video_resources.py}{Baxter-Bon-Appetit Video Resources for Face Detection with Viola-Jones Framework (Source Code)}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/computer_vision/face_detect_face_recognition/samples/sample_video_resources.py}{Baxter-Bon-Appetit Video Resources for Face Detection with Face Recognition Framework (Source Code)}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Evaluating Face Detection Algorithms in Multiple Users}
+
 \section{Mouth Pose Estimation Algorithm}
 
 % ---------------------------------------------------------
