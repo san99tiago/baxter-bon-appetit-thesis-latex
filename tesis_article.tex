@@ -2416,6 +2416,7 @@ The two algorithms that are going to be developed for this research, are variant
 Both face detection algorithms are going to be built on top of the ones mentioned, as a particular extension of their functionalities.\\
 
 \subsection{Viola-Jones Classifier}
+\label{sec:viola_jones_classifier}
 
 The Viola-Jones classifier was developed by Paul Viola , Michael Jones, and it was one of the pioneer programs to correctly solve the face detection problem in a fast and accurate way \citep{cite_viola_jones_face_detection_algorithm}. The problem that it solved was to be able to detect any face in a given input image.\\
 
@@ -2606,6 +2607,7 @@ There will be a total of 3 tests validating the following features:
 \end{itemize}
 
 \subsection{Test 1: general movements facing camera}
+\label{sec:test_1_general_movements_facing_cameras}
 
 The first test had the objective of validating if the face detection algorithms were able to correctly detect the patient's face in a real controlled scenario. This test is the most similar one to a real user's environment for Baxter Bon Appetit.\\
 
@@ -2701,6 +2703,7 @@ The time of processing a single image (assuming loading libraries and initial de
 Both algorithms did a great job in this test.\\
 
 \subsection{Test 2: general movements with face rotations}
+\label{sec:test_2_general_movements_with_face_rotations}
 
 The second test had the goal of validating if the face detection algorithms were able to correctly detect the patient's face in a scenario where the user would rotate its face with extreme angles (greater than 90\textdegree).\\
 
@@ -2795,6 +2798,7 @@ The Viola-Jones algorithm had the best results on this test.\\
 
 
 \subsection{Test 3: multiple faces in video}
+\label{sec:test_3_multiple_faces_in_video}
 
 The final test for the comparison of both face detection algorithms was a video with multiple faces on it. The importance of this test, was to prove that each process was able to only detect the biggest face in the frame, and that face would be the one of the patient in a real-life scenario.\\
 
@@ -2846,18 +2850,81 @@ After getting the results for both algorithms in test 3, the results were outsta
 One important remark, is that the rectangle of the detected frame had some variations in size and position for each algorithm, a relevant aspect that will be important to consider in the development of Baxter Bon Appetit project.\\
 
 
-\subsection{Source code for Baxter Bon Appetit Computer Vision Algorithms}
+\subsection{Source code for Baxter Bon Appetit Face Detection Comparison Algorithms}
 
 The algorithms that enabled the plots and information gathering, were developed using Python programming language and can be found at Baxter Bon Appetit GitHub repository:
 
 \begin{itemize}
     \color{blue}
-    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/computer_vision/face_detect_haar_cascade/samples/sample_video_resources.py}{Baxter-Bon-Appetit Video Resources for Face Detection with Viola-Jones Framework (Source Code)}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/computer_vision/face_detect_haar_cascade/samples}{Baxter-Bon-Appetit Sample Scripts for Face Detection with Viola-Jones Framework (Source Code)}
     \color{blue}
-    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/computer_vision/face_detect_face_recognition/samples/sample_video_resources.py}{Baxter-Bon-Appetit Video Resources for Face Detection with Face Recognition Framework (Source Code)}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/computer_vision/face_detect_face_recognition/samples}{Baxter-Bon-Appetit Sample Scripts for Face Detection with Face Recognition Framework (Source Code)}
 \end{itemize}
 
 
+\subsection{Selecting the Face Detection Algorithm for Baxter Bon Appetit}
+
+As seen in sections sec[\ref{sec:test_1_general_movements_facing_cameras}, \ref{sec:test_2_general_movements_with_face_rotations} \ref{sec:test_3_multiple_faces_in_video}], both algorithms were evaluated in multiple use cases and scenarios. The general results pointed that both would do a great job in Baxter Bon Appetit research project, because of their great performance and accuracy.\\
+
+The most important measurement for the evaluated algorithms was the one of \say{Percentage of correctly detected face frames in video}. This is due to the fact that the process must detect the user's face as frames much as possible. Based on this requirement, on section sec[\ref{sec:test_2_general_movements_with_face_rotations}], the Viola-Jones algorithm had a better percentage accuracy, than the Face Recognition algorithm (with about 10\% of improvement).\\
+
+Even if the CPU and memory percentages are not as great in the Viola-Jones approach as in the Face Recognition approach, Baxter robot has a powerful processor and RAM specifications to execute multi-threading programs, meaning that these conditions will not be a limiting factor for the project.\\
+
+Based on these analyses, the research will be developed executing all the face detection algorithms with the Viola-Jones approach (see section sec[\ref{sec:viola_jones_classifier}]).\\
+
+
+\section{Evaluating Viola-Jones Face Detection Algorithm in Multiple Users}
+
+Now that the algorithm for face detection is selected, one important part of the development of Baxter Bon Appetit research, is to verify that the face detection results work properly for multiple individuals, looking forward to real-life conditions.\\
+
+To validate the Viola-Jones framework with multiple users, 49 pictures of friends and colleagues were collected to verify that the algorithm would work correctly with different gestures and person conditions. All of these individuals approved to be added to this research and had their photos published.\\
+
+The process of this validation was to give the Viola-Jones algorithm an input image (with a face on it), and it had to mark an approximate rectangle on top of each face. For example:
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{assets/imgs/computer_vision/computer_vision_elkin.png}
+		\caption{Example of input photo for validating Viola-Jones algorithm.}
+		\label{fig_original_elkin}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{assets/imgs/computer_vision/computer_vision_elkin_detected.png}
+		\caption{Example of output photo after executing Viola-Jones algorithm.}
+		\label{fig_detected_elkin}
+	\end{subfigure}%
+	\caption{Example of Viola-Jones algorithm for male user.}
+	\label{fig_detecting_elkin}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{assets/imgs/computer_vision/computer_vision_dolly.png}
+		\caption{Example of input photo for validating Viola-Jones algorithm.}
+		\label{fig_original_dolly}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{assets/imgs/computer_vision/computer_vision_dolly_detected.png}
+		\caption{Example of output photo after executing Viola-Jones algorithm.}
+		\label{fig_detected_dolly}
+	\end{subfigure}%
+	\caption{Example of Viola-Jones algorithm for female user.}
+	\label{fig_detecting_dolly}
+\end{figure}
+
+After the validation of the face detection algorithm for each user, the results were successful and it detected correctly a total of 49 individuals (25 males and 24 females).\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/collage_detected_people.png}
+    \caption{Collage of different users with their faces detected using Viola-Jones algorithm. Own development.} 
+    \label{fig_collage_people_detected}
+\end{figure}
 
 
 
@@ -2879,9 +2946,30 @@ The algorithms that enabled the plots and information gathering, were developed 
 
 
 
-\section{Evaluating Face Detection Algorithms in Multiple Users}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Mouth Pose Estimation Algorithm}
+
+
+
+
+
+
+
+
 
 % ---------------------------------------------------------
 \chapter{Control Theory}
