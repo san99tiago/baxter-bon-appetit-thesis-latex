@@ -2339,19 +2339,31 @@ To determine the physical configuration, there are some key values to take into 
 
 Based on these user requirements, the chosen configuration for Baxter and the patient is the one shown in figures fig[\ref{fig_baxter_configuration_1},\ref{fig_baxter_configuration_2}]:
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\linewidth]{assets/imgs/TODO.png}
-    \caption{Physical configuration for Baxter and the patient (side view). Taken at EIA University Lab.} 
-    \label{fig_baxter_configuration_1}
-\end{figure}
+\begin{center}
+\includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/baxter_robot/baxter_setup_physical_configuration".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Baxter physical configuration explained. Own development.}\label{fig_baxter_configuration_1}
+\end{minipage} \end{center}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\linewidth]{assets/imgs/TODO.png}
-    \caption{Physical configuration for Baxter and the patient (front view). Taken at EIA University Lab.} 
-    \label{fig_baxter_configuration_2}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/baxter_robot/computer_vision_side_view_elkin_eating.png}
+		\caption{Physical configuration for Baxter and the user (side view). Taken at EIA University Laboratory.}
+		\label{fig_baxter_configuration_2a}
+	\end{subfigure}~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{assets/imgs/baxter_robot/computer_vision_front_view_elkin_eating.png}
+		\caption{Physical configuration for Baxter and the user (front view). Taken at EIA University Laboratory.}
+		\label{fig_baxter_configuration_2b}
+	\end{subfigure}%
+	\caption{Physical configuration for Baxter and the user. Taken at EIA University Laboratory.}
+	\label{fig_baxter_configuration_2}
 \end{figure}
+
 
 As it can be seen in the shown figures, the configuration was chosen because Baxter's right arm can reach the user's mouth directly in order to do the feeding action. This will enable Baxter cobot to have a great functionality of helping the patient to eat his meal in a dynamic and active way.\\
 
@@ -2927,46 +2939,183 @@ After the validation of the face detection algorithm for each user, the results 
 \end{figure}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \section{Mouth Pose Estimation Algorithm}
 
+The goal of this part of the process, is to obtain a mathematical representation for the specific point of the user's mouth with respect of the main robot's frame. This can be done with a series of strategical transformations through Baxter robot, starting from \{W0\} (word frame) and ending in \{F\} (face frame).\\
+
+To calculate the transformation matrix for the user's mouth at any given time, we must consider the already explained transformations in fig[\ref{fig_baxter_transformations_graphic_way}] (from \{W0\} to \{GL\}), and after that, apply the next transformations to map the coordinates to the user's face. This would be the following expression:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrix_from_0_to_face}
+    \begin{bmatrix}
+    _{F}^{0}\textrm{T}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    _{GL}^{0}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{CV}^{GL}\textrm{T}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{F}^{CV}\textrm{T}
+    \end{bmatrix}
+\end{equation}
+\myequations{Complete mathematical transformations from frame \{0\} (word reference) to frame \{F\} (face reference).}
+\caption{Complete mathematical transformations from frame \{0\} (word reference) to frame \{F\} (face reference).}
+\end{equ}
+
+As it can be observed in fig[\ref{fig_computer_vision_real_life_mappings_santi}], the position and orientation for the left limb of Baxter robot was selected in a strategical configuration. This setup had the objective of having a wide reach of the user's face and maintaining the horizontal orientation fixed. Another beneficial factor of this configuration, is that the user will be approximately located in one of the best positions for the right limb in terms of manoeuvrability (see fig[\ref{fig_baxter_general_workspace}]), giving the robot an excellent and reliable area to move its right limb and reach correctly the user's mouth to feed the patient.\\ 
+
+In this section, the last two transformation matrices of eq[\ref{eq:transformation_matrix_from_0_to_face}] (from \{GL\} to \{CV\} and from \{CV\} to \{F\}) will be discussed in a detailed way. For this chapter, the naming convention of \{GL\} will be equivalent to \{T\}.\\
+
+\begin{center}
+\includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_camera_to_face_mappings_real_life".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{General mappings for transformation matrices from \{T\} to \{CV\} frames. Own development.}\label{fig_computer_vision_real_life_mappings_santi}
+\end{minipage} \end{center}
 
 
+This procedure is a combination of the specific coordinates of Baxter camera (that change in time based on Baxter's left limb conditions), and the overall position of the user's mouth, that also changes in time based on the patient's current position.\\
+
+To start analyzing how the user's mouth is detected (frame \{F\}), it is critical to look back into how the face detection algorithm works, giving an output of a rectangle that has its edges on the limits of the detected face.
+The user's mouth is inside that rectangle at its lowest part, and for Baxter Bon Appetit considerations, the specific position of the user's mouth will be at the lowest 1/3 of the vertical distance, and at the middle of the rectangle, as shown in fig[\ref{fig_rick_face_zoom}]:
 
 
+\begin{center}
+\includegraphics[width= 0.8\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_rick_face_zoom".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Position of user's mouth based on face detection rectangle output. Own development.}\label{fig_rick_face_zoom}
+\end{minipage} \end{center}
+
+
+The next essential aspect of developing a solution where a computer vision algorithm is involved, is that there must be a correct mapping between pixels and meters (or the equivalent unit of measurement). This consideration had to be taken into account for the final transformation matrices of the user's mouth detection and the general process can be understood as follows:
+
+\begin{itemize}
+    \item The relationship between pixels and meters must be achieved from a mathematical and a experimental way.
+    \item The distance that represents the depth on where the image plane is located, is an independent variable that modifies the planar distances of the exposed plane.
+    \item The values obtained from the mappings can only be applied for the implemented camera, because of the unique focal length of the lens of the device and, if the camera is replaced, tweaking factors must be added.
+\end{itemize}
+
+Now that these considerations are taken into account, the first step is to understand the underlying math that relate the geometrical space of the image planes and the physical distances that they represent.\\
+
+Figures [\ref{fig_3d_mappings_and_frames_computer_vision_last_transforms_1}, \ref{fig_3d_mappings_and_frames_computer_vision_last_transforms_2}], specify how the distances and planes are related based on the original center of projection for Baxter's left camera, and the corresponding generated planes (potentially infinite amount of them). The point \{P\} is where the camera is located and the planes \{A$_{cv}$\} and \{B$_{cv}$\} are example planes for possible parallel representations of where the user is located at any given time.\\
+
+
+\begin{center}
+\includegraphics[width= 1.01\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_3d_frames_part_1".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Detailed 3D mappings and frames from Baxter left camera to possible image planes where the user's face could be located. Own development.}\label{fig_3d_mappings_and_frames_computer_vision_last_transforms_1}
+\end{minipage} \end{center}
+
+
+\begin{center}
+\includegraphics[width= 1.01\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_3d_frames_part_2".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Detailed 2D mappings and frames from Baxter left camera to possible image planes where the user's face could be located. Own development.}\label{fig_3d_mappings_and_frames_computer_vision_last_transforms_2}
+\end{minipage} \end{center}
+
+
+These euclidean space configurations have strong-wise mathematical relationships that can be proven to be:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:space_relationships_computer_vision_final_transforms}
+\begin{gathered}
+        R = \frac{Y_{ref_A} [m]}{Z_{A} [m]} = \frac{Y_{ref_B} [m]}{Z_{B} [m]} \\
+        S_{X} = \frac{X_{ref_A} [m]}{X_{ref_A} [pix]} \\
+        S_{Y} = \frac{Y_{ref_A} [m]}{Y_{ref_A} [pix]} \\
+        R = \text{Constant ratio of space triangulation} \\
+        S_{X} = \text{X scaling factor [m]/[pix]} \\
+        S_{Y} = \text{Y scaling factor [m]/[pix]}
+\end{gathered}
+\end{equation}
+\myequations{Geometrical space relationships for computer vision mappings.}
+\caption{Geometrical space relationships for computer vision mappings.}
+\end{equ}
+
+The following steps after gathering these equations, is to understand that the \say{Z} distance will alter the constants $R$, $S_{x}$ and $S_{Y}$ in a direct way. For Baxter Bon Appetit project, the conceived \say{Z} distance, will be assumed to be a constant value and be decided from real-life experiments. This decision was taken based on the specifications of Baxter camera discussed on tab[\ref{tab:camera_specifications}], where it can only obtain a 2D space representation and does not have any depth acquisition.\\
+
+To obtain $Z$ distance, the user was located on the best manoeuvrability areas for Baxter right limb, based on experimental movements of Baxter arm with the cuff sensor pressed (the one located at its wrist). The result of these movements, was to conceive the distance and to measure it from Baxter's left camera (a value that will be really important for the euclidean equations already discussed).\\
+
+To complete the mathematical representations of eq[\ref{eq:space_relationships_computer_vision_final_transforms}] and find the relevant constants, the procedure was to do measurements of $Z_{A}$, $Z_{B}$, $Y_{ref_{A}}$ and $Y_{ref_{B}}$ in meters, and repeat it through multiple iterations, to obtain the desired results, as follows:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/computer_vision/computer_vision_3d_measurements_experiments.png}
+    \caption{Experiments to characterize Baxter left limb camera with respect of the image plane of the user. Own development.} 
+    \label{fig_real_life_experiments_3d_measurements_frames}
+\end{figure}
+
+After obtaining these scaling constant factors for mapping values from pixels to meters, the next step is to understand the transformations and their relevant translations and rotations. Keep in mind that all of these transforms are denoted in meters.\\
+
+To transform the reference frame \{T\} into \{CV\}, the compact mathematical representation is done with the transformation matrix as follows:
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:tranformation_matrix_from_T_to_CV_computer_vision}
+    _{CV}^{T}\textrm{T} = 
+    \begin{bmatrix}
+    r_{11} & r_{12} & r_{13} & P_{x} \\ 
+    r_{21} & r_{22} & r_{23} & P_{y} \\ 
+    r_{31} & r_{32} & r_{33} & P_{z} \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix} =
+    \begin{bmatrix}
+    0 & 1 & 0 & -H/2 \\ 
+    -1 & 0 & 0 & W/2 \\ 
+    0 & 0 & 1 & Z_{const} \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+\myequations{Transformation matrix from frame \{T\} to frame \{CV\}.}
+\caption{Transformation matrix from frame \{T\} to frame \{CV\}.}
+\end{equ}
+
+Additionally, the illustration shown in fig[\ref{fig_2d_plane_explained_rick}] represents the image plane for Baxter's left camera, specified with the corresponding frames \{T\} (Baxter left limb camera reference), \{CV\} (Computer Vision reference), and \{F\} (Face mouth position). One essential consideration to keep in mind, is that the already explained computer vision algorithms (Viola-Jones and Face Recognition), return a dictionary with the coordinates of the rectangle that circumscribes the user's face.
+
+\begin{center}
+\includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_2d_face_plane".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Relationship of frames \{CV\} and \{T\} in a plane for user's mouth detection. Own development.}\label{fig_2d_plane_explained_rick}
+\end{minipage} \end{center}
+
+Finally, the transformation matrix from the computer vision image plane \{CV\} into the specific face frame \{F\}, can be calculated with the following expression:
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:tranformation_matrix_from_CV_to_F_computer_vision}
+    _{CV}^{T}\textrm{T} = 
+    \begin{bmatrix}
+    r_{11} & r_{12} & r_{13} & P_{x} \\ 
+    r_{21} & r_{22} & r_{23} & P_{y} \\ 
+    r_{31} & r_{32} & r_{33} & P_{z} \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix} =
+    \begin{bmatrix}
+    1 & 0 & 0 & X_{F} \\ 
+    0 & 1 & 0 & Y_{F} \\ 
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\end{equation}
+\myequations{Transformation matrix from frame \{CV\} to frame \{F\}.}
+\caption{Transformation matrix from frame \{CV\} to frame \{F\}.}
+\end{equ}
+
+The values specified on eq[\ref{eq:tranformation_matrix_from_CV_to_F_computer_vision}] ($X_{F}$ and $Y_{F}$), are calculated based on the output of the face detection algorithm and the extra mappings explained in fig[\ref{fig_rick_face_zoom}]. Notice that there are no rotations and the translation in the \say{Z} axis is already done in the previous transformation matrix to get to \{CV\}.\\
+
+
+All the mathematical representations and the programmatic development on Python to transform these expressions into actual results, can be found with details in Baxter Bon Appetit GitHub repository:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/tree/main/python/baxter_bon_appetit/src/baxter_vision_mapping}{Baxter-Bon-Appetit Computer Vision Mappings (Source Code)}
+\end{itemize}
 
 
 
@@ -3007,6 +3156,16 @@ After the validation of the face detection algorithm for each user, the results 
 
 % ---------------------------------------------------------
 \chapter{Ethical Considerations}
+
+Since ancient times, there have been several technological advances that have changed the world in positive and negative ways. It is our job as future Mechatronics Engineers from EIA University, to generate a positive impact on the development of society, where technological, social, environmental, cultural and legal areas, in our country and in the world, can be enhanced.\\
+
+As students of the EIA University, we have always had as a main pillar the motto of \say{being, knowing and serving}, so this project, from its conception to the final development, is a step towards the pursuit of a more equitable society for a target population that is highly affected by their physiological conditions. From our mechatronics scope, our main purpose will always be to help others and generate knowledge that contributes to improve the quality of life of these individuals with motor disabilities in the upper limbs.\\
+
+Likewise, it is our great responsibility and duty, to abide by each and every one of the existing rules in the country and in the world, for the development of technological solutions that have people as direct elements in the performance tests, so we must rigorously consider the legal conditions related to this ethical reality of utmost importance and should seek to be viable from Ethics Committees around the world.\\
+
+It is a great pleasure for us to be able to generate a path towards scientific dissemination where a positive social impact is generated, while integrating some of the nuclei of knowledge from the area of Mechatronics Engineering. Therefore, carrying out this project was not just a challenge for us, but also a space for contemplation and continuous projection towards a significant contribution to the society in which we live. These results are a step towards science and the development of a positive influence on society itself.\\
+
+Finally, the aim of this research project was to seek a benefit for people with motor disabilities in the upper extremities and not to remain as a simple proposal, but to be the starting point to generate future projects and disclosures, which will continue and take up the methodologies presented in this article, with the aim of improving the quality of life of these individuals.\\
 
 
 %------------------------------------------------------
