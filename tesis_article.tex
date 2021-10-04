@@ -2163,6 +2163,50 @@ To dive deeper into the software implementation of this algorithm, please feel f
 \end{itemize}
 
 
+\subsection{Baxter Jacobian Analysis}
+\label{subsection_baxter_jacobian_analysis}
+The Jacobian is a matrix of partial derivatives of a vector function. It is extremely useful for finding transformation of coordinates systems.\\ 
+
+In robotics, jacobian matrices are commonly used for  mapping joint velocities to Cartesian velocities \citep{cite_craig_robotics}. This mathematical tool enables a direct relationship between a fix world frame of a robot to its specific articulation frames.
+
+It can be proved that the jacobians follow the mathematical expression:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:transformation_matrices_for_dh_algorithm}
+    \begin{bmatrix}
+    _{}^{k}\textrm{J}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \begin{bmatrix}
+    _{w}^{k}\textrm{R}
+    \end{bmatrix} & 0\\
+    0 & \begin{bmatrix}
+    _{w}^{k}\textrm{R}
+    \end{bmatrix}
+    \end{bmatrix}
+    \begin{bmatrix}
+    _{}^{w}\textrm{J}
+    \end{bmatrix}
+\end{equation}
+\myequations{Jacobian transformation to another frame.}
+\caption{Jacobian transformation to another frame.}
+\end{equ}
+
+Based on the article \say{Baxter Humanoid Robot Kinematics} \citep{cite_baxter_humanoid_robot_kinematics_ohio}, it is known the jacobian matrix from frame 4 to frame 0 ($_{}^{4}\textrm{J}$). This expression is really useful to calculate the jacobian matrix from frame 0 to the end-effector's frame.\\
+
+The calculations and expressions to find Baxter's jacobian matrices can be found at the Baxter Bon Appetit GitHub repository:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/matlab/baxter_jacobian_calculation.m}{Baxter Jacobian calculation}
+\end{itemize}
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/src/baxter_essentials/baxter_jacobian.py}{Baxter Jacobian implementation}
+\end{itemize}
+
 \section{Baxter Robot Work-Space}
 
 A robot workspace is defined as the set of all reachable end-effector positions \citep{cite_robot_academy}. These multiple configurations could be theoretically infinite, but a general understanding of the workspace can be achieved with a rigorous mapping of the area.\\
@@ -3123,11 +3167,191 @@ All the mathematical representations and the programmatic development on Python 
 % ---------------------------------------------------------
 \chapter{Control Theory}
 
+A Robotic system is an multidisciplinary device that is designed on top of the pillars of  engineering and computer science. The key goal of robotics is to create and supply, programmable machines, that can do different tasks with greater speed, safety and precision \citep{cite_towards_data_science}. To properly obtain these benefits, robotic systems must be integrated with different control strategies that allow the system to perform different actions based on a desired conditions.\\
+
+Baxter Bon Appetit project involves areas of knowledge such as robotics, computer vision, control theory and software development. The core component of this research is the development of a robust control system that aims to enable the active feeding of patients with motor disabilities on their upper limbs. To achieve this task, the system must be able to dynamically understand where the patient and the end-effector are located so it can move its arm towards the user's mouth.\\ 
+
+In this chapter, it will be discussed the development, design and implementation of different control strategies that fulfill the requirements for actively feeding a patient.\\
+
 \section{Understanding the Control Problem}
+Every solution that uses a control strategy, must understand the inputs and outputs for a given dynamic system. Baxter Bon Appetit project has main actors that change dynamically in time: The user and the robot's arm.\\
+
+The challenge that has to be solved in this research is to feed a patient by using one of the two arms of Baxter robot, based on the mouth's position of the patient.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{assets/imgs/control_theory/control_theory_main_actors.png}
+    \caption{Main actors that change in time during the feeding action.} 
+    \label{fig_main_actors_control_theory}
+\end{figure}
+
+This movement must be achieved satisfying  the following conditions:
+
+\begin{enumerate}
+    \item The orientation of the end-effector of Baxter robot must not change during the movement, this is an important statement because the robot must carry out food (solids and liquids) and they can not be spilled at any time of the trajectory.
+    \item The system must be able to track the current position of the user's mouth and move dynamically its arm towards it.
+    \item The system must reach the mouth's position in a smooth way, in order to perform a movement similar to the one executed by a human being performing this task.
+    \item The system must be able to perform the movement of the robot's arm  correctly even with external perturbations.
+\end{enumerate}
+
 
 \section{PID Control Strategy}
 
 \section{MPC Control Strategy}
+
+In its beginnings the MPC (Model Predictive Control) was designed to be implemented in applications where the control of chemical processes was required \citep{cite_model_predictive_control_theory_and_practice}. This control strategy was also widely used for the control of aerial vehicles due to its high performance \citep{cite_receding_horizon_control_aerial_vehicles}. In recent years, the MPC has been strongly introduced and implemented in the vast world of robotics, with this novel control strategy, problems such as trajectory planning, compensation of the inertial forces of a manipulator and the approach in a three-dimensional space to a target, have been able to find solutions with a more efficient and optimal point of view. \\
+
+Baxter Bon Appetit MPC strategy is inspired from two contemporary robotic researches that integrated successfully modern control solutions with real-life problems \citep{cite_park_active_robot_assisted_feeding} \citep{cite_reaching_in_clutter_with_whole_arm_tactile_sensing}. 
+
+The controller to be developed for the Baxter Bon Appetit project uses a linear MPC, with a prediction and control horizon which will be chosen in the tuning stage. This controller is based on the discrete-time model:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:general_robot_discrete-time_model}
+\begin{gathered}
+        x(k + 1) = Ax(k) + Bu(k) \\
+\end{gathered}
+\end{equation}
+\myequations{General discrete-time model of the robot.}
+\caption{General discrete-time model of the robot.}
+\end{equ}
+
+Where $x(k)$ are the states of the system and $u(k)$ are the control inputs.\\
+
+This control strategy calculates a series of control inputs every time-step $k$, having as main goal to minimize an objective function which depends on the states and inputs of the system, this optimization problem must consider a series of constraints which map the physical limitations of the robot and its degrees of freedom. $N$ and $M$ are the prediction and control horizon of the model predictive controller respectively. This control strategy defines a quadratic algorithm, that is solved based on a convex optimization problem at each sample time $k$ based on $N$ prediction steps in the future. After that, it saves and applies $M$ calculated control inputs in the system and reformulates the quadratic problem after the already calculated control inputs are applied.\\
+
+\subsection{Overview of the one-step model predictive controller}
+
+As mentioned above, the model predictive controller implemented in Baxter Bon Appetit project aims to move the robot's end-effector to a position close to the patient's mouth, considering different physical constraints of the manipulator.\\
+
+This controller has the following important parameters:
+
+\begin{itemize}
+    \item Goal location and orientation ($x_{m} \in \mathbb{R}^6$): This is a vector with the desired Cartesian position and orientation that represents where and how the controller attempts to move the end-effector of Baxter robot. The position depends on the user's mouth location. 
+    \item Optimal control inputs ($\Delta\phi \in \mathbb{R}^7$): This a vector with the solution of the quadratic problem, these are the optimal values that the Model Predictive controller calculated given the goal position and orientation parameters.
+    \item Robot joint commands ($\phi \in \mathbb{R}^7$): This is a vector with the direct joint commands that the robot is going to receive, these values can be understood as the control signal of the controller.
+    \item Robot states ($\theta \in \mathbb{R}^7$): This is a vector with the current values of the joints of the robot. These values are given by the robot's encoders.
+\end{itemize}
+
+\subsection{Control structure}
+
+The figure fig[\ref{fig_mpc_block_diagram_baxter_bon_appetit}] shows the block diagram of the model predictive controller and its structure. This MPC implementation runs in Python programming language on a conventional desktop computer at a control frequency of approximately 100 Hertz.\\
+
+\begin{center}
+\includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/control_theory/mpc_block_diagram".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Block diagram of the Model Predictive Controller to implement in Baxter Bon Appetit. Own development.}\label{fig_mpc_block_diagram_baxter_bon_appetit}
+\end{minipage} \end{center}
+
+The setpoint of this model predictive controller is a desired Cartesian position and orientation represented mathematically by means of a 6-component vector, where, the first three components represent the Cartesian coordinates of the $x$, $y$ and $z$ positions, and the others, represent the Cartesian orientation in absolute angles representation \citep{cite_craig_robotics}. This controller uses the measurements of the articulations given by the encoders of the robot as feedback to perform the dynamic control of the system.\\
+
+\subsection{Linear discrete-time model}
+
+One of the most important elements for the correct design and implementation of a Model Predictive Controller is the system model or \say{digital copy} of the robot. Based on this model, the controller can somehow predict the future behavior of the real system.\\
+
+For this specific application, mathematical model of the system is given by:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:baxter_robot_arm_discrete_model}
+\begin{gathered}
+        \theta(k + 1) = A\theta(k) + B\Delta\phi(k) \\
+\end{gathered}
+\end{equation}
+\myequations{Discrete-time model of Baxter robot's arm.}
+\caption{Discrete-time model of Baxter robot's arms.}
+\end{equ}
+
+One important remark from eq[\ref{eq:baxter_robot_arm_discrete_model}], is that matrices A and B are considered to be identity matrices, due to the fact that the changes in the articulations of Baxter robot are considered to be homogeneous based on the inputs. Additionally to this simplification, it is valuable to keep in mind that this is a linear model and the real behavior could have slight non-linear performances.\\
+
+\subsection{Quadratic program to compute $\Delta\phi$}
+A quadratic optimization problem is a mathematical expression in which the goal is to find the best possible and feasible solution based on some given criteria \citep{cite_convex_optimization_problem}.\\
+
+For the Model Predictive Controller of Baxter Bon Appetit project, the optimization problem is related to the eq[\ref{eq:baxter_robot_arm_discrete_model}], in which $\Delta\phi$ is the optimization variable that governs the behavior of the system. In order to find $\Delta\phi$ a quadratic objective function must be minimized with convex optimization algorithms. For this research, the open source cvxpy library will be implemented to solve this mathematical problems:    
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/cvxpy/cvxpy}{cvxpy: A Python-embedded modeling language for convex optimization problems}
+\end{itemize}
+
+The objective function has a general structure as follows:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:objective_function_structure}
+\begin{gathered}
+        \sum_{i}^{} \sigma_{i}q_{i} \\
+\end{gathered}
+\end{equation}
+\myequations{MPC objective function structure.}
+\caption{MPC objective function structure.}
+\end{equ}
+
+In eq[\ref{eq:objective_function_structure}], $q_{i}$ represents a series of quadratic functions that depends on the optimization variable $\Delta\phi$ and $\sigma_{i}$ are tweaked experimental constants for the weights of the quadratic equation to solve. For Baxter Bon Appetit, $\sigma_{i}$ will be considered as one. The structure of $q_{i}$ will be discussed below.\\
+
+\subsubsection{Move to the goal position}
+The first component of the quadratic objective function described on eq[\ref{eq:objective_function_structure}], has as main goal to reach the robot's arm to a goal position (user's mouth location). This expression has the following structure:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:first_term_quadratic_optimization_eq}
+\begin{gathered}
+        q = ||\Delta x_{d} - \Delta x_{h}||^2 \\
+\end{gathered}
+\end{equation}
+\myequations{MPC objective function structure.}
+\caption{MPC objective function structure.}
+\end{equ}
+
+Where it is important to notice that $\Delta x_{h} = x_{h}(k + 1) - x_{h}(k)$, is the predicted position and orientation of Baxter's end-effector and $\Delta x_{d}$ is the desired delta expected after one sample time of those values.\\
+
+For this implementation it will be assumed that the changes of the robot's joint angles will be small enough to satisfy the equation:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:cartesian_joint_relationship}
+\begin{gathered}
+        \Delta x_{h} = J_{h}\Delta\theta \\
+\end{gathered}
+\end{equation}
+\myequations{Relationship between the Cartesian space and joint space.}
+\caption{Relationship between the Cartesian space and joint space.}
+\end{equ}
+ 
+The jacobian matrix shown on eq[\ref{eq:cartesian_joint_relationship}], is the one discussed on sec[\ref{subsection_baxter_jacobian_analysis}], which is Baxter's jacobian of the end-effector, where $J_{h} \in \mathbb{R}^{6\times7}$. The term $\Delta\theta = \theta(k + 1) - \theta(k)$ corresponds to the change in the joint angles predicted by the eq[\ref{eq:baxter_robot_arm_discrete_model}].\\ 
+
+The objective function for Baxter Bon Appetit Model Predictive Controller will be expressed as follows:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:objective_function_mpc}
+\begin{gathered}
+        q = ||\Delta x_{d} - J_{h}\Delta\theta||^2
+\end{gathered}
+\end{equation}
+\myequations{Objective function of the Model Predictive Controller.}
+\caption{Objective function of the Model Predictive Controller.}
+\end{equ}
+
+For this research, an intermediate controller will provide the unit vector a distance in which the end-effect will move towards the goal in a straight line. This controller enables and guarantees the small changes in position and orientation, as well as the safety of the patient when the arm is reaching his mouth.\\
+
+For Baxter Bon Appetit, this process is called Cartesian increment and it is defined as follows:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:simple-wise_function_cartesian_increment}
+\begin{gathered}
+        \Delta x_{d} 
+        =
+        \left\{
+            \begin{array}{ll}
+                d_{c}\frac{x_{g} - x{h}}{||x_{g} - x_{h}||} & if ||x_{g} - x_{h}|| > d_{c}\\
+                x_{g} - x_{h} & if ||x_{g} - x_{h}|| \le  d_{c}
+            \end{array}
+        \right.
+\end{gathered}
+\end{equation}
+\myequations{Simple-wise function for the Cartesian increments.}
+\caption{Simple-wise function for the Cartesian increments.}
+\end{equ}
+
+Where $x_{g}$ is a vector with the goal position and orientation that the robot must reach, and $d_{c}$ is a small constant value that indicates the magnitude of change of the position and orientation towards the goal.\\
+
+
 
 \section{PID vs MPC Strategies Results Discussion}
 
@@ -3150,7 +3374,7 @@ All the mathematical representations and the programmatic development on Python 
 \section{Further Investigations}
 
 % ---------------------------------------------------------
-\chapter{Conclusions}
+\chapter{Conclusion}
 
 Mechatronics engineering seeks to assertively integrate multiple technological and scientific pillars through integrated solutions for modern problems. This research project aims to creatively integrate some of these pillars, such as robotics, computer vision, modern control and software integration, in a possible solution to a tangible necessity in today's society.\\
 
