@@ -487,7 +487,7 @@ By solving the FPK of the RR robot, from fig[\ref{fig_general_rr_drawing.}], it 
 \caption{Forward Pose Kinematics results for RR robot example.}
 \end{equ}
 
-\subsubsubsection{Inverse Pose Kinematics}
+\subsubsubsection{Inverse Pose Kinematics} \label{baxter_inverse_pose_kinematic}
 
 The Inverse Pose Kinematics (IPK), are all those equations that relate the behavior of a robotic system, having as input parameters the absolute Cartesian values, allowing finding the equivalent values of each one of the degrees of freedom (DOF) of a robotic system \citep{cite_craig_robotics}.
 
@@ -3197,6 +3197,77 @@ This movement must be achieved satisfying  the following conditions:
 
 \section{PID Control Strategy}
 
+The PID controllers (Proportional-integral-derivative), is one of the most popular and common predefined control structures in real life applications.Their dynamics are known for decades and some of the great advantages of PID controllers are:
+
+\begin{enumerate}
+    \item Its feasibility that allows an easy implementation.
+    \item Its well-known structure that enables a simple tuning approach for the control system.
+    \item Its effectiveness for SISO (Single Input - Single Output) systems. 
+\end{enumerate}
+
+\subsection{Baxter joint controllers}
+
+By default, Baxter robot comes with a PID controller for each one of its joint articulations, implying that the overall behavior or Baxter's arm is defined by the consequence of the dynamics of each joint controller.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/imgs/control_theory/baxter_joint.png}
+    \caption{Baxter's internal joints structure. Taken from \citep{cite_baxter_arms_wiki}} 
+    \label{fig_baxter_internal_joint_structure}
+\end{figure}
+
+The default control structure for each joint of Baxter robot is a PID controller with the following expression:
+
+\begin{center}
+\includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/control_theory/pid_baxter_joint".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Block diagram of Baxter's joints PID controllers. Own development.}\label{fig_baxter_joint_pid_block_diagram}
+\end{minipage} \end{center}
+
+
+\begin{equ}[H]
+\begin{equation} \label{eq:baxter_joint_pid_structure}
+\begin{gathered}
+        \text{PID}(k) = K_{p}\cdot e(k) + K_{i}(e(k)\cdot T_{s} + A_{sum}(k - 1)) + K_{d}\cdot \left[\frac{e(k) - e(k-1)}{T_{s}}\right]\\
+        A_{sum}(k) = A_{sum}(k - 1) + e(k)\cdot Ts
+\end{gathered}
+\end{equation}
+\myequations{Baxter's joints PID control structure.}
+\caption{Baxter's joints PID control structure.}
+\end{equ}
+
+Where the $e(k)$ is the current error signal calculated from the difference between a reference angle value (radians) and the current measured value from the joint encoders angles. $T_{s}$ correspond to the sample time in which the discrete controller takes the measurement and applies the control actions.\\
+
+It is important to notice that this structure applies similarly to each one of the 7 degrees of freedom of Baxter robot.\\ 
+
+The PID algorithms will be implemented using Baxter Interface SDK. These can be found at the Rethink Robotics' repository.
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/RethinkRobotics/baxter_interface/blob/master/src/baxter_control/pid.py}{Rethink Robotics baxter\_interface PID controller implementation}
+\end{itemize}
+
+\subsection{Mouth tracking problem}
+
+Now that it is possible to apply a control signal to move each baxter joint to a desired angle, the question that must be answered to solve the mouth tracking problem exposed in this project, is how to find the right joint commands in order to move the end-effector to the user's mouth location.\\
+
+To achieve this solution, an intermediate process must be implemented in which the current user's position is mapped from Cartesian coordinates to joint coordinates. This analysis can be implemented using the inverse pose kinematics of Baxter robot, as seen in sec[\ref{baxter_inverse_pose_kinematic}]. \\
+
+\begin{center}
+\includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/control_theory/control_pid_ipk".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Mouth tracking solution using IPK and PID controllers. Own development.}\label{fig_baxter_ipk_pid_controller}
+\end{minipage} \end{center}
+
+For Baxter Bon Appetit, the source code for this control strategy can be found at the GitHub repository:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/scripts/node_open_loop_control_trajectory.py}{Baxter Bon Appetit mouth tracking approach based on PID and IPK algorithms}
+\end{itemize}
+
 \section{MPC Control Strategy}
 
 In its beginnings the MPC (Model Predictive Control) was designed to be implemented in applications where the control of chemical processes was required \citep{cite_model_predictive_control_theory_and_practice}. This control strategy was also widely used for the control of aerial vehicles due to its high performance \citep{cite_receding_horizon_control_aerial_vehicles}. In recent years, the MPC has been strongly introduced and implemented in the vast world of robotics, with this novel control strategy, problems such as trajectory planning, compensation of the inertial forces of a manipulator and the approach in a three-dimensional space to a target, have been able to find solutions with a more efficient and optimal point of view. \\
@@ -3218,6 +3289,17 @@ The controller to be developed for the Baxter Bon Appetit project uses a linear 
 Where $x(k)$ are the states of the system and $u(k)$ are the control inputs.\\
 
 This control strategy calculates a series of control inputs every time-step $k$, having as main goal to minimize an objective function which depends on the states and inputs of the system, this optimization problem must consider a series of constraints which map the physical limitations of the robot and its degrees of freedom. $N$ and $M$ are the prediction and control horizon of the model predictive controller respectively. This control strategy defines a quadratic algorithm, that is solved based on a convex optimization problem at each sample time $k$ based on $N$ prediction steps in the future. After that, it saves and applies $M$ calculated control inputs in the system and reformulates the quadratic problem after the already calculated control inputs are applied.\\
+
+The MPC algorithms and conditions for Baxter Bon Appetit research can be found at the GitHub repository:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/tree/main/python/baxter_bon_appetit/src/baxter_control}{Baxter Bon Appetit MPC algorithms}
+    
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/scripts/node_mpc_control_trajectory.py}{Baxter Bon Appetit MPC implementation}
+\end{itemize}
+
 
 \subsection{Overview of the one-step model predictive controller}
 
@@ -3350,6 +3432,69 @@ For Baxter Bon Appetit, this process is called Cartesian increment and it is def
 \end{equ}
 
 Where $x_{g}$ is a vector with the goal position and orientation that the robot must reach, and $d_{c}$ is a small constant value that indicates the magnitude of change of the position and orientation towards the goal.\\
+
+\subsubsubsection{Joint limits}
+
+One of the greatest advantages of MPC controllers is the possibility of adding custom constraints for the variables of the system model, this ability allows the controller to predict scenarios that don't exceed  the physical limitations of the given variables. For Baxter Bon Appetit project, these constraints are going to be essential for maintaining each joint angle inside the lower and upper limit shown in tab[\ref{tab:max_min_values}].\\
+
+These constraints can be expressed mathematically as follows:
+
+\begin{equ}[H]
+\begin{equation} \label{eq:mpc_joint_limits_constraints}
+\begin{gathered}
+        \theta_{min} 
+        \leq
+        \theta(k + 1)
+        \leq
+        \theta_{max}
+\end{gathered}
+\end{equation}
+\myequations{MPC constraints for joints physical limitations.}
+\caption{MPC constraints for joints physical limitations.}
+\end{equ}
+
+Where $\theta_{min}$ and $\theta_{max}$ are the vectors that correspond to the minimum and maximum values for each one of the joints of Baxter robot respectively
+
+\subsection{MPC Tuning}
+
+As exposed in the MPC expressions, there are some variables that have a direct impact on the behavior of the system, such as the prediction horizon (N) and control horizon (M). For this research, these variables will be found in an experimental way.\\
+
+In order to find the best possible values of N and M, multiple experiments were developed. The main task of those tests was to move Baxter's right arm to a specific constant location in space, so that the step response of the overall system could be analysed afterwards. In this experiments, different combinations of these parameters were applied to the MPC controller, with the objective of finding the controller with the best dynamic performance.\\
+
+The experiments were developed with the following combinations of N and M:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{1.0}{
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Experiment Nº} & \textbf{N} & \textbf{M} \\ \hline
+        1 & 1 & 1 \\ \hline
+        2 & 3 & 1 \\ \hline
+        3 & 5 & 1 \\ \hline
+        4 & 10 & 1 \\ \hline
+        5 & 3 & 3 \\ \hline
+        6 & 5 & 3 \\ \hline
+        7 & 10 & 3 \\ \hline
+        8 & 5 & 5 \\ \hline
+        9 & 10 & 5 \\ \hline
+        10 & 10 & 10 \\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:combination_n_m} Combinations of N and M for MPC tests.}
+\end{center}
+\end{table}
+
+During the experiments, the main variables of the system (Joints of the robot and the Cartesian location and orientation of the end-effector) were monitored constantly. The collected data of the experiments will be shown in the following plots.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/imgs/control_theory/mpc_tests/s0.png}
+    \caption{Baxter's s0 joint behavior during the MPC experiments.} 
+    \label{fig_baxter_s0_mpc_experiments}
+\end{figure}
 
 
 
