@@ -1998,7 +1998,8 @@ The software implementation of the FPK algorithm for this research project can b
 \end{itemize}
 
 
-\subsection{Baxter Inverse Pose Kinematics}
+\subsection{Baxter Inverse Pose Kinematics} 
+\label{sub_sec_ipk}
 
 The goal of the IPK for Baxter, is to determine the current angles of each one of the degrees of freedom, based on the Cartesian position and orientation of the end effector. To solve this problem, we can proceed to derive a general expression based on an analytical solution.\\
 
@@ -3268,6 +3269,59 @@ For Baxter Bon Appetit, the source code for this control strategy can be found a
     \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/scripts/node_open_loop_control_trajectory.py}{Baxter Bon Appetit mouth tracking approach based on PID and IPK algorithms}
 \end{itemize}
 
+\subsection{PID results}
+To analyze how is the behavior of the system with the control structure shown in fig[\ref{fig_baxter_ipk_pid_controller}], a experiment was designed in which the main task was to move Baxter's right arm to a specific constant location in space, so that the step response of the overall system could be analysed afterwards. The results are the following:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tests/x_pose.png}
+    \caption{Baxter's end-effector x position during the experiment with the mouth tracking solution using IPK and PID.} 
+    \label{fig_baxter_x_pose_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tests/y_pose.png}
+    \caption{Baxter's end-effector y position during the experiment with the mouth tracking solution using IPK and PID.} 
+    \label{fig_baxter_y_pose_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tests/z_pose.png}
+    \caption{Baxter's end-effector z position during the experiment with the mouth tracking solution using IPK and PID.} 
+    \label{fig_baxter_z_pose_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tests/x_orientation.png}
+    \caption{Baxter's end-effector x orientation during the experiment with the mouth tracking solution using IPK and PID.} 
+    \label{fig_baxter_x_orientation_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tests/y_orientation.png}
+    \caption{Baxter's end-effector y orientation during the experiment with the mouth tracking solution using IPK and PID.} 
+    \label{fig_baxter_y_orientation_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tests/z_orientation.png}
+    \caption{Baxter's end-effector z orientation during the experiment with the mouth tracking solution using IPK and PID.} 
+    \label{fig_baxter_z_orientation_pid_experiments}
+\end{figure}
+
+
+After the results of the experiment were analyzed, some interesting insights were found:
+\begin{itemize}
+    \item As seen in figs[\ref{fig_baxter_x_pose_pid_experiments}, \ref{fig_baxter_y_pose_pid_experiments}], the time response of the system has a significant steady state error due to the mathematical simplifications of the 6 DOF IPK, explained in sec[\ref{sub_sec_ipk}]  
+    \item The Cartesian orientation has relevant changes and even high-slope segments that are undesired for the feeding task. 
+\end{itemize}
+
+
 \section{MPC Control Strategy}
 
 In its beginnings the MPC (Model Predictive Control) was designed to be implemented in applications where the control of chemical processes was required \citep{cite_model_predictive_control_theory_and_practice}. This control strategy was also widely used for the control of aerial vehicles due to its high performance \citep{cite_receding_horizon_control_aerial_vehicles}. In recent years, the MPC has been strongly introduced and implemented in the vast world of robotics, with this novel control strategy, problems such as trajectory planning, compensation of the inertial forces of a manipulator and the approach in a three-dimensional space to a target, have been able to find solutions with a more efficient and optimal point of view. \\
@@ -3487,18 +3541,90 @@ The experiments were developed with the following combinations of N and M:
 \end{center}
 \end{table}
 
-During the experiments, the main variables of the system (Joints of the robot and the Cartesian location and orientation of the end-effector) were monitored constantly. The collected data of the experiments will be shown in the following plots.\\
+During the experiments, the main variables of the system (Joints of the robot and the Cartesian location and orientation of the end-effector) were monitored constantly. The collected data of the Cartesian coordinates taken at the experiments will be shown in the following plots.\\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{assets/imgs/control_theory/mpc_tests/s0.png}
-    \caption{Baxter's s0 joint behavior during the MPC experiments.} 
-    \label{fig_baxter_s0_mpc_experiments}
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tests/x_pose.png}
+    \caption{Baxter's end-effector x position during the MPC experiments.} 
+    \label{fig_baxter_x_pose_mpc_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tests/y_pose.png}
+    \caption{Baxter's end-effector y position during the MPC experiments.} 
+    \label{fig_baxter_y_pose_mpc_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tests/z_pose.png}
+    \caption{Baxter's end-effector z position during the MPC experiments.} 
+    \label{fig_baxter_z_pose_mpc_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tests/x_orientation.png}
+    \caption{Baxter's end-effector x orientation during the MPC experiments.} 
+    \label{fig_baxter_x_orientation_mpc_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tests/y_orientation.png}
+    \caption{Baxter's end-effector y orientation during the MPC experiments.} 
+    \label{fig_baxter_y_orientation_mpc_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tests/z_orientation.png}
+    \caption{Baxter's end-effector z orientation during the MPC experiments.} 
+    \label{fig_baxter_z_orientation_mpc_experiments}
 \end{figure}
 
 
+After analysing all the possible configurations of the MPC controller implemented in the experiments, the best performance of the system was achieved with the values of $N = 1$ and $M = 1$. Some of the reasons for selecting this combination of the MPC parameters are:
+
+\begin{itemize}
+    \item The rise time and the settling time were smallest ones compared to the other combinations.
+    \item Time response has the smoothest behavior, making the movements of the end-effector optimal accurate for the task of feeding.
+    \item As seen in figs[\ref{fig_baxter_x_orientation_mpc_experiments}, \ref{fig_baxter_y_orientation_mpc_experiments}, \ref{fig_baxter_z_orientation_mpc_experiments}] this controller has the steadiest behavior for the end-effector's orientation.
+\end{itemize}
+
+Further more, the experiments revealed some additional valuable information about the MPC. The step-wise behavior seen in some combinations such as the one that involves $N = 10$ and $M = 1$, indicate that computational resources are close to their performance limits and due to this, the horizontal parts of the step-wise response are a consequence of the processing time needed to compute these algorithms. \\
+
 
 \section{PID vs MPC Strategies Results Discussion}
+
+For Baxter Bon Appetit project, it is important to choose the best control strategy based on tangible conclusions that aim to execute the feeding task as save and smooth as possible. \\
+
+The previous sections showed the process of development of two control strategies (IPK and PID based controller, MPC controller). Although both approaches had great general results, it is crucial to distinguish which one satisfies better the project requirements. \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 % ---------------------------------------------------------
 \chapter{ROS Integration}
