@@ -1285,7 +1285,7 @@ The GUI will be developed as a desktop application that connects strategically w
 A middle-ware is defined as \say{a software that bridges gaps between other applications, tools, and databases in order to provide unified services to users} \citep{cite_middleware_definition_talend}.\\
 
 
-\section{Finite State Machine}
+\section{Finite State Machine} \label{cite_finite_state_machine_section}
 
 The finite state machine has the purpose of managing the general behaviour of the system in each of the main tasks that Baxter (and the associated subsystems) will perform in the feeding tasks, according to the user's commands.\\
 
@@ -2984,7 +2984,7 @@ After the validation of the face detection algorithm for each user, the results 
 \end{figure}
 
 
-\section{Mouth Pose Estimation Algorithm}
+\section{Mouth Pose Estimation Algorithm} \label{mouth_pose_estimation}
 
 The goal of this part of the process, is to obtain a mathematical representation for the specific point of the user's mouth with respect of the main robot's frame. This can be done with a series of strategical transformations through Baxter robot, starting from \{W0\} (word frame) and ending in \{F\} (face frame).\\
 
@@ -3007,7 +3007,7 @@ To calculate the transformation matrix for the user's mouth at any given time, w
     \end{bmatrix}
 \end{equation}
 \myequations{Complete mathematical transformations from frame \{0\} (word reference) to frame \{F\} (face reference).}
-\caption{Complete mathematical transformations from frame \{0\} (word reference) to frame \{F\} (face reference).}
+\caption{Complete mathematical transformations from frame \{0\} (world reference) to frame \{F\} (face reference).}
 \end{equ}
 
 As it can be observed in fig[\ref{fig_computer_vision_real_life_mappings_santi}], the position and orientation for the left limb of Baxter robot was selected in a strategical configuration. This setup had the objective of having a wide reach of the user's face and maintaining the horizontal orientation fixed. Another beneficial factor of this configuration, is that the user will be approximately located in one of the best positions for the right limb in terms of manoeuvrability (see fig[\ref{fig_baxter_general_workspace}]), giving the robot an excellent and reliable area to move its right limb and reach correctly the user's mouth to feed the patient.\\ 
@@ -3322,7 +3322,7 @@ After the results of the experiment were analyzed, some interesting insights wer
 \end{itemize}
 
 
-\section{MPC Control Strategy}
+\section{MPC Control Strategy} \label{cite_mpc_section}
 
 In its beginnings the MPC (Model Predictive Control) was designed to be implemented in applications where the control of chemical processes was required \citep{cite_model_predictive_control_theory_and_practice}. This control strategy was also widely used for the control of aerial vehicles due to its high performance \citep{cite_receding_horizon_control_aerial_vehicles}. In recent years, the MPC has been strongly introduced and implemented in the vast world of robotics, with this novel control strategy, problems such as trajectory planning, compensation of the inertial forces of a manipulator and the approach in a three-dimensional space to a target, have been able to find solutions with a more efficient and optimal point of view. \\
 
@@ -3487,7 +3487,7 @@ For Baxter Bon Appetit, this process is called Cartesian increment and it is def
 
 Where $x_{g}$ is a vector with the goal position and orientation that the robot must reach, and $d_{c}$ is a small constant value that indicates the magnitude of change of the position and orientation towards the goal.\\
 
-\subsubsubsection{Joint limits}
+\subsubsection{Joint limits}
 
 One of the greatest advantages of MPC controllers is the possibility of adding custom constraints for the variables of the system model, this ability allows the controller to predict scenarios that don't exceed  the physical limitations of the given variables. For Baxter Bon Appetit project, these constraints are going to be essential for maintaining each joint angle inside the lower and upper limit shown in tab[\ref{tab:max_min_values}].\\
 
@@ -3599,9 +3599,151 @@ Further more, the experiments revealed some additional valuable information abou
 
 \section{PID vs MPC Strategies Results Discussion}
 
-For Baxter Bon Appetit project, it is important to choose the best control strategy based on tangible conclusions that aim to execute the feeding task as save and smooth as possible. \\
+For Baxter Bon Appetit project, it is important to choose the best control strategy based on tangible conclusions that aim to execute the feeding task as safe and smooth as possible. \\
 
-The previous sections showed the process of development of two control strategies (IPK and PID based controller, MPC controller). Although both approaches had great general results, it is crucial to distinguish which one satisfies better the project requirements. \\
+The previous sections showed the process of development of two control strategies (IPK and PID based controller and MPC controller). Although both approaches had great general results, it is crucial to distinguish which one satisfies better the project requirements. \\
+
+To validate the best controller, the finest MPC controller (N = 1, M = 1) and the IPK-PID based controller were plotted in the same graph to get a better insight of the comparison of their behavior. The results were the following:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_vs_pid/x_pose.png}
+    \caption{Baxter's end-effector x position for MPC and IPK-PID controllers.} 
+    \label{fig_baxter_x_pose_mpc_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_vs_pid/y_pose.png}
+    \caption{Baxter's end-effector y position for MPC and IPK-PID controllers.} 
+    \label{fig_baxter_y_pose_mpc_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_vs_pid/z_pose.png}
+    \caption{Baxter's end-effector z position for MPC and IPK-PID controllers.} 
+    \label{fig_baxter_z_pose_mpc_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_vs_pid/x_orientation.png}
+    \caption{Baxter's end-effector x orientation for MPC and IPK-PID controllers.} 
+    \label{fig_baxter_x_orientation_mpc_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_vs_pid/y_orientation.png}
+    \caption{Baxter's end-effector y orientation for MPC and IPK-PID controllers.} 
+    \label{fig_baxter_y_orientation_mpc_pid_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_vs_pid/z_orientation.png}
+    \caption{Baxter's end-effector z orientation for MPC and IPK-PID controllers.} 
+    \label{fig_baxter_z_orientation_mpc_pid_experiments}
+\end{figure}
+
+As it can be inferred in figs[\ref{fig_baxter_x_pose_mpc_pid_experiments}, \ref{fig_baxter_y_pose_mpc_pid_experiments}, \ref{fig_baxter_z_pose_mpc_pid_experiments}], the best performance for the absolute Cartesian position was achieved with the MPC control strategy, because it had the smoothest time response and an smaller steady state error. It can be notice that IPK-PID control strategy has high-slope changes that can affect directly the acceleration and jerk of the robot's end-effector. \\
+
+It is crucial to understand that one of the most important requirements for the feeding task is to maintain the end-effector's orientation constant during the robot's movements. This condition is a complex challenge due to the high related dynamic behavior of the position and orientation of the robot and this can impact the other one. As is can be observed in figs[\ref{fig_baxter_x_orientation_mpc_pid_experiments}, \ref{fig_baxter_y_orientation_mpc_pid_experiments}, \ref{fig_baxter_z_orientation_mpc_pid_experiments}], the MPC strategy can regulate better the end-effector's orientation during the movement of the robot, which fulfills that the robot gives correctly the food to the patient without dropping it during the feeding task. \\
+
+Based on these analyses, the selected control strategy that is going to be implemented for Baxter Bon Appetit project is the MPC controller with $N=1$ and $M=1$ parameters. \\
+
+\section{MPC performance analysis}
+The two most important features that a controller must guarantee are trajectory tracking and setpoint regulation. Trajectory tracking is concerned with the design of control laws that force a system to reach and follow a time
+parameterized reference \citep{cite_trajectory_tracking}. Setpoint regulation is the control condition that aims to maintain a dynamic variable of a system on a reference value. \\
+
+To evaluate the behavior of the MPC strategy, it is necessary to develop some tests that allow to understand how the system would perform under specific conditions. The tests were developed for the tracking and the regulation tasks.\\
+
+\subsection{Tracking task}
+
+The tracking task experiment consisted of executing the MPC strategy while the user moved  to different locations. The goal of this test was to determine how effective the control strategy is under trajectory tracking circumstances. \\
+
+The user's movement for the tracking test can be seen on fig[\ref{fig_patient_mouth_tracking_explained}].
+
+\begin{center}
+\includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/control_theory/mouth_tracking_rick".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Illustration of patient's movement for mouth tracking experiment. Own development.}\label{fig_patient_mouth_tracking_explained}
+\end{minipage} \end{center}
+
+The results of the tracking experiment are going to be shown in the following figures:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/x_pose.png}
+    \caption{Baxter's end-effector x position during the mouth tracking test.} 
+    \label{fig_baxter_x_pose_mpc_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/y_pose.png}
+    \caption{Baxter's end-effector y position during the mouth tracking test.} 
+    \label{fig_baxter_y_pose_mpc_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/z_pose.png}
+    \caption{Baxter's end-effector z position during the mouth tracking test.} 
+    \label{fig_baxter_z_pose_mpc_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/x_orientation.png}
+    \caption{Baxter's end-effector x orientation during the mouth tracking test.} 
+    \label{fig_baxter_x_orientation_mpc_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/y_orientation.png}
+    \caption{Baxter's end-effector y orientation during the mouth tracking test.} 
+    \label{fig_baxter_y_orientation_mpc_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/z_orientation.png}
+    \caption{Baxter's end-effector z orientation during the mouth tracking test.} 
+    \label{fig_baxter_z_orientation_mpc_tracking_experiments}
+\end{figure}
+
+The results demonstrated that the MPC controller was able to follow the trajectory successfully. Some relevant metrics about the experiment are:
+
+\begin{table}[H]
+\begin{center}
+\scalebox{1.0}{
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+        \textbf{Performance metric} & \textbf{X position} & \textbf{Y position}  & \textbf{Z position}\\ \hline
+        Rise time $(t_{r})$ [sec] & 3.17 & 1.96 & 2.03\\ \hline
+        Settling time $(t_{s})$ [sec] & 4.87 & 2.84 & 3.01\\ \hline
+        Peak time $(t_{p})$ [sec] & 3.39 & 2.2 & 2.32\\ \hline
+        Dead time $(t_{d})$ [sec] & 0.24 & 0.43 & 0.29\\ \hline
+    \end{tabular}
+}
+\caption{\label{tab:performance_metrics_tracking} Performance metrics for mouth tracking experiment.}
+\end{center}
+\end{table}
+
+\subsection{Regulation task}
+
+
+
+
+
+
+
 
 
 
@@ -3629,20 +3771,46 @@ The previous sections showed the process of development of two control strategie
 % ---------------------------------------------------------
 \chapter{ROS Integration}
 
-\section{General ROS Architecture}
+In order to create a robust software/hardware architecture for Baxter Bon Appetit project, it is necessary to design a proper message-passing middle-ware suit that enables a framework to operate Baxter robot. To fulfill these requirements it will be implemented a Robotic Operating System (ROS) architecture, which is an open-source robotic flexible framework \citep{cite_about_ros}.\\
 
-\section{System ROS Architecture}
+Throughout the article, multiple scripts and software developments have been explained in an isolated way (showing their own functionality without mentioning how they interact with the rest of the system elements). In this section, it will be explained how those functionalities are going to be integrated for Baxter Bon Appetit project.\\
 
-\section{Anomaly Conditions Handling}
+\section{ROS definitions}
+To understand how Baxter Bon Appetit ROS architecture is designed, it is mandatory to have a basic understanding of the following concepts:
 
-\section{Orchestrate Nodes with Graphical User Interface}
+\begin{itemize}
+    \item \textbf{ROS node}: is a process with emphasis in a single computational task. They are conceived as simple micro-services, that combined together, can create powerful robot functionalities \citep{cite_ros_node}.
+    \item \textbf{ROS message}: is a simple data structure with parameterized typed fields. Messages enable nodes to communicate with each other to topics \citep{cite_ros_message}.
+    \item \textbf{ROS topic}: is communication bus that helps nodes to exchange massages. Topics are design for unidirectional, streaming communication and have publisher/subscriber semantic, that isolate ROS nodes micro-services \citep{cite_ros_topic}.
+    \item \textbf{ROS launch}: is a tool that allows launching multiples ROS nodes and some other useful functionalities such as setting parameters and automatically re-spawning dead nodes \citep{cite_ros_launch}. 
+\end{itemize}
 
-% ---------------------------------------------------------
-\chapter{Integration Results}
+\section{Baxter Bon Appetit nodes architecture}
 
-\section{Complete System Results Analysis}
+In this section, it will be explained the general functionalities if the ROS nodes, that coupled together via ROS topics, create Baxter Bon Appetit architecture. The goal of these explanations is to show how these nodes were developed with the best practices of a decoupled-system composed of multiple micro-services. \\
 
-\section{Further Investigations}
+The ROS architecture is the way in which the nodes and the topics interact with each other in a micro-services approach. This structure can be seen in fig[\ref{fig_ros_nodes_architecture}]:
+
+\begin{center}
+\includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/ros_integration/ros_nodes_diagram".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{ROS architecture for Baxter Bon Appetit project. Own development.}\label{fig_ros_nodes_architecture}
+\end{minipage} \end{center}
+
+\begin{itemize}
+    \item \textbf{Publish mouth coordinates}: this node communicates with the underlying Baxter's camera message and executes the mouth detection algorithms explained on sec[\ref{mouth_pose_estimation}]. The goal of this node is to publish the mouth location to a topic at a given frequency.
+    \item \textbf{Go to home}: the objective of this node is to simultaneously move Baxter's limbs to the home position, that is the neutral setup for Baxter Bon Appetit operations as it is shown in fig[\ref{fig_baxter_configuration_1}]. This is the starting node for properly executing the feeding and scooping tasks. 
+    \item \textbf{MPC control}: this node is in charge of executing the model predictive control strategy explained on sec[\ref{cite_mpc_section}], in order to find the best possible configurations of the joint angles at a given time. The solution angles are published to a topic in a desired control frequency.
+    \item \textbf{Joint position control}: the goal of this node is to send joint control commands to the robot based on the solution of the MPC control node.
+    \item \textbf{Pick up food}: this node has the propose of moving Baxter's end-effector close to the food location and scooping the food in order to be ready for the feeding task.
+    \item \textbf{Finite state machine}: this node aims to orchestrate all possible states of Baxter robot for Baxter Bon Appetit project, so that the application is conceived as a multi-state approach with different independent functionalities explained on sec[\ref{cite_finite_state_machine_section}].
+    \item \textbf{Baxter GUI}: this nodes correspond to the graphical user interface that operates the finite state machine node in a friendly user experience approach. It is going to be explained on sec[\ref{ref_gui_section}].
+    \item \textbf{Baxter nodes}: they corresponds to a series of nodes that are implemented by default in Baxter robot. These nodes publish valuable topics with important information about the robot sensors and states.
+\end{itemize}
+
+\section{Orchestrate Nodes with Graphical User Interface} \label{ref_gui_section}
+
 
 % ---------------------------------------------------------
 \chapter{Conclusion}
