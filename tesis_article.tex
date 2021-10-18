@@ -222,36 +222,6 @@
 % ---------------------------------------------------------
 
 \cleardoublepage
-\chapter*{List of Symbols}
-
-\begin{longtable}{p{5mm} c p{120mm} }
-
-\multicolumn{3}{l}{\textbf{Position Variables}}\\
-\\
-$\zeta$ & --- & Vector of something...\\
-\\
-\multicolumn{3}{l}{\textbf{Robot's parameters}}\\
-\\
-$P$ & --- & Centroid of ...\\
-
-\\
-\multicolumn{3}{l}{\textbf{Control Theory parameters}}\\
-\\
-$t$ & --- & Time ...\\
-
-\\
-\multicolumn{3}{l}{\textbf{Probability functions}}\\
-\\
-$\g(.)$ & --- & Probability function for ...\\
-
-\\
-
-
-\end{longtable}
-
-% ---------------------------------------------------------
-
-\cleardoublepage
 \chapter*{List of Equations}
 
 \listofmyequations
@@ -1248,7 +1218,6 @@ Although the general system architecture discussed on fig[\ref{fig_general_block
 \captionof{figure}{General software diagram for system's functionalities. Own work.}\label{fig_general_software_architecture}
 \end{minipage} \end{center}
 
-
 \subsection{Control \& Device Layer}
 
 The control and devices layer has low-level controllers and sensors that will allow to measure the current state of Baxter at all times. This layer has several embedded elements, where some of them can be subtly modified and others are black boxes that can not be edited at a low level operation.\\
@@ -1361,6 +1330,13 @@ The first key condition, is that the project will be named \say{Baxter Bon Appet
     \caption{Baxter Bon Appetit project logo. Own development.} 
     \label{fig_baxter_bon_appetit_logo}
 \end{figure}
+
+A detailed explanation of how to setup Baxter Bon Appetit project with the source code of this research, can be found at:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/setup_baxter_bon_appetit.md}{Baxter Bon Appetit setup guide.}
+\end{itemize}
 
 Another valuable appreciation, is that the initial experiments of this research project, will be tested on the authors (Santiago Garcia Arango and Elkin Javier Guerra Galeano), but for future improvements, there will be a greater development of quality assurance tests in multiple patients. This will be discussed in the \say{Ethical Considerations} on the final chapters.\\
 
@@ -3811,6 +3787,47 @@ The ROS architecture is the way in which the nodes and the topics interact with 
 
 \section{Orchestrate Nodes with Graphical User Interface} \label{ref_gui_section}
 
+In order to have a reliable and friendly user experience, it is useful to design a graphical user interface that enables the functionalities of Baxter Bon Appetit to any non-technical patient. To do so, the main features were abstracted and implemented based on the finite state machine explained on sec[\ref{cite_finite_state_machine_section}].\\
+
+The major version of the GUI was designed with the help of a professional UI/UX tool called Figma, a collaborative interface web-based design tool specialized in the development of graphical applications \citep{cite_figma}. The main reason to implement Figma, is that it can easily generate different layouts using drag and drop functionalities without the need of using a programming language. \\
+
+After the visual approach of the GUI was developed, it was converted into a Python-based Tkinter desktop application with the help of an open-source repository called \say{Tkinter-Designer}, that using an API request, generates the Python code implementing native libraries \citep{cite_Tkinter-Designer}. \\
+
+The result of this procedure was the following:
+
+\begin{center}
+\includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/ros_integration/baxter-gui".pdf}
+\bigbreak
+\begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
+\captionof{figure}{Baxter Bon Appetit Graphical User Interface. Own development.}\label{fig_baxter_gui}
+\end{minipage} \end{center}
+
+The way in which the GUI works, is with multiples Python methods, that when the buttons are pressed, they run callbacks to orchestrate the finite state machine for Baxter Bon Appetit. \\
+
+One important remark is that the \say{START button} has the purpose of activating the ROS-launch tool for starting, orchestrating and automatically re-spawning the following nodes of Baxter Bon Appetit architecture:
+
+\begin{itemize}
+    \item /go\_to\_home
+    \item /publish\_mouth\_coordinates
+    \item /mpc\_control
+    \item /joint\_position\_control
+\end{itemize}
+
+It is also relevant to notice that the \say{SHUTDOWN button} not only has the purpose of stopping the movements, but it also disables the internal joint controllers of the robot, replicating the functionalities of the physical emergency button of the system.\\
+
+Another important functionality of the GUI is to make sure that the user only executes the absolutely necessary ROS nodes for Baxter Bon Appetit, avoiding the possibility of calling other programs that could interfere with each other. This is an extra layer of protection and compliance for the safety of the patient.\\
+
+To dive deeper into the source code for the implementation of the Graphical User Interface and the underlying ROS-launch tool for orchestrating the nodes, feel free to analyze these Baxter Bon Appetit GitHub repository files:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/launch/mpc_position_control_nodes.launch}{Baxter Bon Appetit ROS-launch tool implementation.}
+    
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/python/baxter_bon_appetit/scripts/node_gui.py}{Baxter Bon Appetit GUI node
+    }
+\end{itemize}
+
+
 
 % ---------------------------------------------------------
 \chapter{Conclusion}
@@ -3825,7 +3842,6 @@ Baxter Bon Appetit offers a breakthrough in active patient feeding systems as a 
 
 Finally, this mechatronics project manages to implement multiple spheres of knowledge in an innovative way, to meet a relevant need of society and thus, continue aiming to encourage the study of these active manipulative systems for the benefit of humanity.\\
 
-
 % ---------------------------------------------------------
 \chapter{Ethical Considerations}
 
@@ -3838,10 +3854,33 @@ Likewise, it is our great responsibility and duty, to abide by each and every on
 It is a great pleasure for us to be able to generate a path towards scientific dissemination where a positive social impact is generated, while integrating some of the nuclei of knowledge from the area of Mechatronics Engineering. Therefore, carrying out this project was not just a challenge for us, but also a space for contemplation and continuous projection towards a significant contribution to the society in which we live. These results are a step towards science and the development of a positive influence on society itself.\\
 
 Finally, the aim of this research project was to seek a benefit for people with motor disabilities in the upper extremities and not to remain as a simple proposal, but to be the starting point to generate future projects and disclosures, which will continue and take up the methodologies presented in this article, with the aim of improving the quality of life of these individuals.\\
+% ---------------------------------------------------------
 
+\chapter{Further investigation}
+Baxter Bon Appetit research project is a starting point for implementing a wide-variety of assisted robotics solutions. The internal algorithms for each of the subsystems that compose the architecture of the project, are subject to possible optimizations and upgrades.\\
+
+One great advantage of the chosen software design, is that the main functionalities are divided into a series of independent micro-services that, gathered together, create a robust system that is most reliable. In addition to that, the architecture supports individual improvements for each one on the nodes, in order to make them faster, more optimal and adding new features. \\
+
+As any investigation project, there are always possible branches and fields to develop new researches on top of the insights obtained from Baxter Bon Appetit project. Some possible areas of improvement are:
+
+\begin{itemize}
+    \item The development of a web server application that expands the graphical user interface to remote devices such as smartphones, tablets and computers, allowing them to execute Baxter's functionalities remotely.
+    \item Gathering, processing and analysis of soft real-time data in order to build new models that are tweaked for the feeding tasks based on the collected data and its insights.
+    \item Creation of an interactive dashboard that works simultaneously with the graphical user interface in order to monitor and watch the desired variables of the system in a pseudo real-time approach.
+    \item Test, train and implement new plausible anomaly detection and classification algorithms that are built with models based on data that is collected from Baxter Bon Appetit tasks and are constantly improving their performance.
+    \item Explore new modern control techniques that are designed based on data and smart system models that seek a better performance,
+\end{itemize}
+
+Finally, to develop similar autonomous assisted robotics feeding solutions, it was developed a \say{Manual to replicate Baxter Bon Appetit to other robotic platforms}, which is a general abstraction guide to systematically design and implement the functionalities of Baxter Bon Appetit similar robots. This guide can be found at:
+
+\begin{itemize}
+    \color{blue}
+    \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/guide_to_replicate_in_other_robots.md}{Baxter Bon Appetit: guide to replicate in other robots.}
+\end{itemize}
 
 %------------------------------------------------------
 % GENERATE BIBLIOGRAPHY BASED ON ALL CAPTIONS AND REFERENCES
+\renewcommand{\bibname}{References}
 
 \begin{sloppypar}
     \bibliography{references}
