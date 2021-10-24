@@ -632,19 +632,19 @@ One of the most important applications of computer vision is face detection and 
 
 \subsubsubsection{Face detection algorithms}
 
-Face detection is a specific field of computer vision algorithms that involve Machine Learning. The main purpose of this field is to estimate the face position and direction from a given image \citep{cite_face_detection_science_direct_article}. Facial recognition algorithms started around 1960s and there have been multiple improvements of different approaches to solve the objective of detecting human faces.\\
+Face detection is a specific field of computer vision algorithms that involve Machine Learning. The main purpose of this field is to estimate the face position and direction from a given image \citep{cite_face_detection_science_direct_article}. Facial recognition algorithms started around the 1960s and there have been multiple improvements of different approaches to solve the objective of detecting human faces.\\
 
-One of the most recognized and significant article in the history of face detection is the famous \say{Rapid object detection using a boosted cascade of simple features}, popularly known as \say{Viola–Jones object detection framework} \citep{cite_viola_jones_face_detection_algorithm}. This algorithm enabled the fast processing of digital images with great accuracy via machine learning algorithms for object detection.\\
+One of the most recognized and significant articles in the history of face detection is the famous \say{Rapid object detection using a boosted cascade of simple features}, popularly known as \say{Viola–Jones object detection framework} \citep{cite_viola_jones_face_detection_algorithm}. This algorithm enabled the fast processing of digital images with great accuracy via machine learning algorithms for object detection.\\
 
-Viola Jones Algorithms, established three main relevant literature contributions \citep{cite_viola_jones_face_detection_algorithm}. These are:\\
+Viola Jones Algorithms established three main relevant literature contributions \citep{cite_viola_jones_face_detection_algorithm}. These are:\\
 
 \begin{enumerate}
     \item The introduction of a new image abstraction known as the \say{Integral Image}. This allowed the quick processing of an analyzed image.
-    \item A learning algorithm that is based on \say{AdaBoost}, that selects few relevant features from a big data-set and enables an efficient classifier.
+    \item A learning algorithm that is based on \say{AdaBoost}, that selects few relevant features from a big data set and enables an efficient classifier.
     \item A innovative method to combine separate classifiers that increased their complexity in a cascade approach. These allowed the background sections of an image to be discarded quickly in the process of detection.\\
 \end{enumerate}
 
-Taking into account these considerations, most modern algorithms use features that were developed by Paul Viola and Michael Jones and evolved their specific classifiers in diverse aspects. One example of the importance of these features is the recognized open-source project called \say{OpenCV}, that implements some variants of these algorithms in their previously trained \say{Face Detection} libraries \citep{cite_opencv_classifier_face_detection_general}.\\
+Taking into account these considerations, most modern algorithms use features that were developed by Paul Viola and Michael Jones and evolved their specific classifiers in diverse aspects. One example of the importance of these features is the recognized open-source project called \say{OpenCV}, which implements some variants of these algorithms in their previously trained \say{Face Detection} libraries \citep{cite_opencv_classifier_face_detection_general}.\\
 
 
 
@@ -658,7 +658,7 @@ Taking into account these considerations, most modern algorithms use features th
 
 \subsubsubsection{Stereoscopic Camera}
 
-These are frames acquisition devices, which have the ability to acquire images or videos, while being able to identify the spatial quality associated with a third dimension, i.e., they are able to capture the depth of the surfaces of the image. These cameras use strategies based on the morphology of mammalian eyes to map a three-dimensional structure of the captured scene \citep{cite_stereoscopic_camera_techniques}.\\
+These are frame acquisition devices, which have the ability to acquire images or videos while being able to identify the spatial quality associated with a third dimension, i.e., they are able to capture the depth of the surfaces of the image. These cameras use strategies based on the morphology of mammalian eyes to map a three-dimensional structure of the captured scene \citep{cite_stereoscopic_camera_techniques}.\\
 
 \begin{figure}[H]
     \centering
@@ -674,7 +674,7 @@ Within the framework of preliminary knowledge for the development of this resear
 
 \subsubsubsection{Motion control systems}
 
-A motion control system aims to follow a given defined trajectory and seeks to reduce the error between the actual performance of the system and its planned trajectory. This control system is very important at the industrial level and are usually guided by 3 integrated control loops: position, velocity and torque. These motion control tasks have a high degree of complexity and usually involve variables such as system load, actuator saturation and robot workspace limitations \citep{cite_position_control_for_linear_motion_servo_systems}.\\
+A motion control system aims to follow a given defined trajectory and seeks to reduce the error between the actual performance of the system and its planned trajectory. This control system is very important at the industrial level and is usually guided by 3 integrated control loops: position, velocity, and torque. These motion control tasks have a high degree of complexity and usually involve variables such as system load, actuator saturation, and robot workspace limitations \citep{cite_position_control_for_linear_motion_servo_systems}.\\
 
 \subsubsubsection{Decentralized control systems}
 
@@ -684,7 +684,7 @@ A decentralized control system is one that has the ability to integrate multiple
 
 In the context of a motion control system, there is a relevant term known as \say{impedance}. This concept refers to the relationship between force and position and/or velocity variables. Taking into account this definition, a completely rigid system is one that has simple impedance.\\
 
-Based on these concepts, an impedance control seeks to carry out an intermediate regulation between the force variables of a system, applied to the desired positions in a specific trajectory. The underlying goal of this control strategy is to assign a prescribed dynamic behaviour of the motion system while its components are interacting with their environment \citep{cite_canudas_theory_of_robotic_control}.\\
+Based on these concepts, an impedance control seeks to carry out an intermediate regulation between the force variables of a system, applied to the desired positions in a specific trajectory. The underlying goal of this control strategy is to assign a prescribed dynamic behavior of the motion system while its components are interacting with their environment \citep{cite_canudas_theory_of_robotic_control}.\\
 
 Impedance control seeks to model a real-life system into a \say{Generalize Dynamic Impedance}, by a set of linear or non-linear second order differential equations representing a spring-damper-mass system \citep{cite_canudas_theory_of_robotic_control}.\\
 
@@ -698,15 +698,15 @@ Impedance control seeks to model a real-life system into a \say{Generalize Dynam
 
 \subsubsubsection{Model predictive controller}
 
-Model Predictive Controllers, known as MPC, are control algorithms in which the dynamics of the system must be known through a previous identification of itself, by traditional methods of system identification. These algorithms have advantages such as simplicity, robustness, convenience in implementation, taking into account the system's constraints and a good handling of Multiple-Inputs/Multiple-Outputs (MIMO) systems.\\
+Model Predictive Controllers, known as MPC, are control algorithms in which the dynamics of the system must be known through a previous identification of itself, by traditional methods of system identification. These algorithms have advantages such as simplicity, robustness, convenience in implementation, taking into account the system's constraints, and good handling of Multiple-Inputs/Multiple-Outputs (MIMO) systems.\\
 
 Model Predictive Controllers seek to predict the changes in the dependent variables of the system model, which will be caused by the influence of the changes in the independent variables of the system. Similarly, they are widely used in systems with multiple constraints, such as those in which the actuators or sensors have saturation points \citep{cite_mpc_industrial_processes_automation_systems}.\\
 
-MPC literature has been developed significantly over the last decades. One of the reasons that impulsed the community research in MPC algorithms is attributed to the fact that MPCs is a wide-open domain. It integrates and involves: optimal control, control processes, stochastic control, multi-variable control and future set-points of variables \citep{cite_model_predictive_control_camacho_bordons}.\\ 
+MPC literature has been developed significantly over the last decades. One of the reasons that impulsed the community research in MPC algorithms is attributed to the fact that MPCs is a wide-open domain. It integrates and involves:optimal control, control processes, stochastic control, multivariable control and future set-points of variables \citep{cite_model_predictive_control_camacho_bordons}.\\ 
 
-One great advantage of Model Predictive Controllers is the fact that they allow to predict a behaviour based on a prediction horizon that considers input constraints of the system and the affected variables. This is done with linear and non-linear processes, allowing MPC to interact with a lot of important industrial processes.\\
+One great advantage of Model Predictive Controllers is the fact that they allow predicting behavior based on a prediction horizon that considers input constraints of the system and the affected variables. This is done with linear and non-linear processes, allowing MPC to interact with a lot of important industrial processes.\\
 
-Another great conditions that has been a golden-key for the development of MPC algorithms, are the fact that embedded system's processors are being improved with exponential characteristics over the last years. This has come with the circumstance that there are plenty of open-source projects that implement the mathematical approach of convex-optimization problems, an intermediate feature in MPC control strategies.\\
+Another great condition that has been a golden-key for the development of MPC algorithms, is the fact that embedded system's processors have been improving with exponential rates over the last few years. This has allowed ideas for the development of plenty open-source projects that implement the mathematical approach of convex-optimization problems, an intermediate feature in MPC control strategies.\\
 
 
 \begin{center}
@@ -718,20 +718,19 @@ Another great conditions that has been a golden-key for the development of MPC a
 
 
 
-
 % ---------------------------------------------------------
 
 \newpage
 
 \chapter{Methodology}
 
- There are several methodologies for scientific design to carry out a process of research divulgation. In this investigation it was decided to implement a methodology applied to engineering processes, where there are a series of iterative designs that seek to achieve a final detailed product \citep{cite_dieter_engineering_design}.\\
+ There are several methodologies for scientific design to carry out a process of research divulgation. For this investigation, it was decided to implement a methodology applied to engineering processes, where there are a series of iterative designs that seek to achieve a final detailed product \citep{cite_dieter_engineering_design}.\\
  
 It is also important to point out that the development of this research will have an exploratory approach to the technological and practical solution of the problem to be solved, so the design stages focused on the market study and the financial components to generate a start-up plan at a commercial level will not be developed. Because of this statements, these two stages will be left as a proposal for future research.\\
 
 \section{User requirements identification}
 
-The selection process of the most relevant characteristics in terms of user requirements was carried out taking into account the existing literature on assisted robotics focused on feeding-systems and the general considerations that were determined to be relevant for the considerations of Baxter robot. In this choice for the user requirements, the following needs were identified:\\
+The selection process of the most relevant characteristics in terms of user requirements was carried out taking into account the existing literature on assisted robotics focused on feeding systems and the general considerations that were determined to be relevant for the considerations of the Baxter robot. In this choice for the user requirements, the following needs were identified:\\
 
 
 \begin{table}[H]
@@ -741,13 +740,13 @@ The selection process of the most relevant characteristics in terms of user requ
     \rowcolor[HTML]{C0C0C0} 
     \textbf{\#} & \textbf{Requirements}                                                    & \textbf{Relevance} & \textbf{Measurement} \\ \hline
     1           & User must feel safe                                                      & 5                  & Subjective           \\ \hline
-    2           & System must be able to be initialize through an user-interface           & 4                  & Objective            \\ \hline
-    3           & System must be able to detect the user's mouth                           & 5                  & Binary               \\ \hline
-    4           & System must be able to generate a trajectory between two points in space & 5                  & Objective            \\ \hline
-    5           & System must be able to measure the current end-effector's position       & 5                  & Objective            \\ \hline
-    6           & System must be able to move the end-effector following a trajectory      & 5                  & Objective             \\ \hline
-    7           & System must be able to move the end-effector close to the user's mouth    & 5                  & Objective            \\ \hline
-    8           & System must be able to stop in case of an anomaly detection              & 5                  & Subjective           \\ \hline
+    2           & The system must be able to be initialized through a user-interface           & 4                  & Objective            \\ \hline
+    3           & The system must be able to detect the user's mouth                           & 5                  & Binary               \\ \hline
+    4           & The system must be able to generate a trajectory between two points in space & 5                  & Objective            \\ \hline
+    5           & The system must be able to measure the current end-effector's position       & 5                  & Objective            \\ \hline
+    6           & The system must be able to move the end-effector following a trajectory      & 5                  & Objective             \\ \hline
+    7           & The system must be able to move the end-effector close to the user's mouth    & 5                  & Objective            \\ \hline
+    8           & The system must be able to stop in case of an anomaly detection              & 5                  & Subjective           \\ \hline
     \end{tabular}
 }
 \caption{\label{tab:user_requirements} User requirements for active feeding system.}
@@ -756,11 +755,11 @@ The selection process of the most relevant characteristics in terms of user requ
 
 \section{House of Quality}
 
-The House of Quality (HoQ), is a design tool that enables a simple and powerful approach for a \say{quality function deployment}. The tool was originated at the Mitsubishi’s Kobe shipyard site and it has helped the development of multiple industrial solutions, such as home appliances, infrastructures, electronics, clothing, integrated circuits and more \citep{cite_house_of_quality}.\\
+The House of Quality (HoQ), is a design tool that enables a simple and powerful approach for a \say{quality function deployment}. The tool was originated at Mitsubishi’s Kobe shipyard site and it has helped the development of multiple industrial solutions, such as home appliances, infrastructures, electronics, clothing, integrated circuits and more \citep{cite_house_of_quality}.\\
 
 The methodology of a House of Quality, maps the corresponding requirements with important engineering conditions that are measurable. The result of these characteristics, generate two important parts: the main matrix and the roof correlation matrix. These matrices are important to understand the underlying relationships and their importance in a measurable way.\\
 
-The result of the HoQ for an active feeding system for patients with motor disabilities in upper extremities, can be seen at fig[\ref{fig_hoq}].\\
+The result of the HoQ for an active feeding system for patients with motor disabilities in upper extremities can be seen in fig[\ref{fig_hoq}].\\
 
 \begin{center}
     \includegraphics[width= 0.98\textwidth]{\string "assets/pdfs/methodology/HoQ".pdf}
@@ -777,7 +776,7 @@ As a general conclusion for the House of Quality design analysis, it is importan
     \item Robot's memory (RAM)
 \end{enumerate}
 
-As a general result, the camera conditions are similarly important and there is no significant difference on the relative relevance for those aspects. As well as that, the robot's payload is not a key aspect, because there is no need for high amounts of robotic load to manipulate.\\
+As a general result, the camera conditions are similarly important and there is no significant difference in the relative relevance for those aspects. As well as that, the robot's payload is not a key aspect, because there is no need for high amounts of robotic load to manipulate.\\
 
 
 \section{System architecture}
@@ -892,7 +891,7 @@ In order to ensure a pleasant user experience, there must be a subsystem that re
     
     &
     
-    It is normally a slow-start/slow-running program. It requires high amount of resources in the execution. It requires necessarily a web-server.
+    It is normally a slow-start/slow-running program. It requires high amount of resources in the execution. It requires necessarily a web server.
     
     \\ \hline
     \end{tabular}
@@ -901,11 +900,11 @@ In order to ensure a pleasant user experience, there must be a subsystem that re
 \end{table}
 
 
-\subsubsection{Execute control algorithm for achieving current task}
+\subsubsection{Execute control algorithm for achieving the current task}
 
 In order to deliver correctly the food to the user, the system must be able to track and move its structure to the final mouth position in a dynamic and secure way.\\
 
-The following alternatives, are different general control strategies that govern real solutions for different applications. There will be a comparison to determine which one adapts better for the feeding problem.\\
+The following alternatives are different general control strategies that govern real solutions for different applications. There will be a comparison to determine which one adapts better for the feeding problem.\\
 
 
 \begin{table}[H]
@@ -995,9 +994,9 @@ The following alternatives, are different general control strategies that govern
 
 \subsubsection{Operate robot}
 
-In order to have a robot structure that is able to give food to the patients, it is necessary to choose a robot that has the right compliance for this activity.\\
+To have a robot structure that can give food to the patients, it is necessary to choose a robot that has the right compliance for this activity.\\
 
-The next alternatives, are robots that are available in the \say{Laboratory of Industrial Automation} of the EIA University:\\
+The next alternatives are robots that are available in the \say{Laboratory of Industrial Automation} of the EIA University:\\
 
 \begin{table}[H]
 \begin{center}
@@ -1015,11 +1014,11 @@ The next alternatives, are robots that are available in the \say{Laboratory of I
 
     &
     
-    It has a great documentation and its structures and controllers are easily replaced. It has an excellent support assistance from ABB robotics.
+    It has a great documentation and its structures and controllers are easily replaced. It has excellent support assistance from ABB robotics.
     
     &
     
-    It does not have a collaborative approach and is only used for industrial applications. It does not have  have any embedded external sensors for its environment.
+    It does not have a collaborative approach and is only used for industrial applications. It does not have  any embedded external sensors for its environment.
     
     \\ \hline
     \end{tabular}
@@ -1057,9 +1056,9 @@ The next alternatives, are robots that are available in the \say{Laboratory of I
 
 \subsubsection{Execute computer vision algorithms}
 
-One fundamental step in the process of giving food to the user, is detecting where his mouth is located in an accurate way and in a real-time approach.\\
+One fundamental step in the process of giving food to the user is detecting where his mouth is located in an accurate way and a real-time approach.\\
 
-To correctly implement this condition, the system must have a great camera that is able to capture the user's face and then, send this information to a computer vision algorithm that makes it possible to detect the mouth.\\
+To correctly implement this condition, the system must have a great camera that can capture the user's face and then, send this information to a computer vision algorithm that makes it possible to detect the mouth.\\
 
 The considered alternatives for the vision sub-system cameras are:\\
 
@@ -1080,7 +1079,7 @@ The considered alternatives for the vision sub-system cameras are:\\
 
     &
     
-    It is able to detect the depth of the image with its two cameras placed similarly to a human-vision-condition.
+    It can detect the depth of the image with its two cameras placed similarly to a human-vision-condition.
     
     &
     
@@ -1163,9 +1162,9 @@ After diving into each alternative for the overall solution, the result morpholo
 y
 \section{PUGH Decision matrix}
 
-After the development of the morphological matrix, it is mandatory select the best possible solution based on a quantitative qualification approach. There are multiple ways to discern into the most recommended solution, and for this article, it will be chosen with the help of the \say{PUGH Decision Matrix} (PM) \citep{cite_pugh_matrix}.\\
+After the development of the morphological matrix, it is mandatory to select the best possible solution based on a quantitative qualification approach. There are multiple ways to discern the most recommended solution, and for this article, it will be chosen with the help of the \say{PUGH Decision Matrix} (PM) \citep{cite_pugh_matrix}.\\
 
-The PUGH matrix, compares the concepts in a objective-like ways, to determine a possible heuristic solution to the problem based on the engineering conditions defined in the HoQ of the methodology (the ones that impact directly to the user requirements). This decision matrix is considered a great approach, because it involves the most important part of the design, which is what the user really needs.\\
+The PUGH matrix, compares the concepts in an objective-like ways, to determine a possible heuristic solution to the problem based on the engineering conditions defined in the HoQ of the methodology (the ones that impact the user requirements directly). This decision matrix is considered a great approach because it involves the most important part of the design, which is what the user needs.\\
 
 The result of the PUGH matrix for the assistive robotic feeding is:\\
 
@@ -1185,22 +1184,22 @@ The result of the PUGH matrix for the assistive robotic feeding is:\\
     \cellcolor[HTML]{C0C0C0}                   & \textbf{6} & Cameras resolution                  & =          & +           & =           \\ \cline{2-6} 
     \cellcolor[HTML]{C0C0C0}                   & \textbf{7} & Cameras focal length                & =          & =           & -           \\ \cline{2-6} 
     \multirow{-8}{*}{\cellcolor[HTML]{C0C0C0}} & \textbf{8} & Cameras frame rate                  & =          & =           & -           \\ \hline
-    \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Sum of the positive signs}}              & 0          & 2           & 0           \\ \hline
-    \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Sum of the negative signs}}              & 0          & 3           & 2           \\ \hline
+    \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Total positive signs}}              & 0          & 2           & 0           \\ \hline
+    \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Total negative signs}}              & 0          & 3           & 2           \\ \hline
     \multicolumn{3}{|c|}{\cellcolor[HTML]{C0C0C0}Overall result}                                  & \textbf{0} & \textbf{-1} & \textbf{-2} \\ \hline
     \end{tabular}
 \caption{\label{tab:pugh_matrix} PUGH decision matrix for active feeding system}
 \end{center}
 \end{table}
 
-As it can be seen in the table tab[\ref{tab:pugh_matrix}], the overall result A was the best concept, based on the given engineering conditions for the analysis.\
+As it can be seen in the table tab[\ref{tab:pugh_matrix}], the overall result A was the best concept, based on the given engineering conditions for the analysis.\\
 
-After evaluating and analyzing the \say{PUGH Decision Matrix}, the result was clearly aiming towards the A concept, which is explained in detail in the solution alternatives section.\\
+After evaluating and analyzing the \say{PUGH Decision Matrix}, the result was aiming towards the A concept, which is explained in detail in the solution alternatives section.\\
 
 After this part of the investigation, all of the procedures will be based on the following selected solution alternatives:\\
 
 \begin{enumerate}
-    \item Process and send commands through user's interface: Tkinter.
+    \item Process and send commands through the user's interface: Tkinter.
     \item Execute control algorithm for achieving current task: MPC.
     \item Operate robot: Baxter robot.
     \item Execute computer vision algorithms: Baxter hand cameras.
@@ -1209,7 +1208,7 @@ After this part of the investigation, all of the procedures will be based on the
 
 \section{Software architecture}
 
-Although the general system architecture discussed on fig[\ref{fig_general_block_diagram}], enables the understanding of the signals and important information of the complete process workflow, it is extremely valuable to dive into how the software operates in order to achieve these functionalities. In the next diagram, the general software architecture will be presented divided into several layers of abstraction.\\
+Although the general system architecture discussed in fig[\ref{fig_general_block_diagram}], enables the understanding of the signals and important information of the complete process workflow, it is extremely valuable to dive into how the software operates to achieve these functionalities. In the next diagram, the general software architecture will be presented divided into several layers of abstraction.\\
 
 \begin{center}
 \includegraphics[width= 0.8\textwidth]{\string "assets/pdfs/methodology/BaxterSoftwareArchitecture".pdf}
@@ -1220,26 +1219,26 @@ Although the general system architecture discussed on fig[\ref{fig_general_block
 
 \subsection{Control \& Device Layer}
 
-The control and devices layer has low-level controllers and sensors that will allow to measure the current state of Baxter at all times. This layer has several embedded elements, where some of them can be subtly modified and others are black boxes that can not be edited at a low level operation.\\
+The control and devices layer has low-level controllers and sensors that will allow to measure the current state of Baxter at all times. This layer has several embedded elements, where some of them can be subtly modified and others are black boxes that can not be edited at a low-level operation.\\
 
-In the control layer, it is important to keep in mind that the controllers mentioned are designed for Baxter and have a number of additional protections to prevent damaging them, ensuring that Baxter is a very safe robot and suitable for educational tests.\\
+In the control layer, it is important to keep in mind that the controllers mentioned are designed for Baxter and have several additional protections to prevent damaging them, ensuring that Baxter is a very safe robot and suitable for educational tests.\\
 
 
 \subsection{Functional Layer}
 
 The functional layer enables the most challenging and complex processing algorithms to be performed throughout the system. This layer is intended to perform the main tasks of the system, allowing control strategies, computer vision algorithms, anomaly detection and, continuous operation guardians for each one of the critical components.\\
 
-The control algorithms will be divided into an MPC for the robot trajectories and an a trajectory planning in order to decide where the end effector should move, achieving a coordination of more than one control algorithm at the same time.\\
+The control algorithms will be divided into an MPC for the robot trajectories and a trajectory planning to decide where the end effector should move, achieving coordination of more than one control algorithm at the same time.\\
 
-There will be a perception subsystem, where the correct detection of the position of the user's mouth and the position of the food will be guaranteed through computer vision algorithms. These will be connected in cascade as feeds for the inputs to the control algorithms.\\
+There will be a perception subsystem, where the correct detection of the position of the user's mouth and the position of the food will be guaranteed through computer vision algorithms. These will be connected in a cascade approach as feeds for the inputs to the control algorithms.\\
 
-The anomaly detector acts as a \say{supervisory agent} that is constantly receiving signals from the other subsystems and validating non-conventional behaviors in order to stop the system in case of the detection of an anomaly. This should be integrated with a \say{continuous supervisor} that restarts a given system if it detects any strange failure, such as a run-time exception or a memory failure, so the system keeps working normally at every moment.\\
+The anomaly detector acts as a \say{supervisory agent} that is constantly receiving signals from the other subsystems and validating non-conventional behaviors to stop the system in case of the detection of an anomaly. This should be integrated with a \say{continuous supervisor} that restarts a given system if it detects any strange failure, such as a run-time exception or a memory failure, so the system keeps working normally at every moment.\\
 
 \subsection{Task Layer}
 
 The task layer is in charge of orchestrating each one of the steps of the finite state machine that will allow the dynamic operation of Baxter for each one of the tasks required in the food process (such as, for example, picking up the food and feeding the patient).\\
 
-This finite state machine (FSM), understood as \say{a computation model that can be implemented with hardware or software and can be used to simulate sequential logic and some computer programs} \citep{cite_finite_state_machine_brilliant}, will decide which of the Baxter's tasks will be implemented in the main control algorithms, in order to generate the desired output of the system.\\
+This finite state machine (FSM), understood as \say{a computation model that can be implemented with hardware or software and can be used to simulate sequential logic and some computer programs} \citep{cite_finite_state_machine_brilliant}, will decide which of Baxter's tasks will be implemented in the main control algorithms, to generate the desired output of the system.\\
 
 The task layer is a fundamental element in the system, because it understands and translates the user's inputs, into states of the FSM, enabling Baxter to move according to the user's needs.\\
 
@@ -1249,16 +1248,16 @@ This FSM must be designed with a correct architecture for guaranteeing that each
 
 This layer works as the highest layer of abstraction, where the user will interact with a simple Graphical User Interface (GUI) and will decide how Baxter should move based on the current state of his meal.\\
 
-The GUI will be developed as a desktop application that connects strategically with the lower-level algorithms developed for the Finite State Machine. It will also have an integrated middle-ware,  that acts as a connector between the subsystems that govern the feeding processes, so that it can take important actions if something wrong happens (like the sudden stop of an specific subsystem).\\
+The GUI will be developed as a desktop application that connects strategically with the lower-level algorithms developed for the Finite State Machine. It will also have an integrated middle-ware,  that acts as a connector between the subsystems that govern the feeding processes so that it can take important actions if something wrong happens (like the sudden stop of a specific subsystem).\\
 
 A middle-ware is defined as \say{a software that bridges gaps between other applications, tools, and databases in order to provide unified services to users} \citep{cite_middleware_definition_talend}.\\
 
 
 \section{Finite State Machine} \label{cite_finite_state_machine_section}
 
-The finite state machine has the purpose of managing the general behaviour of the system in each of the main tasks that Baxter (and the associated subsystems) will perform in the feeding tasks, according to the user's commands.\\
+The finite state machine has the purpose of managing the general behavior of the system in each of the main tasks that Baxter (and the associated subsystems) will perform in the feeding tasks, according to the user's commands.\\
 
-It is important to notice that there are multiple states that have transitions based on a specific condition that changes in the system (for example, a command given by the user). In the next diagram, it will be shown the general structure of the Finite State Machine for the feeding system with its specific transition conditions and states:\\
+It is important to notice that multiple states have transitions based on a specific condition that changes in the system (for example, a command given by the user). In the next diagram, it will be shown the general structure of the Finite State Machine for the feeding system with its specific transition conditions and states:\\
 
 
 \begin{center}
@@ -1270,11 +1269,11 @@ It is important to notice that there are multiple states that have transitions b
 
 \subsection{Shutdown state}
 
-The shutdown state is the default state in which the Baxter robot is completely static, because all of the joint-controllers are turned down. This state is the nearest one to a real hard drive shutdown of the robot, and any trial to transition to another state that is not the \say{Ready State}, will end up in nothing.\\
+The shutdown state is the default state in which the Baxter robot is completely static because all of the joint controllers are turned down. This state is the nearest one to a real hard drive shutdown of the robot, and any trial to transition to another state that is not the \say{Ready State}, will end up in nothing.\\
 
-This state, not only works as an initialization condition, but also determines a safety state in which the robot behaviour can be completely stopped, similarly to the emergency physical button that Baxter has.\\
+This state, not only works as an initialization condition but also determines a safety state in which the robot's behavior can be completely stopped, similarly to the emergency physical button that Baxter has.\\
 
-It is important to notice that any other state of the system, is able to change directly and immediately to the \say{Shutdown State}. This was designed thinking about the importance of the safety of the patients.\\
+It is important to notice that any other state of the system, can change immediately to the \say{Shutdown State}. This was designed thinking about the importance of the safety of the patients.\\
 
 \subsection{Ready State}
 
@@ -1286,43 +1285,43 @@ When the user starts the system, it is a condition that should enable the robot'
 
 This state is considered to be one of the central and most used states for the overall functionalities. This state should prepare the robot to start the movements of any other state conditions, such as \say{Pick Up Food}, \say{Give Food} and \say{Shutdown}.\\
 
-The neutral state is popularly known as the \say{Home Condition}, because is a well known workspace disposition for the robot environment and conditions of its degrees of freedom for the limbs.\\
+The neutral state is popularly known as the \say{Home Condition} because it is a well-known workspace disposition for the robot environment and conditions of its degrees of freedom for the limbs.\\
 
 It is also important to notice that every other movement state, usually ends up in the \say{Neutral State}, which means that this state is a logical connector between each one of the tasks of the system.\\
 
 \subsection{Food Scooping States}
 
-The \say{Food Scooping States} are composed of the \say{Move to default food position state} and the \say{Scoop food state}. These states work together as a complete task of food scooping, and will always be executed in series, starting by the first one.\\
+The \say{Food Scooping States} is composed of the \say{Move to default food position state} and the \say{Scoop food state}. These states work together as a complete task of food scooping, and will always be executed in series, beginning with the first one.\\
 
-It is important to realize, that there is no default transition condition to go to the \say{Neutral State}, which implies that at the end of the execution of the tasks of this state, the system will automatically return to home by its own algorithm.\\
+It is important to realize, that there is no default transition condition to go to the \say{Neutral State}, which implies that at the end of the execution of the tasks of this state, the system will automatically return home on its algorithm.\\
 
 Both states of the \say{Food Scooping States}, will be able to stop their procedure, when the user executes a shutdown transition. This will cancel the tasks and return the system to the \say{Shutdown State}.\\
 
 
 \subsection{Feeding States}
 
-The \say{Feeding States} are designed with three main internal states. These are:\\
+The states related to feeding are designed with three main internal states. These are:\\
 
 \begin{enumerate}
-    \item Detect user's mouth state.
+    \item Detect the user's mouth state.
     \item Move close to the user's mouth state.
-    \item Wait for user's command to return home state.
+    \item Wait for the user's command to return home state.
 \end{enumerate}
 
-After analysing the structure and transitions of these internal states, it is clear that there is an internal control loop as a result of the first two states. This control loop is a logical consequence of the need of a feedback-wise system that interacts dynamically with the environment and the patient.\\
+After analyzing the structure and transitions of these internal states, it is clear that there is an internal control loop as a result of the first two states. This control loop is a logical consequence of the need for a feedback-wise system that interacts dynamically with the environment and the patient.\\
 
-At the end of the \say{Feeding States}, the user can decide to stop the system or to return to the neutral state. This decision will also direction the finite state machine, to prepare the system for a future command (such as \say{Food Scoping State}, \say{Feeding States}, or, a final \say{Shutdown State}).\\
+At the end of the \say{Feeding States}, the user can decide to stop the system or to return to the neutral state. This decision will also direct the finite state machine, to prepare the system for a future command (such as \say{Food Scoping State}, \say{Feeding States}, or, a final \say{Shutdown State}).\\
 
 \subsection{Stop State}
 
-As mentioned before, the \say{Stop State} is a condition that guarantees that the robot does not move or execute any motion command. This pause is a software condition that does not mean that the controllers are off, instead of that, this state works based on a series of conditions and regulations that stop the robot in a safe way.\\
+As mentioned before, the \say{Stop State} is a condition that guarantees that the robot does not move or execute any motion command. This pause is a software condition that does not mean that the controllers are off, instead of that, this state works based on a series of conditions and regulations that safely stop the robot.\\
 
 
 \section{Important Project Remarks}
 
-This research project will be designed implementing an active robotic solution with Baxter cobot. There are some important concepts to understand for the reach of this investigation.\\
+This research project will be designed to implement an active robotic solution with Baxter cobot. There are some important concepts to understand for the reach of this investigation.\\
 
-The first key condition, is that the project will be named \say{Baxter Bon Appetit}, referring to the french common expression that has the objective of positively implying someone to enjoy their meal. The purpose of this name, is to create an etymological meaning that transcends in an outstanding robotic solution, that generates a safety feeling of appreciating a good meal.\\
+The first key condition is that the project will be named \say{Baxter Bon Appetit}, referring to the french common expression that has the objective of positively implying someone to enjoy their meal. The purpose of this name is to create an etymological meaning that transcends in an outstanding robotic solution, that generates a feeling of safety when appreciating a good meal.\\
 
 \begin{figure}[H]
     \centering
@@ -1338,7 +1337,7 @@ A detailed explanation of how to setup Baxter Bon Appetit project with the sourc
     \item \href{https://github.com/san99tiago/baxter-bon-appetit/blob/main/setup_baxter_bon_appetit.md}{Baxter Bon Appetit setup guide.}
 \end{itemize}
 
-Another valuable appreciation, is that the initial experiments of this research project, will be tested on the authors (Santiago Garcia Arango and Elkin Javier Guerra Galeano), but for future improvements, there will be a greater development of quality assurance tests in multiple patients. This will be discussed in the \say{Ethical Considerations} on the final chapters.\\
+Another valuable appreciation is that the initial experiments of this research project, will be tested on the authors (Santiago Garcia Arango and Elkin Javier Guerra Galeano), but for future improvements, there will be a greater development of quality assurance tests in multiple patients. This will be discussed in the \say{Ethical Considerations} in the final chapters.\\
 
 
 % ---------------------------------------------------------
@@ -1356,9 +1355,9 @@ The robot that will be implemented in this research is the Baxter robot from Ret
 
 \section{Baxter Robot Discovery and Characterization}
 
-To work with Baxter robot, it is important to refer to the official Baxter Rethink Robotics Wiki. This website has multiple valuable features and information about the setup, functionalities, SDKs, considerations and development of solutions with Baxter \citep{cite_baxter_main_wiki}.\\
+To work with the Baxter robot, it is important to refer to the official Baxter Rethink Robotics Wiki. This website has multiple valuable features and information about the setup, functionalities, SDKs, considerations, and development of solutions with Baxter \citep{cite_baxter_main_wiki}.\\
 
-To dive into the official documentation of Baxter robot, please refer to:
+To dive into the official documentation of the Baxter robot, please refer to:
 
 \begin{itemize}
     \color{blue}
@@ -1378,7 +1377,7 @@ To correctly configure Baxter for the first time, it is important to refer to th
 
 For the development of this research project, Baxter was already assembled with its pedestal and physical connections already plugged in.\\
 
-The first steps to configure and check Baxter right performance, was to connect a physical keyboard to Baxter's back USB connector. This connections was done in the back of Baxter with the USB entry as can be seen in fig[\ref{fig_baxter_back_part_closeup}]:\\
+The first step to configure and check Baxter's right performance was to connect a physical keyboard to Baxter's back USB connector. These connections were done in the back of Baxter with the USB entry as can be seen in fig[\ref{fig_baxter_back_part_closeup}]:\\
 
 
 \begin{figure}[H]
@@ -1389,7 +1388,7 @@ The first steps to configure and check Baxter right performance, was to connect 
 \end{figure}
 
 
-After that connection, we ran a pre-boot configuration to validate low-level hardware checks to confirm that each one of Baxter components was working correctly. The tests passed successfully in the validation.\\
+After the previous connection, we ran a pre-boot configuration to validate low-level hardware checks to confirm that each one of Baxter's components were working correctly. The tests were run successfully during the validation test.\\
 
 \begin{figure}[H]
     \centering
@@ -1399,57 +1398,57 @@ After that connection, we ran a pre-boot configuration to validate low-level har
 \end{figure}
 
 
-As well as the hardware checks, the official documentation implies that it is important to run Baxter joint-controller calibrations every month \citep{cite_baxter_arms_calibartion}. This process is relevant in order to guarantee that the robot's arms responding reliable on its movements and on its specific sensor signals.\\
+As well as the hardware checks, the official documentation implies that it is important to run Baxter joint-controller calibrations every month \citep{cite_baxter_arms_calibartion}. This process is relevant to guarantee that the robot's arms are responding reliably, both on its movements and its specific sensor signals.\\
 
-This calibration was implemented with an internal Baxter ROS node that ran a programmatic routine for about 30 minutes. The step-by-step documentations are found in this wiki:
+This calibration was implemented with an internal Baxter ROS node that ran a programmatic routine for about 30 minutes. The step-by-step documentation is found in this wiki:
 
 \begin{itemize}
     \color{blue}
     \item \href{https://sdk.rethinkrobotics.com/wiki/Arm_Calibration}{Baxter Arm Calibration}
 \end{itemize}
 
-After this initial configurations, it was concluded that Baxter general low-level conditions and controller calibrations were working perfectly.\\
+After these initial configurations, it was concluded that Baxter's general low-level conditions and controller calibrations were working perfectly.\\
 
 
 \subsection{Baxter Components Specifications}
 
-It is mandatory to have a clear and descent understanding of Baxter components. This knowledge can help to determine the way in which the robotic solutions are developed and optimized. A robotic system is usually assembled with default general parts, such as arm(s), end tools, sensor and security components. In this section, Baxter components will be examined in a general point of view.\\
+It is mandatory to have a clear and decent understanding of Baxter components. This knowledge can help to determine how the robotic solutions are developed and optimized. A robotic system is usually assembled with default general parts, such as arm(s), end tools, sensor and security components. In this section, Baxter's components will be examined from a general point of view.\\
 
 The main Baxter components are:
 
 \subsubsubsection{Robot}
 
-As clear as it could be seen, Baxter robot has a central computer unit that is located inside of its torso. This
-CPU is able to run multi thread programs to perform complex robotic operations that involve multiple applications.\\
+The Baxter robot has a central computer unit that is located inside of its torso. This
+CPU can run multi-thread programs to perform complex robotic operations that involve multiple applications.\\
 
-It is also important to specify that the most important interactive safety measure is known as the \say{Emergency Button}. This E-Button is able to completely shutdown Baxter robot and kill all the underlying processes that are being executed at any time. This acts similarly as an \say{Enable/Disable} condition.\\
+It is also important to specify that the most important interactive safety measure is known as the \say{Emergency Button}. This E-Button can completely shut down the Baxter robot and kill all the underlying processes that are being executed at any time. This acts similarly as an \say{Enable/Disable} condition.\\
 
 
 \subsubsubsection{Grippers}
 
 Grippers, also known as end effectors, are the final part of a robotic arm. The grippers act as a crucial part of a robot because they enable the manipulation of external elements in a workspace.\\
 
-Baxter robot supports two default type of pre-built grippers. These are: electric grippers and suction grippers. Many applications require one of these end effectors as a primary tool for the correct development of an automation task.\\
+The Baxter robot supports two default types of pre-built grippers. These include electric grippers and suction grippers. Many applications require one of these end effectors as a primary tool for the correct development of an automation task.\\
 
 Baxter robot, also allows external \say{own-made} grippers to be attached to its hands, making it possible to design multiple solutions that are not initially considered.\\
 
 \subsubsubsection{Head}
 
-Baxter head is a subtle but fundamental component of the robot, because it can be used as an interactive tool to display friendly images and show possible tasks to the user. The head is also a way to demonstrate that Baxter is designed for collaborative environments that are easily adapted to multiple scenarios with people around him.\\ 
+Baxter's head is a subtle but fundamental component of the robot because it can be used as an interactive tool to display friendly images and show possible tasks to the user. The head is also a way to demonstrate that Baxter is designed for collaborative environments that are easily adapted to multiple scenarios with people around him.\\ 
 
-The head is also capable of panning a total of 180\textdegree \space in horizontal directions and nodding vertically as well. This condition is a way to implement an extra layer of interactions with the work-space's users.\\
+The head is also capable of panning a total of 180\textdegree \space in horizontal directions and nodding vertically as well. This condition is a way to implement an extra layer of interactions with the work space's users.\\
 
 \subsubsubsection{Screen}
 
-The screen is a 1024 x 600 SVGA LCD display that is completely integrated with Baxter internal components. This screen is intended to be an extension of the robot's functionalities.\\
+The screen is a 1024 x 600 SVGA LCD that is completely integrated with Baxter internal components. This screen is intended to be an extension of the robot's functionalities.\\
 
 \subsubsubsection{Arms}
 
-One of the particularities of Baxter robot, is that is has two independent arms (which is different than most industrial robots that only have one). The fact that Baxter was developed in this way, is a design strategy to show that the robot is a \say{friendly system} that looks similar to human being, increasing the trust that users have for it.\\
+One of the particularities of the Baxter robot is that it has two independent arms (which is different than most industrial robots that only have one). The fact that Baxter was developed in this way, is a design strategy to show that the robot is a \say{friendly system} that looks similar to the human anatomy, increasing the trust that users have for it.\\
 
-Each arm is composed of seven degrees of freedom that are moved, controlled and measured with internal electro-mechanical components. These arms are also conceived to have multiple \say{Series Elastic Actuators (SEAs)}, that enhance different available control modes, to ensure the overall safety of the system \citep{cite_baxter_arms_wiki}.\\
+Each arm is composed of seven degrees of freedom that are moved, controlled, and measured with internal electromechanical components. These arms are also conceived to have multiple \say{Series Elastic Actuators (SEAs)}, that enhance different available control modes, to ensure the overall safety of the system \citep{cite_baxter_arms_wiki}.\\
 
-Baxter hands also implement extra signals sensors, such as cameras, infrared sensors, accelerometers and navigators. These sensors are totally integrated with the internal electronic and software architecture of the system.\\
+Baxter hands also implement extra signals sensors, such as cameras, infrared sensors, accelerometers and, navigators. These sensors are integrated with the internal electronic and software architecture of the system.\\
 
 
 \subsubsubsection{Cameras}
@@ -1458,30 +1457,30 @@ A key component of the whole system is the fact that it has multiple high-resolu
 
 One important limitation to keep in mind is that the hardware conditions do not allow Baxter to operate more than two cameras at the same time (this is because of an internal USB hardware requirement).\\
 
-Baxter also allows to individually configure camera conditions, i.e, window width, window height and max frame rate.\\
+Baxter also allows to individually configure camera conditions, i.e, window width, window height, and max frame rate.\\
 
 
 \subsubsubsection{Input and Output}
 
-Although the other components may have internal I/O systems, Rethink Robotics considered the \say{Input/Output} conditions as a key feature of the final solution. These I/O are the direct conditions to interact with Baxter robot, and are designed in a robust, secure and easy-to-program way.\\
+Although the other components may have internal I/O systems, Rethink Robotics considered the \say{Input/Output} conditions as a key feature of the final solution. These I/O are the direct conditions to interact with the Baxter robot, and are designed in a robust, secure, and easy-to-program way.\\
 
 The three main I/O categories are \say{Analog I/Os}, \say{
-Digital I/Os} and \say{Navigator Interface I/Os} \citep{cite_baxter_io_wiki}. All three have different electronic signal behaviours and are composed of: sensors, buttons, switches, lights, then navigators, then digitals and analog IOs.\\
+Digital I/Os} and \say{Navigator Interface I/Os} \citep{cite_baxter_io_wiki}. All three have different electronic signal behaviors and are composed of: sensors, buttons, switches, lights, then navigators, then digitals and analog IOs.\\
 
 
 \subsection{Baxter Hardware Specifications}
 
 Baxter robot is documented officially in the Rethink Robotics Wiki with multiple measurements and information about its hardware components.\\
 
-As it is said in the robot's data-sheet, Baxter was designed for continuous operation and can run 24/7 for expended periods of time without the risk of damaging the hardware of the robot\citep{cite_baxter_hardware_specifications}. \\
+As it is said in the robot's data-sheet, Baxter was designed for continuous operation and can run 24/7 for expended periods without the risk of damaging the hardware of the robot\citep{cite_baxter_hardware_specifications}. \\
 
-In this section, we will dive into important characteristics and features that are going to be essential in the future chapters. All of these measurements are taken from the official documentation and were guarantee to have minor errors.\\
+In this section, we will dive into important characteristics and features that are going to be essential in future chapters. All of these measurements are taken from the official documentation and are guaranteed to have minor errors.\\
 
 \subsubsection{Baxter Arm Specifications}
 
-Both Baxter arms are exactly the same in terms of distances, angles and internal conditions, with the only exception of being symmetrical.\\
+Both of Baxter's arms are the same in terms of distances, angles, and internal conditions, with the only exception of being symmetrical.\\
 
-In the following image (fig[\ref{fig_baxter_hand_measurements}]), there is a detailed explanation of Baxter hand with the notation of its angle names (that are used for the internal processing and execution of Baxter commands):
+In the following image (fig[\ref{fig_baxter_hand_measurements}]), there is a detailed explanation of Baxter's hand with the notation of its angle names (that are used for the internal processing and execution of Baxter commands):
 
 \begin{figure}[H]
     \centering
@@ -1532,23 +1531,23 @@ Another interesting condition that is required for implementing control solution
         W2 & 4.0 & 15 \\ \hline
     \end{tabular}
 }
-\caption{\label{tab:max_joint_conditions} Maximum joint speed values and torques for Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
+\caption{\label{tab:max_joint_conditions} Maximum joint speed values and torques for the Baxter robot. Adapted from \citep{cite_baxter_hardware_specifications}.}
 \end{center}
 \end{table}
 
 
 These joint speed values and torques are considered to be fast, considering the normal operating conditions of collaborative robots.\\
 
-To correctly acquire Baxter current joint angles, Baxter has high quality sensor at each on of its degrees of freedom. These sensors have the following specifications:
+To correctly measure its joint angles, Baxter has high-quality sensors located in each one of its degrees of freedom. These sensors have the following specifications:
 
 \begin{itemize}
-    \item The resolution for the joint sensors is 14 bits (over 360 degrees); so 360/(2\^14) = 0.021972656 degrees per tick resolution.
-    \item The joints have a waveform non-linearity, based on an accuracy on the order of about +/-0.10 degrees, worst case +/-0.25 degrees accuracy when reaching the joint limits.
+    \item The resolution for the joint sensors is 14 bits (over 360 degrees); so 360/($2^{14}$) = 0.021972656 degrees per tick resolution.
+    \item The joints have a waveform non-linearity, based on accuracy on the order of about +/-0.10 degrees, worst case +/-0.25 degrees accuracy when reaching the joint limits.
 \end{itemize}
 
 \subsubsection{Baxter Camera Specifications}
 
-Camera signals play a fundamental role in the development of autonomous solutions. For Baxter robot, these conditions are similar for each on of the cameras and are the typical values are the following:
+Camera signals play a fundamental role in the development of autonomous solutions. For the Baxter robot, these conditions are similar for each on of the cameras, and are the typical values are the following:
 
 \begin{table}[H]
 \begin{center}
@@ -1573,7 +1572,7 @@ It is important to notice that these conditions will be analyzed better in the c
 
 \subsubsection{Baxter CPU Specifications}
 
-CPU specifications are a direct limitation for any robotic solution, because the processor is in charge of executing multiple complex threads for the correct real-time applications.\\
+CPU specifications are a direct limitation for any robotic solution because the processor is in charge of executing multiple complex threads for the correct real-time applications.\\
 
 \begin{table}[H]
 \begin{center}
@@ -1595,7 +1594,7 @@ CPU specifications are a direct limitation for any robotic solution, because the
 
 \subsubsection{Baxter Additional Specifications}
 
-There are some final additional important specifications that Rethink Robotics has considered as relevant to consider in order to develop disruptive robotic solutions. These considerations are specified in table[\ref{tab:additional_specifications}]:
+These are some additional specifications that Rethink Robotics considered in order to develop disruptive robotic solutions, some of which are specified in table[\ref{tab:additional_specifications}]:
 
 \begin{table}[H]
 \begin{center}
@@ -1621,16 +1620,16 @@ There are some final additional important specifications that Rethink Robotics h
 
 \subsection{Baxter Software Specifications}
 
-Robots are devices that must integrate multiple sensors, actuators, protocols, validations, security features, programmable processes and more. This requirements are only possible with the right software and hardware integration for the desired robot features. Based on this statement, there must be an overall layer of abstraction for controlling the specified aspects and executing the robot´s functionalities in a reliable way. For Baxter robot, this software and hardware conditions are run on based on a \say{Robot Operating System} (ROS) \citep{cite_ROS_official_site}.
+Robots are devices that must integrate multiple sensors, actuators, protocols, validations, security features, programmable processes, and more. These requirements are only possible with the right software and hardware integration for the desired robot features. Based on this statement, there must be an overall layer of abstraction for controlling the specified aspects and reliably executing the robot's functionalities. For the Baxter robot, these software and hardware conditions are run based on a \say{Robot Operating System} (ROS) \citep{cite_ROS_official_site}.
 
-Baxter runs on ROS Indigo and implements an Ubuntu 14.04 Linux distribution. This software requirements can be eventually upgraded to newer versions with minor work, but is not a straight-forward approach, because some important functionalities could get unstable or not compatible. For this reason, for this research these software requirements are going to be used.\\
+Baxter runs on ROS Indigo and implements an Ubuntu 14.04 Linux distribution. These software requirements can be eventually upgraded to newer versions with minor work, but is not a straightforward approach, because some important functionalities could get unstable or not compatible. For this reason, for this research these software requirements are going to be used.\\
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/imgs/baxter_robot/ros_indigo.png}
-		\caption{ROS Indigo Igloo implemented in Baxter robot. Taken from \citep{cite_ros_indigo_main_page}}
+		\caption{ROS Indigo Igloo implemented in the Baxter robot. Taken from \citep{cite_ros_indigo_main_page}}
 		\label{fig_ros_indigo_logo}
 	\end{subfigure}~
 	\begin{subfigure}{.5\textwidth}
@@ -1646,11 +1645,11 @@ Baxter runs on ROS Indigo and implements an Ubuntu 14.04 Linux distribution. Thi
 
 \section{Baxter Robot Mathematical Approach}
 
-The mathematical approach of any dynamic system, has its foundations on reference frames that enable the absolute and relative Cartesian systems. For robotic systems, it is common to define a main workspace reference and start developing models to transform these coordinates into multiple other references throughout the system.\\
+The mathematical approach of any dynamic system has its foundations on reference frames that enable the absolute and relative Cartesian systems. For robotic systems, it is common to define the main workspace reference and start developing models to transform these coordinates into multiple other references throughout the system.\\
 
-Baxter is a completely symmetrical two armed hyper-redundant 7DOF humanoid robot. This condition makes it useful to define a central reference as the workspace center, so that the transforms are similar in each one of the arms. It's also relevant to notice that both limbs are exactly the same in measurements and the only key difference the sign of an angle.Each arm has a total of seven degrees of freedom (DOF) of rotational joint type (\textbf{R}).\\
+Baxter is a completely symmetrical two-armed hyper-redundant 7DOF humanoid robot. This condition makes it useful to define a central reference as the workspace center, so that the transforms are similar in each one of the arms. It's also relevant to notice that both limbs are the same in measurements and the only key difference the sign of an angle.Each arm has a total of seven degrees of freedom (DOF) of rotational joint type (\textbf{R}).\\
 
-In order to be determine the position and orientation of Baxter end effector in a mathematical way, it is important to understand that Baxter has multiple joint-encoder sensors that are only able to measure the angle of an articulation based on the angle that it makes with respect of the previous one.\\
+In order to be determine the position and orientation of Baxter end effector in a mathematical way, it is important to understand that Baxter has multiple joint-encoder sensors that are only able to measure the angle of an articulation based on the angle that it makes with the previous one.\\
 
 These encoders are already calibrated and are the main way to map the end effector to the central reference frame. To do this mapping, it is mandatory to have a mathematical representation with Transformation Matrices for each one of the reference frames that are in Baxter's joints.\\
 
@@ -1685,7 +1684,7 @@ There is an extra consideration for these values, because the final distance \sa
 
 \subsection{Baxter Fixed Transformation Matrices}
 
-There are some important transformation matrices that enable the mapping of Baxter arms with respect of the main reference frame (this is from \{W0\} to \{BR\} or from \{W0\} to \{BL\}, as it can be seen in figures fig[\ref{fig_baxter_schematic_general}] and fig[\ref{fig_baxter_schematic_torso_to_arm}]. These transforms are considered \say{fixed}, because they are constant in time. That means that we do not need to implement any addition algorithm to calculate the current values (those calculations are only relevant in the angles for Baxter arms).\\
+Some important transformation matrices enable the mapping of Baxter's arms with respect to the main reference frame (this is from \{W0\} to \{BR\} or from \{W0\} to \{BL\}, as it can be seen in figures fig[\ref{fig_baxter_schematic_general}] and fig[\ref{fig_baxter_schematic_torso_to_arm}]. These transforms are considered \say{fixed} because they are constant in time. That means that we do not need to implement any addition algorithm to calculate the current values (those calculations are only relevant in the angles for Baxter's arms).\\
 
 In the following figures, it is possible to determine the relevant reference frames to do the initial transformation matrices:
 
@@ -1786,7 +1785,7 @@ After these fixed transformation matrices are taken into consideration, there ar
 \includegraphics[width= 0.92\textwidth]{\string "assets/pdfs/baxter_robot/baxter_transformations_explained".pdf}
 \bigbreak
 \begin{minipage}{\linewidth} %Keep image/PDF in only 1 page
-\captionof{figure}{Visual complete transformation matrices for Baxter left hand. Own development.}\label{fig_baxter_transformations_graphic_way}
+\captionof{figure}{Visual complete transformation matrices for Baxter's left hand. Own development.}\label{fig_baxter_transformations_graphic_way}
 \end{minipage} \end{center}
 
 After these fixed transformation matrices were explained by inspection, the next section is going to explain how to use the \say{DH notation} to specify how to calculate the missing transformations of the reference frames from \{0\} to \{7\}.\\
@@ -1827,7 +1826,7 @@ For Baxter DH Parameters, it is going to be used the modified Denavit-Hartenberg
 \end{center}
 \end{table}
 
-One great advantage of Baxter robot is that the Denavit Hartenberg parameters are identical for both of its arms, making it simple to describe the kinematics and dynamics of the entire system, due to the symmetrical configuration. The main difference will only be considered for the fixed transformation matrices shown in the last section in equations eq[\ref{eq:transformation_matrix_w0_bl_and_w0_br}] and eq[\ref{eq:transformation_matrices_fixed_init_of_arm_and_end_of_arm}].\\
+One great advantage of the Baxter robot is that the Denavit Hartenberg parameters are identical for both of its arms, making it simple to describe the kinematics and dynamics of the entire system, due to the symmetrical configuration. The main difference will only be considered for the fixed transformation matrices shown in the last section in equations eq[\ref{eq:transformation_matrix_w0_bl_and_w0_br}] and eq[\ref{eq:transformation_matrices_fixed_init_of_arm_and_end_of_arm}].\\
 
 After inspecting and analyzing the Baxter DH parameters table, it is now possible to determine a specific transformation matrix of any of its joints, based on the measurement of the encoder sensors of all of its degrees of freedom. This affirmation will be extremely important, for future calculations that require multiple transformation matrices at a given time.\\ 
 
@@ -1840,7 +1839,7 @@ The FPK and IPK algorithms will be explained in the following sub-sections:
 
 \subsection{Baxter Forward Pose Kinematics}
 
-The objective of the FPK for Baxter, is to determine the position and orientation of the end-effector frame. To solve this problem, we can proceed to implement the DH parameters in the following way:
+The objective of the FPK for Baxter is to determine the position and orientation of the end-effector frame. To solve this problem, we can proceed to implement the DH parameters in the following way:
 
 \begin{enumerate}
     \item Substitute each line of Denavit-Hartenberg Parameters shown in table tab[\ref{tab:dh_params}] with the current joint angle values.
@@ -1878,7 +1877,7 @@ The previous steps can be expressed in a matrix-wise way as it follows (these ab
 \caption{Transformation matrices for Denavit Hartenberg algorithm.}
 \end{equ}
 
-The transformation matrices specified in eq[\ref{eq:transformation_matrices_for_dh_algorithm}], correspond to the position and orientation of the desired joint articulation that we want to analyze, and if the final reference frame of Baxter arm is the goal, this transformation matrix would become to the values that go from \{0\} to \{7\}.\\
+The transformation matrices specified in eq[\ref{eq:transformation_matrices_for_dh_algorithm}], correspond to the position and orientation of the desired joint articulation that we want to analyze, and if the final reference frame of Baxter's arm is the goal, this transformation matrix would become to the values that go from \{0\} to \{7\}.\\
 
 To obtain the complete matrix transformation from \{0\} to \{7\}, it can apply the properties of homogeneous transformation matrices, like this:
 
@@ -1914,9 +1913,9 @@ To obtain the complete matrix transformation from \{0\} to \{7\}, it can apply t
 \caption{Complete Baxter arm transformation matrix from frame \{0\} to frame \{7\} using DH intermediate transforms.}
 \end{equ}
 
-As it can be perceived in the transformation matrix obtained in eq[\ref{eq:transformation_matrix_from_0_to_7_process}], it only takes into consideration the frames that change in time, which correspond to the shoulder, wrist and elbow of Baxter arm. However, to apply a complete transform from the defined center of reference \{W0\} to the final end-effector \{GL\} or \{GR\}, the already discussed fixed transformation matrices must be applied correctly.\\
+As it can be perceived in the transformation matrix obtained in eq[\ref{eq:transformation_matrix_from_0_to_7_process}], it only takes into consideration the frames that change in time, which correspond to the shoulder, wrist, and elbow of Baxter's arm. However, to apply a complete transformation from the defined center of reference \{W0\} to the final end-effector \{GL\} or \{GR\}, the already discussed fixed transformation matrices must be applied correctly.\\
 
-To mathematically express the absolute final position and orientation of the end-effector expressed in homogeneous transformation matrix, the successive expression must be calculated:
+To mathematically indicate the absolute final position and orientation of the end-effector expressed in a homogeneous transformation matrix, the successive expression must be calculated:
 
 \begin{equ}[H]
 \begin{equation} \label{eq:transformation_matrix_from_w0_to_GL}
@@ -1977,9 +1976,9 @@ The software implementation of the FPK algorithm for this research project can b
 \subsection{Baxter Inverse Pose Kinematics} 
 \label{sub_sec_ipk}
 
-The goal of the IPK for Baxter, is to determine the current angles of each one of the degrees of freedom, based on the Cartesian position and orientation of the end effector. To solve this problem, we can proceed to derive a general expression based on an analytical solution.\\
+The goal of the IPK for Baxter is to determine the current angles of each one of the degrees of freedom, based on the Cartesian position and orientation of the end effector. To solve this problem, we can proceed to derive a general expression based on an analytical solution.\\
 
-One key condition to consider is that Baxter has 7 DOF, which makes him an hyper-redundant robot that can usually get to a given point in space in many different ways. This redundancy makes it more complex to calculate an analytical solution taking into consideration each one of the angles as variables. This problem will be solved by a strategic approach in which one of the degrees of freedom will be fixed at a constant value.\\
+One key condition to consider is that Baxter has 7 DOF, which makes him a hyper-redundant robot that can usually get to a given point in space in many different ways. This redundancy makes it more complex to calculate an analytical solution taking into consideration each one of the angles as variables. This problem will be solved by a strategic approach in which one of the degrees of freedom will be fixed at a constant value.\\
 
 This degree of freedom that will have its angle fixed to zero will be the one corresponding to the first elbow joint (\say{E0}, which is $\theta_{3}$), as it can be seen in fig[\ref{fig_baxter_fixed_e0_dof}]:
 
@@ -1991,9 +1990,9 @@ This degree of freedom that will have its angle fixed to zero will be the one co
     \label{fig_baxter_fixed_e0_dof}
 \end{figure}
 
-Another important distance that will be discarded for this analytical calculation, is $L_5$, which is really small compared to the other limb distances. This assumption will make it simpler to obtain the analytical IPK Baxter solution.\\
+Another important distance that will be discarded for this analytical calculation, is $L_5$, which is small compared to the other limb distances. This assumption will make it simpler to obtain the analytical IPK Baxter solution.\\
 
-After the $\theta_{3}$ and $L_5$ condition are said, the next part of the problem is to understand the inputs and outputs for getting the IPK.:\\
+After the $\theta_{3}$ and $L_5$ conditions are carified, the next part of the problem is to understand the inputs and outputs for getting the IPK.:\\
 
 \textbf{Input Matrix:}
 
@@ -2025,7 +2024,7 @@ It is important to notice that the indices of the frames are assuming that $\the
 
 As well as that, keep in mind that the distance from the reference frames of joints \{2\} to \{4\}, is the euclidean distance from the center of each frame, that corresponds to: $\sqrt{L_{2}^2 + L_{3}^2}$.\\
 
-The analytical solution can be proved by starting with equation shown in eq[\ref{eq:expression_to_obtain_analytical_ipk}], and applying linear algebra concepts for each one of the DOF.\\
+The analytical solution can be proved by starting with the equation shown in eq[\ref{eq:expression_to_obtain_analytical_ipk}] and applying linear algebra concepts for each one of the DOF.\\
 
 \begin{equ}[H]
 \begin{equation} \label{eq:expression_to_obtain_analytical_ipk}
@@ -2129,7 +2128,7 @@ The final angle values are:
 \end{equ}
 
 
-The Baxter IPK analytical solution will be a necessary algorithm to develop robotic solutions that map the Cartesian space to the joint space. This solution could be improved with a 7 DOF Inverse Pose Kinematics, but the cost of developing a solution that involves every join value, would represent a higher computational cost with lower response times for the robot.\\
+The Baxter IPK analytical solution will be a necessary algorithm to develop robotic solutions that map the Cartesian space to the joint space. This solution could be improved with a 7 DOF Inverse Pose Kinematics, but the cost of developing a solution that involves every join value would represent a higher computational cost with lower response times for the robot.\\
 
 
 To dive deeper into the software implementation of this algorithm, please feel free to explore our GitHub repository \say{baxter-bon-appetit} with the source code for the IPK:\\
@@ -2188,7 +2187,7 @@ The calculations and expressions to find Baxter's jacobian matrices can be found
 
 A robot workspace is defined as the set of all reachable end-effector positions \citep{cite_robot_academy}. These multiple configurations could be theoretically infinite, but a general understanding of the workspace can be achieved with a rigorous mapping of the area.\\
 
-For the further understanding of Baxter robot, this research developed a mapping algorithm that works in the following way:
+For the further understanding of the Baxter robot, this research developed a mapping algorithm that works in the following way:
 
 \begin{center}
 \includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/baxter_robot/baxter_mapping_delaunay_block_diagram".pdf}
@@ -2207,7 +2206,7 @@ As it can be seen in fig[\ref{fig_baxter_general_mapping_workspace_block_diagram
     \item After the data is collected, apply these Cartesian values to the Delaunay Triangulation to obtain the desired workspace plot results.
 \end{enumerate}
 
-When the algorithm was implemented for the mapping, the first results were the \say{General Mapping Workspace Trajectories}, that would cover most of Baxter workspace. These trajectories were taken with the explained algorithm for 30 minutes in each of Baxter's arms. It is important to notice, that to avoid robot damage, the trajectories were implemented by moving Baxter arms manually by touching the cuff sensor and driving the arms as much as possible.\\
+When the algorithm was implemented for the mapping, the first results were the \say{General Mapping Workspace Trajectories}, which would cover most of Baxter's workspace. These trajectories were taken with the explained algorithm for 30 minutes in each of Baxter's arms. It is important to notice, that to avoid robot damage, the trajectories were implemented by moving Baxter arms manually by touching the cuff sensor and driving the arms as much as possible.\\
 
 \begin{figure}[H]
     \centering
@@ -2216,12 +2215,12 @@ When the algorithm was implemented for the mapping, the first results were the \
     \label{fig_baxter_general_workspace}
 \end{figure}
 
-After the database of the trajectories for the Cartesian values was filled, the Delaunay Triangulation was applied to the overall results. The objective of this process, was to obtain the maximum reachable spherical surface for Baxter robot workspace. The result is extremely valuable, because it gives us some important information, such as:
+After the database of the trajectories for the Cartesian values was filled, the Delaunay Triangulation was applied to the overall results. The objective of this process was to obtain the maximum reachable spherical surface for the Baxter robot workspace. The result is extremely valuable because it provides some important information, such as:
 
 \begin{itemize}
     \item Baxter robot's workspace shape and symmetry.
     \item Baxter robot's limits for X, Y, and Z dimensions.
-    \item Overview of good and bad manoeuvrability positions for both of Baxter's arms.
+    \item Overview of good and bad maneuverability positions for both of Baxter's arms.
     \item A good understanding of the mathematics to relate joint-states with Cartesian-coordinates.
 \end{itemize}
 
@@ -2246,21 +2245,21 @@ The algorithms to map Baxter workspace can be analyzed at our GitHub repository 
 
 \section{Baxter Robot Tool}
 
-A robot's tool corresponds to a functional extension of the robot's basic capabilities. This final component not only implies a change in the mathematical equations governing the robot's dynamics, but also allows extending the practical behavior of the features that the robot can perform in its classical programming.\\
+A robot's tool corresponds to a functional extension of the robot's basic capabilities. This final component not only implies a change in the mathematical equations governing the robot's dynamics but also allows extending the practical behavior of the features that the robot can perform in its classical programming.\\
 
-For this application (Baxter-Bon-Appetit), the most important capability to be implemented with Baxter robot, is to be able to carry out food for an user. This circumstances, imply that the tool designed for Baxter robot must follow up a series of requirements, such as:
+For this application (Baxter-Bon-Appetit), the most important capability to be implemented with the Baxter robot, is to be able to carry out food for a user. This circumstances imply that the tool designed for Baxter must follow up a series of requirements, such as:
 
 \begin{itemize}
-    \item The tool must be able to be placed firmly on Baxter hand.
+    \item The tool must be able to be placed firmly on Baxter's hand.
     \item The tool must carry out (hold) food.
-    \item The tool must be able to carry different cutlery utensils, so that they can be changed easily depending on the patient and type of food. 
+    \item The tool must be able to carry different cutlery utensils so that they can be changed easily depending on the patient and type of food. 
 \end{itemize}
 
-After taking into consideration these requirements, it was chosen that a 3D printed design would satisfy all the requirements and be cost-efficient for the economic budget of this research project. The 3D printed approach was a viable way to develop an accurate mechanical tool, that would match the necessary tolerances of Baxter's arms.\\
+After taking into consideration these requirements, it was chosen that a 3D printed design would satisfy all the requirements and be cost-efficient enough for the project's budget of this research project. The 3D printed approach was a viable way to develop an accurate mechanical tool that would match the necessary tolerances of Baxter's arms.\\
 
 First of all, the software in which the design was made, was Autodesk Fusion 360, a cloud-based 3D modeling, CAD, CAM, CAE, and PCB software platform for product design and manufacturing \citep{cite_autodesk_fusion}. This allowed us to work simultaneously on the design and develop a practical re-usable tool system.\\
 
-The design of tool had to match the following Baxter hand attaching system, so that it could be placed correctly and guarantee a stable connection to Baxter arm:
+The design of the tool had to match the following Baxter hand attaching system so that it could be placed correctly and guarantee a stable connection to Baxter's arm:
 
 \begin{figure}[H]
     \centering
@@ -2269,9 +2268,9 @@ The design of tool had to match the following Baxter hand attaching system, so t
     \label{fig_baxter_hand_for_attaching_the_tool}
 \end{figure}
 
-Based on the hand, it was developed a design that matched the default Baxter mechanism for adding external tools designed by the user. This solution was developed as a stereo-lithography CAD design (also known as STL), which is an universal format that can be understood by most CAD-CAM software and 3D printers.\\
+Based on the hand, it was developed a design that matched the default Baxter mechanism for adding external tools designed by the user. This solution was developed as a stereo-lithography CAD design (also known as STL), which is a universal format that can be understood by most CAD-CAM software and 3D printers.\\
 
-The overall mechanical solution achieved for Baxter-Bon-Appetit research project with Fusion 360 software can be seen at figs[\ref{fig_baxter_tool_fusion_front_view}, \ref{fig_baxter_tool_fusion_multiple_views}]:
+The overall mechanical solution achieved for the \say{Baxter-Bon-Appetit} research project with Fusion 360 software can be seen in figs[\ref{fig_baxter_tool_fusion_front_view}, \ref{fig_baxter_tool_fusion_multiple_views}]:
 
 \begin{figure}[H]
     \centering
@@ -2281,7 +2280,7 @@ The overall mechanical solution achieved for Baxter-Bon-Appetit research project
 \end{figure}
 
 
-One important advantage that is full-filled with the developed design, is that there can be multiple cutlery coupled in the tool, so that the user can change the necessary cutlery, based on the food that he or she wants and also be able to change them based on the user (for more than one different patient).\\
+One important advantage that is full-filled with the developed design, is that there can be multiple cutlery coupled in the tool so that the user can change the necessary cutlery, based on the food that he or she wants and also be able to change them based on the user (for more than one different patient).\\
 
 
 \begin{figure}[H]
@@ -2303,9 +2302,9 @@ One important advantage that is full-filled with the developed design, is that t
 \end{figure}
 
 
-After the general measurements were implemented and verified at the CAD STL design, the next step was to print it into a real tool by a 3D printer. This process was achieved successfully with the \say{Ender-3 V2 3D Printer}, a low-price system, suitable for business start-ups and research projects \citep{cite_3d_printer_for_tool}.\\
+After the general measurements were implemented and verified at the CAD STL design, the next step was to print a real tool with a 3D printer. This process was achieved successfully with the \say{Ender-3 V2 3D Printer}, a low-price system, suitable for business start-ups and research projects \citep{cite_3d_printer_for_tool}.\\
 
-This 3D printer was able to create the tool in 4 hours and 30 minutes. The reason of this time, is because the tool was created with a high-density speed constant, so that it would be more resistant to fatigue and mechanical stresses.\\
+This 3D printer was able to create the tool in 4 hours and 30 minutes. The reason for this time being that the tool was created with a high-density and constant speed, while maintaining high quality parameters and a higher resistance to fatigue and mechanical stresses.\\
 
 \begin{figure}[H]
 	\centering
@@ -2328,12 +2327,12 @@ This 3D printer was able to create the tool in 4 hours and 30 minutes. The reaso
 
 When the design was completely printed, the next part of the methodology was to verify that it could fit correctly (and properly) into Baxter's hand. This was verified and was achieved successfully at EIA University Laboratory.\\
 
-The following images show the final result of Baxter's tool to correctly be able to give food to the users in a correct and natural way:
+The following images show the final result of Baxter's tool to correctly be able to give food to the users in a correctly and naturally way:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{assets/imgs/baxter_robot/baxter_tool_real_life_implementation.jpg}
-    \caption{Baxter tool general view implemented on real life. Taken at EIA University Laboratory.} 
+    \caption{Baxter tool general view implemented in real life. Taken at EIA University Laboratory.} 
     \label{fig_baxter_tool_real_life_general_view}
 \end{figure}
 
@@ -2344,18 +2343,18 @@ The following images show the final result of Baxter's tool to correctly be able
     \label{fig_baxter_tool_real_life_side_view}
 \end{figure}
 
-The results of Baxter tool for giving food correctly, will be considered as an important condition to take into account in the mathematical calibrations of the FPK algorithm (as an additional offset of the final Baxter hand transformation).\\
+The results of Baxter's food giving toll were successful, and will be taken into account in the mathematical calibrations of the FPK algorithm (as an additional offset of the final Baxter hand transformation).\\
 
 \section{Baxter Physical Configuration}
 
-For Baxter-Bon-Appetit project, the physical workspace configuration for the robot/patient space is a differential factor to fulfill the development of an active feeding system. This configuration is a deterministic decision that will guide the design of the solution and will modify the evolution of the project based on how it is chosen.\\
+For \say{axter-Bon-Appetit} project, the physical workspace configuration for the robot/patient space is a differential factor to fulfill the development of an active feeding system. This configuration is a deterministic decision that will guide the design of the solution and will modify the evolution of the project based on how it is chosen.\\
 
 To determine the physical configuration, there are some key values to take into consideration:
 
 \begin{enumerate}
     \item The patient must be seated facing directly to one of Baxter's cameras.
-    \item The patient must be located in a place where Baxter maneuverability is high.
-    \item The position of the camera and the patient should be always the same (or really similar).
+    \item The patient must be located in a place where Baxter has high maneuverability.
+    \item The camera position and the one of the patient should be the same (or really similar).
 \end{enumerate}
 
 Based on these user requirements, the chosen configuration for Baxter and the patient is the one shown in figures fig[\ref{fig_baxter_configuration_1},\ref{fig_baxter_configuration_2}]:
@@ -2386,26 +2385,26 @@ Based on these user requirements, the chosen configuration for Baxter and the pa
 \end{figure}
 
 
-As it can be seen in the shown figures, the configuration was chosen because Baxter's right arm can reach the user's mouth directly in order to do the feeding action. This will enable Baxter cobot to have a great functionality of helping the patient to eat his meal in a dynamic and active way.\\
+As it can be seen in the shown figures, the configuration was chosen so that Baxter's right arm can reach the user's mouth directly in order to feed the user correctly. This will enable the Baxter cobot to fulfill its task of helping the patient eat in a dynamic and active way.\\
 
-Another remarkable condition of the exposed arrangement, is that the camera that is going to be used is directly embedded on Baxter's left arm, implying that it can be tweaked in position and orientation (something that would not be achievable with the camera on Baxter's head). As well as this extra translation and rotation approach, one advantage of using a camera that is directly designed into Baxter's arm, is that, with the encoder measurements, it will always be possible to find the current position of the camera (even after external modifications). This measurements will be explained in future chapters.\\
+Another remarkable condition of the exposed arrangement, is that the camera that is going to be used is directly embedded on Baxter's left arm, implying that it can be tweaked in position and orientation (something that would not be achievable with the camera on Baxter's head). As well as this extra translation and rotation approach, another advantage of using a camera that is directly designed into Baxter's arm, is that, with the encoder measurements, it will always be possible to find the current position of the camera (even after external modifications). This measurements will be explained in future chapters.\\
 
-One extra interesting benefit of implementing this physical layout, is that the patient will always be facing directly to the camera, and even after having its meal given to his mouth, his face will be mostly visible to the camera, resulting in a great clear-vision approach for constantly detecting the user's face.\\
+An additional benefit of implementing this physical layout, is that the patient will always be facing directly into the camera, and even after being fed its meal, its face will be mostly visible to the camera, resulting in a great clear-vision approach for constantly detecting the user's face.\\
 
 The research will use the exposed configuration for the control, computer vision and integration algorithms.\\
 
 % ---------------------------------------------------------
 \chapter{Computer Vision}
 
-Most robotic systems that are aware of their environment, use sensors of various types to ensure proper data acquisition to provide valuable information for the dynamic variables of interest for the system.\\
+Most robotic systems that are aware of their environment, use various types of sensors to ensure proper data acquisition to provide valuable information for the dynamic variables of interest for the system.\\
 
-For the case in which cameras are used as primary sensors, it is extremely important to understand that the acquired signal can not go directly to a control scheme, but must be processed and debugged through computational algorithms that transform the multiple RGB matrices obtained by these cameras, in more accurate variables according to the control scheme.\\
+For the case in which cameras are used as primary sensors, it is extremely important to understand that the acquired signal can't go directly to a control scheme, but must be processed and debugged through computational algorithms that transform the multiple RGB matrices obtained by these cameras, into more accurate variables according to the control scheme.\\
 
-The computer vision algorithms that will be implemented on Baxter robot, will start directly from the embedded robot's cameras, as it was described in the design exposed at fig[\ref{fig_general_morphological_matrix}]. This decision
+The computer vision algorithms that will be implemented on the Baxter robot, will start directly from the embedded robot's cameras, as it was described in the design exposed at fig[\ref{fig_general_morphological_matrix}]. This decision
 
 \section{Baxter Camera Configuration and Setup}
 
-To implement a computer vision algorithm, it is relevant to have a deep understanding on the camera specifications. The most relevant characteristics for Baxter cameras are exposed in table tab[\ref{tab:camera_specifications}] and it is important to guarantee that the camera's resolution is fixed in a constant value (so that the trained networks work properly).\\
+To implement a computer vision algorithm, it's relevant to have a deep understanding on the camera's specifications. The most relevant characteristics for Baxter cameras are exposed in table tab[\ref{tab:camera_specifications}] and it is important to guarantee that the camera's resolution is fixed in a constant value (so that the trained networks work properly).\\
 
 The chosen value for the camera resolution is \say{640x400 pixels}. This value is obtained from the best practices specifications given in Baxter camera SDK documentation \citep{cite_baxter_hardware_specifications}.\\
 
@@ -2413,9 +2412,9 @@ The software and mathematical implementations for this chapter, will be calculat
 
 \section{Baxter Camera Manipulation}
 
-To understand how Baxter's cameras work, we highly recommend to dive deeper into the official SDK documentation, so that every detail can be considered \citep{cite_baxter_cameras_wiki}.\\
+To understand how Baxter's cameras work, we highly recommend to dive deeper into the official SDK documentation so that every detail can be considered \citep{cite_baxter_cameras_wiki}.\\
 
-Baxter cameras are relevant sensors designed to gather direct information from Baxter's environment as fast as possible. These devices are assembled and integrated with Baxter functionalities through ROS. To control the cameras and the information acquired, we must understand some key features:
+Baxter's cameras are relevant sensors designed to gather direct information from its environment as fast as possible. These devices are assembled and integrated with Baxter's functionalities through ROS. To control the cameras and the information acquired, we must understand some key features:
 
 \begin{itemize}
     \item Cameras are controlled with an Application Programming Interface (API) that makes it possible to interact with their software configurations.
@@ -2432,12 +2431,12 @@ the robot was controlled and operated through the official camera control algori
     \item \href{https://github.com/RethinkRobotics/baxter_tools/blob/master/scripts/camera_control.py}{RethinkRobotics/baxter\_tools: camera control (Source Code)}
 \end{itemize}
 
-After understanding the underlying low-level configurations, the computer vision algorithms designed for this research, were developed using the internal messages of Baxter robot regarding its cameras and the necessary subscribers to their information. A deeper analysis of these implementations, will be discussed in the source code and in ROS integration section.\\
+After understanding the underlying low-level configurations, the computer vision algorithms designed for this research were developed using the internal messages of the the Baxter robot regarding its cameras and the necessary subscribers to their information. A deeper analysis of these implementations, will be discussed in the source code and in ROS integration section.\\
 
 
 \section{Face Detection Algorithms}
 
-For Baxter-Bon-Appetit project, the face detection algorithms are considered to be one on the first key components of the whole control structure. This is due because they convert the original images obtained from Baxter's cameras (complex matrices that do not give straight valuable information), into strategical information that is understood as a reference feature for mapping the user's face.\\
+For \say{Baxter-Bon-Appetit} project, the face detection algorithms are considered to be one on the first key components of the whole control structure. They convert the original images obtained from Baxter's cameras (complex matrices that do not give straight valuable information), into strategical information that is understood as a reference feature for mapping the user's face.\\
 
 The two algorithms that are going to be developed for this research, are variants of:
 
@@ -2446,14 +2445,14 @@ The two algorithms that are going to be developed for this research, are variant
     \item Face Recognition API based on deep learning using dblib.
 \end{enumerate}
 
-Both face detection algorithms are going to be built on top of the ones mentioned, as a particular extension of their functionalities.\\
+Both face detection algorithms are going to be built on top of the ones mentioned as a particular extension of their functionalities.\\
 
 \subsection{Viola-Jones Classifier}
 \label{sec:viola_jones_classifier}
 
-The Viola-Jones classifier was developed by Paul Viola , Michael Jones, and it was one of the pioneer programs to correctly solve the face detection problem in a fast and accurate way \citep{cite_viola_jones_face_detection_algorithm}. The problem that it solved was to be able to detect any face in a given input image.\\
+The Viola-Jones classifier was developed by Paul Viola and Michael Jones and it was one of the pioneer programs to correctly solve the face detection problem in a fast and accurate way \citep{cite_viola_jones_face_detection_algorithm}. It solved the problem of detecting faces for any given image input.\\
 
-This algorithm expects the face to be positioned directly to the camera so that it is arranged as a frontal upright face. As well as this, it important that the face is not tilted to either one of the sides, avoiding inclinations.\\
+This algorithm expects the face to be positioned directly in front of the camera so that it is arranged as a frontal upright face. It is also important that the face is not tilted to either one of the sides and avoid inclinations.\\
 
 \begin{center}
 \includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_haar_cascade_block_diagram".pdf}
@@ -2464,7 +2463,7 @@ This algorithm expects the face to be positioned directly to the camera so that 
 
 The algorithm that was developed on top of Viola-Jones classifier, has multiple extra inputs, such as frequency, video acquisition, scale factors, minimum neighbors, minimum size and other internal parameters.\\
 
-The described face detection algorithm was developed with Python programming language with the libraries of OpenCV and numpy. The source code of Baxter Bon Appetit project for face detection with Viola-Jones approach, can be found at \say{baxter-bon-appetit} GitHub repository:
+The described face detection algorithm was developed with Python programming language with the libraries of OpenCV and numpy. The source code of \say{Baxter Bon Appetit} project for face detection with Viola-Jones approach, can be found at \say{baxter-bon-appetit} GitHub repository:
 
 
 \begin{itemize}
@@ -2477,9 +2476,9 @@ Each one of the steps of the block diagram is going to be explained with a high 
 
 \subsubsection{Get frames of video based on desired frequency}
 
-This process is the one that manages how the input to the OpenCV Haar Cascade Classifier is going to be analyzed. This implies, that the sample time and video conditions are configured as general inputs to the algorithm.\\
+This process manages how the input to the OpenCV Haar Cascade Classifier is going to be analyzed. This implies, that the sample time and video conditions are configured as general inputs to the algorithm.\\
 
-To do this step, a continuous loop is processing the video input in a Python Thread, and it has specific wait times to only process the video input at a desired time. This processing converts the video frames into specific images with a given window size.\\
+To do this step, a continuous loop is processing the video input in a Python Thread and it has specific wait times to only process the video input at a desired time. This processing converts the video frames into specific images with a given window size.\\
 
 \subsubsection{Haar feature selection}
 
@@ -2505,9 +2504,9 @@ These features will play a special role in the determination of what is a face o
 
 \subsubsection{Integral Image}
 
-The integral image approach, also known as summed-area-table is a data structure and algorithm that is commonly used in computer vision and computer graphics \citep{cite_matlab_integral_image}. This process calculates the sum of the values of a matrix in a subsection of the grid. This implies that the original matrix is then processed into a new integral matrix that has relevant values of the inner elements sums.\\
+The integral image approach, also known as summed-area-table, is a data structure and algorithm that is commonly used in computer vision and computer graphics \citep{cite_matlab_integral_image}. This process calculates the sum of the values of a matrix in a subsection of the grid. This implies that the original matrix is then processed into a new integral matrix that has relevant values of the inner elements sums.\\
 
-The advantage of generating integral images, is that they reduce significantly the amount of operations involved in computer vision algorithms, and therefore, they improve the performance of the algorithm undoubtedly.\\
+The advantage of generating integral images is that they significantly reduce the amount of operations involved in computer vision algorithms, and therefore improve the performance of the algorithm.\\
 
 The process of generating an integral image is based on the following equation:
 
@@ -2548,7 +2547,7 @@ This algorithm sums up the corresponding image pixels, and generates the final i
 
 \subsubsection{AdaBoost Training}
 
-The AdaBoost training, also called Adaptive Boosting, is an ensemble method in Machine Learning algorithms. In order to understand the adaBoost method, it is necessary to know how the boosting algorithm actually works, this technique makes 'n' number of decisions trees during the data training time, as the first decision tree/model is made, the incorrectly classified record in the first model is given priority. Only these records are sent as input for the second model. The process goes on until we specify a number of base learners we want to create \citep{cite_adaboost_explained}.
+The AdaBoost training, also called Adaptive Boosting, is an ensemble method in Machine Learning algorithms. In order to understand the adaBoost method, it's necessary to know how the boosting algorithm actually work. This technique makes \say{n} number of decisions trees during the data training time. As the first decision tree/model is made, the incorrectly classified record in the first model is given priority. Only these records are sent as input for the second model. The process goes on until we specify a number of base learners we want to create \citep{cite_adaboost_explained}.
 
 \begin{figure}[H]
     \centering
@@ -2574,26 +2573,26 @@ These classifiers are trained individually based on a series of \say{positive} i
 
 The importance of developing cascading classifier solutions, is that they can be applied directly to a region of a matrix (in this case, image), and detect object from it.\\
 
-The main advantage of Viola-Jones cascade classifier, was not only the fact that it had a great accuracy, but also the speed of the calculations, meaning that it could be ran in low-power CPU devices \citep{cite_viola_jones_face_detection_algorithm}.\\
+The main advantage of Viola-Jones cascade classifier, was not only the fact that it had a great accuracy, but also the speed of the calculations, meaning that it could be run in low-power CPU devices \citep{cite_viola_jones_face_detection_algorithm}.\\
 
 
 
 \subsection{Face Recognition Deep Learning Framework}
 
-The second approach to achieve face detection for Baxter Bon Appetit project, is by implementing a deep learning library that focuses on face detection and face recognition \citep{cite_face_detect_face_recognition_github_repo}.\\
+The second approach to achieve face detection for \say{Baxter Bon Appetit} project, is by implementing a deep learning library that focuses on face detection and face recognition \citep{cite_face_detect_face_recognition_github_repo}.\\
 
 The library is called \say{Face Recognition} and it implements multiple low-level deep neural networks and convolutional networks built on top of o the famous C++ library called \say{dlib}. This dlib C++ library is a modern framework that has robust machine learning algorithms and tools for developing complex software solutions for real-life problems \citep{cite_dlib_github_repo}.\\
 
 The advantage of implementing \say{dlib} with the Face Recognition module, is that it's built on top of C++, increasing its performance and the speed of the algorithms.\\
 
-The principal author of the library, Adam Geitgey, has an amazing series of articles explaining the undelying processes of the deep neural networks algorithms that generate the amazing results of his Face Recognition Framework. Some of the articles can be found in his tech blogs:
+The principal author of the library, Adam Geitgey, has an amazing series of articles explaining the underlying processes of the deep neural networks algorithms that generate the amazing results of his Face Recognition Framework. Some of the articles can be found in his tech blogs:
 
 \begin{itemize}
     \color{blue}
     \item \href{https://medium.com/@ageitgey/machine-learning-is-fun-part-3-deep-learning-and-convolutional-neural-networks-f40359318721}{Deep Learning and Convolutional Neural Networks, by Adam Geitgey}
 \end{itemize}
 
-To understand how the library works in a high-level of abstraction, we can think that it works as a convolutional complex neural network that receives an input image and has multiple multi-threading processes with many layers, that is able to learn complicated patterns based on a hierarchy or conceptual structure that propagates through the network \citep{cite_face_detect_face_recognition_github_repo}.\\
+To understand how the library works in a high-level of abstraction, we can think of it as a convolutional complex neural network, that receives an input image and has multiple multi-threading processes with many layers that is able to learn complicated patterns based on a hierarchy or conceptual structure that propagates through the network \citep{cite_face_detect_face_recognition_github_repo}.\\
 
 The processes of the library, can be simplified as follows:
 
@@ -2626,7 +2625,7 @@ The development of the face detection solution implementing the face recognition
 
 Now that we have two face detection algorithms written in Python and compatible with the conditions of the operating system of the Baxter robot, it is time to perform a series of real tests to validate which one of the algorithms has better performance.\\
 
-This performance will be validated through some criteria established previously, and a series of tests will be performed with the same conditions for both algorithms, in order to decide which one is the most appropriate for this research.\\
+This performance will be validated through some criteria established previously and a series of tests performed with the same conditions for both algorithms in order to decide which one is the most appropriate for this research.\\
 
 There will be a total of 3 tests validating the following features:
 
@@ -2642,11 +2641,11 @@ There will be a total of 3 tests validating the following features:
 \subsection{Test 1: general movements facing camera}
 \label{sec:test_1_general_movements_facing_cameras}
 
-The first test had the objective of validating if the face detection algorithms were able to correctly detect the patient's face in a real controlled scenario. This test is the most similar one to a real user's environment for Baxter Bon Appetit.\\
+The first test's objective was to validate if the face detection algorithms were able to correctly detect the patient's face in a real controlled scenario. This test is an accurate example to a real user's environment for \say{Baxter Bon Appetit}.\\
 
 The input video was the same for both algorithms, making the input of the system identical. Both processes performed really well in terms of the most important parameters.\\
 
-The video had a person looking directly into the camera and moving its face in a vertical and horizontal way (always being facing the camera without any angle).\\
+The video had a person looking directly into the camera and moving its face in a vertical and horizontal way (always facing the camera with no angle).\\
 
 \begin{figure}[H]
 	\centering
@@ -2740,7 +2739,7 @@ Both algorithms did a great job in this test.\\
 
 The second test had the goal of validating if the face detection algorithms were able to correctly detect the patient's face in a scenario where the user would rotate its face with extreme angles (greater than 90\textdegree).\\
 
-The input video was the same for both algorithms, making the input of the system identical. The video had a person that started looking directly to the camera, and after that, the person rotated his face around in the 2 principal axis directions (horizontal and vertical rotations). The main objective of this inclinations, was to determine which of the algorithm was able to perform better in extreme scenarios where the user would tilt his head.\\
+The input video was the same for both algorithms, meaning that the system's inputs were identical. The video had a person that started looking directly to the camera, and after that, the person rotated his face around in the 2 principal axis directions (horizontal and vertical rotations). The main objective of these inclinations was to determine which of the said algorithms was able to perform better in extreme scenarios where the user would tilt his head.\\
 
 
 \begin{figure}[H]
@@ -2762,9 +2761,9 @@ The input video was the same for both algorithms, making the input of the system
 \end{figure}
 
 
-The previous figure fig[\ref{fig_computer_vision_test_2}], shows that both algorithms did an excellent job when it was necessary to detect the user's face when the person is looking to the side. These results are a great example of showing that Baxter Bon Appetit project will be reliable, even the the patients look extremely to the sides, scenario common for when someone is being called by another person in a room.\\
+The previous fig[\ref{fig_computer_vision_test_2}] shows that both algorithms did an excellent job when it was necessary to detect the user's face while the person is looking to the side. These results exemplify why \say{Baxter Bon Appetit} project will be reliable even in common scenarios like when someone is being called by another person in a room.\\
 
-When analyzing the performance, the results were the following:
+When analyzing the performance, the results are as follows:
 
 \begin{figure}[H]
 	\centering
@@ -2813,8 +2812,8 @@ After running the comparison scripts for both algorithms, the compact results we
     \hline
     \rowcolor[HTML]{C0C0C0} 
         \textbf{Measurement} & \textbf{Viola-Jones} & \textbf{Face Recognition} \\ \hline
-        Time to process single image & 0.45s & 0.52s \\ \hline
-        Percentage of correctly detected face frames in video & 80.70\% & 71.05\% \\ \hline
+        Time to process a single image & 0.45s & 0.52s \\ \hline
+        Percentage of correctly detected face frames in a video & 80.70\% & 71.05\% \\ \hline
         Does it only detect the biggest face frame? & Yes & Yes \\ \hline
         Spent CPU resources & 61.03\% & 25.63\% \\ \hline
         Spent memory resources & 80.05\% & 79.89\% \\ \hline
@@ -2825,7 +2824,7 @@ After running the comparison scripts for both algorithms, the compact results we
 \end{center}
 \end{table}
 
-These results are really interesting, because on the \say{Percentage of correctly detected face frames in video} measurement, there is a significant gap between both approaches, being more accurate the Viola-Jones processes, when detecting faces that are rotated. This is a major discovery, because it will be a crucial factor for the selection of the final face detection algorithm.\\
+These results are interesting, because on the \say{Percentage of correctly detected face frames in video} measurement, there is a significant gap between both approaches, the more accurately being Viola-Jones processes when detecting faces that are rotated. This is a major discovery because it will be a crucial factor for the selection of the final face detection algorithm.\\
 
 The Viola-Jones algorithm had the best results on this test.\\
 
@@ -2878,9 +2877,9 @@ The results were amazing for both algorithms, and they did show only the biggest
 \end{figure}
 
 
-After getting the results for both algorithms in test 3, the results were outstanding. Both were able to only detect the biggest face and correctly do this process at all frames of the video. The results can be shown in figures fig[\ref{fig_face_detect_biggest_face_hc_1}, \ref{fig_face_detect_biggest_face_fr_1}].\\
+After getting the results for both algorithms in the third test, the results were outstanding. Both were able to only detect the biggest face and correctly do this process at all frames of the video. The results can be shown in figures fig[\ref{fig_face_detect_biggest_face_hc_1}, \ref{fig_face_detect_biggest_face_fr_1}].\\
 
-One important remark, is that the rectangle of the detected frame had some variations in size and position for each algorithm, a relevant aspect that will be important to consider in the development of Baxter Bon Appetit project.\\
+One important remark, is that the rectangle of the detected frame had some variations in size and position for each algorithm, a relevant aspect that will be important to consider in the development of \say{Baxter Bon Appetit} project.\\
 
 
 \subsection{Source code for Baxter Bon Appetit Face Detection Comparison Algorithms}
@@ -2897,18 +2896,18 @@ The algorithms that enabled the plots and information gathering, were developed 
 
 \subsection{Selecting the Face Detection Algorithm for Baxter Bon Appetit}
 
-As seen in sections sec[\ref{sec:test_1_general_movements_facing_cameras}, \ref{sec:test_2_general_movements_with_face_rotations} \ref{sec:test_3_multiple_faces_in_video}], both algorithms were evaluated in multiple use cases and scenarios. The general results pointed that both would do a great job in Baxter Bon Appetit research project, because of their great performance and accuracy.\\
+As seen in sections sec[\ref{sec:test_1_general_movements_facing_cameras}, \ref{sec:test_2_general_movements_with_face_rotations} \ref{sec:test_3_multiple_faces_in_video}], both algorithms were evaluated in multiple use cases and scenarios. The general results pointed that both would do a great job in Baxter Bon Appetit research project because of their great performance and accuracy.\\
 
-The most important measurement for the evaluated algorithms was the one of \say{Percentage of correctly detected face frames in video}. This is due to the fact that the process must detect the user's face as frames much as possible. Based on this requirement, on section sec[\ref{sec:test_2_general_movements_with_face_rotations}], the Viola-Jones algorithm had a better percentage accuracy, than the Face Recognition algorithm (with about 10\% of improvement).\\
+The most important measurement for the evaluated algorithms was the one of \say{Percentage of correctly detected face frames in video}. This is due to the fact that the process must detect the user's face as frames much as possible. Based on this requirement, on section sec[\ref{sec:test_2_general_movements_with_face_rotations}], the Viola-Jones algorithm had a better percentage accuracy than the Face Recognition algorithm (with about 10\% of improvement).\\
 
-Even if the CPU and memory percentages are not as great in the Viola-Jones approach as in the Face Recognition approach, Baxter robot has a powerful processor and RAM specifications to execute multi-threading programs, meaning that these conditions will not be a limiting factor for the project.\\
+Although both CPU and memory percentages were not as great in the Viola-Jones approach compared to those in the Face Recognition approach, the Baxter robot has both a powerful processor and RAM specifications to execute multi-threading programs, meaning that these conditions will not be a limiting factor for the project.\\
 
 Based on these analyses, the research will be developed executing all the face detection algorithms with the Viola-Jones approach (see section sec[\ref{sec:viola_jones_classifier}]).\\
 
 
 \section{Evaluating Viola-Jones Face Detection Algorithm in Multiple Users}
 
-Now that the algorithm for face detection is selected, one important part of the development of Baxter Bon Appetit research, is to verify that the face detection results work properly for multiple individuals, looking forward to real-life conditions.\\
+Now that the algorithm for face detection is selected, one important part of the development of \say{Baxter Bon Appetit} research, is to verify that the face detection results work properly for multiple individuals looking forward to real-life situations.\\
 
 To validate the Viola-Jones framework with multiple users, 49 pictures of friends and colleagues were collected to verify that the algorithm would work correctly with different gestures and person conditions. All of these individuals approved to be added to this research and had their photos published.\\
 
@@ -2962,9 +2961,9 @@ After the validation of the face detection algorithm for each user, the results 
 
 \section{Mouth Pose Estimation Algorithm} \label{mouth_pose_estimation}
 
-The goal of this part of the process, is to obtain a mathematical representation for the specific point of the user's mouth with respect of the main robot's frame. This can be done with a series of strategical transformations through Baxter robot, starting from \{W0\} (word frame) and ending in \{F\} (face frame).\\
+The goal of this part of the process is to obtain a mathematical representation for the specific point of the user's mouth with respect of the main robot's frame. This can be done with a series of strategical transformations through the Baxter robot, starting from \{W0\} (word frame) and ending in \{F\} (face frame).\\
 
-To calculate the transformation matrix for the user's mouth at any given time, we must consider the already explained transformations in fig[\ref{fig_baxter_transformations_graphic_way}] (from \{W0\} to \{GL\}), and after that, apply the next transformations to map the coordinates to the user's face. This would be the following expression:
+To calculate the transformation matrix for the user's mouth at any given time, we must consider the already explained transformations in fig[\ref{fig_baxter_transformations_graphic_way}] (from \{W0\} to \{GL\}), and after that, apply the next transformations to map the coordinates to the user's face. The expression would be as follows:
 
 \begin{equ}[H]
 \begin{equation} \label{eq:transformation_matrix_from_0_to_face}
@@ -2986,7 +2985,7 @@ To calculate the transformation matrix for the user's mouth at any given time, w
 \caption{Complete mathematical transformations from frame \{0\} (world reference) to frame \{F\} (face reference).}
 \end{equ}
 
-As it can be observed in fig[\ref{fig_computer_vision_real_life_mappings_santi}], the position and orientation for the left limb of Baxter robot was selected in a strategical configuration. This setup had the objective of having a wide reach of the user's face and maintaining the horizontal orientation fixed. Another beneficial factor of this configuration, is that the user will be approximately located in one of the best positions for the right limb in terms of manoeuvrability (see fig[\ref{fig_baxter_general_workspace}]), giving the robot an excellent and reliable area to move its right limb and reach correctly the user's mouth to feed the patient.\\ 
+As it can be observed in fig[\ref{fig_computer_vision_real_life_mappings_santi}], the position and orientation for the left limb of the Baxter robot was selected in a strategical configuration. The objective of this setup is to provide a wide reach of the user's face and maintaining the horizontal orientation fixed. Another beneficial factor of this configuration, is that the user will be approximately located in one of the best positions for the right limb in terms of manoeuvrability (see fig[\ref{fig_baxter_general_workspace}]), giving the robot an excellent and reliable area to move its right limb and reach the user's mouth and thus, feed the patient correctly.\\ 
 
 In this section, the last two transformation matrices of eq[\ref{eq:transformation_matrix_from_0_to_face}] (from \{GL\} to \{CV\} and from \{CV\} to \{F\}) will be discussed in a detailed way. For this chapter, the naming convention of \{GL\} will be equivalent to \{T\}.\\
 
@@ -2998,10 +2997,12 @@ In this section, the last two transformation matrices of eq[\ref{eq:transformati
 \end{minipage} \end{center}
 
 
-This procedure is a combination of the specific coordinates of Baxter camera (that change in time based on Baxter's left limb conditions), and the overall position of the user's mouth, that also changes in time based on the patient's current position.\\
+This procedure is a combination of the specific coordinates of Baxter camera (that change in time based on Baxter's left limb conditions), and the overall position of the user's mouth that also changes based on the patient's current position at a certain moment in time.\\
 
-To start analyzing how the user's mouth is detected (frame \{F\}), it is critical to look back into how the face detection algorithm works, giving an output of a rectangle that has its edges on the limits of the detected face.
-The user's mouth is inside that rectangle at its lowest part, and for Baxter Bon Appetit considerations, the specific position of the user's mouth will be at the lowest 1/3 of the vertical distance, and at the middle of the rectangle, as shown in fig[\ref{fig_rick_face_zoom}]:
+To start analyzing how the user's mouth is detected (frame \{F\}), it is critical to look back at how the face detection algorithm works. It provides a rectangular output that specifies its edges on the limits of the detected face.\\
+
+
+The user's mouth is located inside the discussed rectangle at its lowest part, and for Baxter Bon Appetit considerations, the specific position of the user's mouth will be at the lowest 1/3 of the vertical distance, and at the middle of the rectangle, as shown in fig[\ref{fig_rick_face_zoom}]:
 
 
 \begin{center}
@@ -3012,7 +3013,7 @@ The user's mouth is inside that rectangle at its lowest part, and for Baxter Bon
 \end{minipage} \end{center}
 
 
-The next essential aspect of developing a solution where a computer vision algorithm is involved, is that there must be a correct mapping between pixels and meters (or the equivalent unit of measurement). This consideration had to be taken into account for the final transformation matrices of the user's mouth detection and the general process can be understood as follows:
+The next essential aspect of developing a solution where the computer vision algorithm is involved, correct mapping between pixels and meters must happen (or the equivalent unit of measurement). This consideration had to be taken into account for the final transformation matrices of the user's mouth detection and the general process can be understood as follows:
 
 \begin{itemize}
     \item The relationship between pixels and meters must be achieved from a mathematical and a experimental way.
@@ -3058,9 +3059,9 @@ These euclidean space configurations have strong-wise mathematical relationships
 \caption{Geometrical space relationships for computer vision mappings.}
 \end{equ}
 
-The following steps after gathering these equations, is to understand that the \say{Z} distance will alter the constants $R$, $S_{x}$ and $S_{Y}$ in a direct way. For Baxter Bon Appetit project, the conceived \say{Z} distance, will be assumed to be a constant value and be decided from real-life experiments. This decision was taken based on the specifications of Baxter camera discussed on tab[\ref{tab:camera_specifications}], where it can only obtain a 2D space representation and does not have any depth acquisition.\\
+The following steps after gathering these equations, is to understand that the \say{Z} distance will alter the constants $R$, $S_{x}$ and $S_{Y}$ in a direct way. For Baxter Bon Appetit project, the conceived \say{Z} distance, will be assumed to be a constant value and be decided from real-life experiments. This decision was taken based on the specifications of Baxter's camera discussed on tab[\ref{tab:camera_specifications}], where it can only obtain a 2D space representation and does not have any depth acquisition.\\
 
-To obtain $Z$ distance, the user was located on the best manoeuvrability areas for Baxter right limb, based on experimental movements of Baxter arm with the cuff sensor pressed (the one located at its wrist). The result of these movements, was to conceive the distance and to measure it from Baxter's left camera (a value that will be really important for the euclidean equations already discussed).\\
+To obtain $Z$ distance, the user was located on such position to guarantee optimal maneuverability areas for Baxter's right limb, based on experimental movements of Baxter's arm with the cuff sensor pressed (the one located at its wrist). As a result to these series of movements, the reach from Baxter's left camera was obtained (a value that will be remarkable for the euclidean equations already discussed).\\
 
 To complete the mathematical representations of eq[\ref{eq:space_relationships_computer_vision_final_transforms}] and find the relevant constants, the procedure was to do measurements of $Z_{A}$, $Z_{B}$, $Y_{ref_{A}}$ and $Y_{ref_{B}}$ in meters, and repeat it through multiple iterations, to obtain the desired results, as follows:
 
@@ -3071,7 +3072,7 @@ To complete the mathematical representations of eq[\ref{eq:space_relationships_c
     \label{fig_real_life_experiments_3d_measurements_frames}
 \end{figure}
 
-After obtaining these scaling constant factors for mapping values from pixels to meters, the next step is to understand the transformations and their relevant translations and rotations. Keep in mind that all of these transforms are denoted in meters.\\
+After obtaining these scaling constant factors for mapping values from pixels to meters, the following step is to understand the transformations, their relevant translations, and rotations. Keep in mind that all of these transforms are denoted in meters.\\
 
 To transform the reference frame \{T\} into \{CV\}, the compact mathematical representation is done with the transformation matrix as follows:
 
@@ -3096,7 +3097,7 @@ To transform the reference frame \{T\} into \{CV\}, the compact mathematical rep
 \caption{Transformation matrix from frame \{T\} to frame \{CV\}.}
 \end{equ}
 
-Additionally, the illustration shown in fig[\ref{fig_2d_plane_explained_rick}] represents the image plane for Baxter's left camera, specified with the corresponding frames \{T\} (Baxter left limb camera reference), \{CV\} (Computer Vision reference), and \{F\} (Face mouth position). One essential consideration to keep in mind, is that the already explained computer vision algorithms (Viola-Jones and Face Recognition), return a dictionary with the coordinates of the rectangle that circumscribes the user's face.
+Additionally, the illustration shown in fig[\ref{fig_2d_plane_explained_rick}] represents the image plane for Baxter's left camera, specified with the corresponding frames \{T\} (Baxter's left limb camera reference), \{CV\} (Computer Vision reference), and \{F\} (Face mouth position). One essential consideration to keep in mind, is that the already explained computer vision algorithms (Viola-Jones and Face Recognition), return a dictionary with the coordinates of the rectangle that circumscribes the user's face.
 
 \begin{center}
 \includegraphics[width= 1.02\textwidth]{\string "assets/pdfs/computer_vision/computer_vision_2d_face_plane".pdf}
@@ -3105,7 +3106,7 @@ Additionally, the illustration shown in fig[\ref{fig_2d_plane_explained_rick}] r
 \captionof{figure}{Relationship of frames \{CV\} and \{T\} in a plane for user's mouth detection. Own development.}\label{fig_2d_plane_explained_rick}
 \end{minipage} \end{center}
 
-Finally, the transformation matrix from the computer vision image plane \{CV\} into the specific face frame \{F\}, can be calculated with the following expression:
+Finally, the output from the computer vision image plane \{CV\}, to the specific face frame \{F\}, expressed as a transformation matrix can be turned calculated with the following expression:
 
 
 \begin{equ}[H]
@@ -3144,16 +3145,16 @@ All the mathematical representations and the programmatic development on Python 
 % ---------------------------------------------------------
 \chapter{Control Theory}
 
-A Robotic system is an multidisciplinary device that is designed on top of the pillars of  engineering and computer science. The key goal of robotics is to create and supply, programmable machines, that can do different tasks with greater speed, safety and precision \citep{cite_towards_data_science}. To properly obtain these benefits, robotic systems must be integrated with different control strategies that allow the system to perform different actions based on a desired conditions.\\
+A Robotic system is an multidisciplinary device that is designed on top of the pillars of  engineering and computer science. The key goal of robotics is to create and supply programmable machines that can do different tasks with greater speed, safety, and precision \citep{cite_towards_data_science}. To properly obtain these benefits, robotic systems must be integrated with different control strategies that allow the system to perform different actions based on a desired conditions.\\
 
-Baxter Bon Appetit project involves areas of knowledge such as robotics, computer vision, control theory and software development. The core component of this research is the development of a robust control system that aims to enable the active feeding of patients with motor disabilities on their upper limbs. To achieve this task, the system must be able to dynamically understand where the patient and the end-effector are located so it can move its arm towards the user's mouth.\\ 
+Baxter Bon Appetit project involves areas of knowledge such as robotics, computer vision, control theory, and software development. The core component of this research is the development of a robust control system that aims to enable the active feeding of patients with motor disabilities on their upper limbs. To achieve this task, the system must be able to dynamically understand where the patient and the end-effector are located so it can move its arm towards the user's mouth.\\ 
 
-In this chapter, it will be discussed the development, design and implementation of different control strategies that fulfill the requirements for actively feeding a patient.\\
+In this chapter, it will be discussed the development, design, and implementation of different control strategies that fulfill the requirements for actively feeding a patient.\\
 
 \section{Understanding the Control Problem}
 Every solution that uses a control strategy, must understand the inputs and outputs for a given dynamic system. Baxter Bon Appetit project has main actors that change dynamically in time: The user and the robot's arm.\\
 
-The challenge that has to be solved in this research is to feed a patient by using one of the two arms of Baxter robot, based on the mouth's position of the patient.\\
+The challenge that has to be solved in this research is to feed a patient by using one of the two arms of the Baxter robot, based on the mouth's position of the patient.\\
 
 \begin{figure}[H]
     \centering
@@ -3165,9 +3166,9 @@ The challenge that has to be solved in this research is to feed a patient by usi
 This movement must be achieved satisfying  the following conditions:
 
 \begin{enumerate}
-    \item The orientation of the end-effector of Baxter robot must not change during the movement, this is an important statement because the robot must carry out food (solids and liquids) and they can not be spilled at any time of the trajectory.
+    \item The orientation of the end-effector of the Baxter robot must not change during the movement. This is an important statement because the robot must carry out food (solids and liquids) and they can not be spilled at any time of the trajectory.
     \item The system must be able to track the current position of the user's mouth and move dynamically its arm towards it.
-    \item The system must reach the mouth's position in a smooth way, in order to perform a movement similar to the one executed by a human being performing this task.
+    \item The system must reach the mouth's position in a smooth way in order to perform a movement similar to the one executed by a human being.
     \item The system must be able to perform the movement of the robot's arm  correctly even with external perturbations.
 \end{enumerate}
 
@@ -3184,7 +3185,7 @@ The PID controllers (Proportional-integral-derivative), is one of the most popul
 
 \subsection{Baxter joint controllers}
 
-By default, Baxter robot comes with a PID controller for each one of its joint articulations, implying that the overall behavior or Baxter's arm is defined by the consequence of the dynamics of each joint controller.\\
+By default, th Baxter robot comes with a PID controller for each one of its joint articulations, implying that the overall behavior of Baxter's arm is defined by the dynamics of each joint controller.\\
 
 \begin{figure}[H]
     \centering
@@ -3227,9 +3228,9 @@ The PID algorithms will be implemented using Baxter Interface SDK. These can be 
 
 \subsection{Mouth tracking problem}
 
-Now that it is possible to apply a control signal to move each baxter joint to a desired angle, the question that must be answered to solve the mouth tracking problem exposed in this project, is how to find the right joint commands in order to move the end-effector to the user's mouth location.\\
+Now that it's possible to apply a control signal to move each of Baxter's joints to a desired angle, the question to be answered in order to solve the mouth tracking problem, is how to find the right joint commands to move the end-effector to the user's mouth location.\\
 
-To achieve this solution, an intermediate process must be implemented in which the current user's position is mapped from Cartesian coordinates to joint coordinates. This analysis can be implemented using the inverse pose kinematics of Baxter robot, as seen in sec[\ref{baxter_inverse_pose_kinematic}]. \\
+To achieve this, an intermediate process must be implemented in which the current user's position is mapped from Cartesian coordinates to joint coordinates. This analysis can be implemented using the inverse pose kinematics of Baxter robot, as seen in sec[\ref{baxter_inverse_pose_kinematic}]. \\
 
 \begin{center}
 \includegraphics[width= 1.0\textwidth]{\string "assets/pdfs/control_theory/control_pid_ipk".pdf}
@@ -3246,7 +3247,7 @@ For Baxter Bon Appetit, the source code for this control strategy can be found a
 \end{itemize}
 
 \subsection{PID results}
-To analyze how is the behavior of the system with the control structure shown in fig[\ref{fig_baxter_ipk_pid_controller}], a experiment was designed in which the main task was to move Baxter's right arm to a specific constant location in space, so that the step response of the overall system could be analysed afterwards. The results are the following:
+To analyze the behavior of the system with the control structure shown in fig[\ref{fig_baxter_ipk_pid_controller}], an experiment was designed in which the main task was to move Baxter's right arm to a specific constant location in space, so that the step response of the overall system could be analysed afterwards. The results are as follows:
 
 \begin{figure}[H]
     \centering
@@ -3300,11 +3301,11 @@ After the results of the experiment were analyzed, some interesting insights wer
 
 \section{MPC Control Strategy} \label{cite_mpc_section}
 
-In its beginnings the MPC (Model Predictive Control) was designed to be implemented in applications where the control of chemical processes was required \citep{cite_model_predictive_control_theory_and_practice}. This control strategy was also widely used for the control of aerial vehicles due to its high performance \citep{cite_receding_horizon_control_aerial_vehicles}. In recent years, the MPC has been strongly introduced and implemented in the vast world of robotics, with this novel control strategy, problems such as trajectory planning, compensation of the inertial forces of a manipulator and the approach in a three-dimensional space to a target, have been able to find solutions with a more efficient and optimal point of view. \\
+IAt first, the MPC (Model Predictive Control) was designed to be implemented in where control of chemical processes was required \citep{cite_model_predictive_control_theory_and_practice}. This control strategy was also widely used for the control of aerial vehicles due to its high performance \citep{cite_receding_horizon_control_aerial_vehicles}. In recent years, the MPC has been strongly implemented in the vast world of robotics. With this novel control strategy, problems such as trajectory planning, compensation of the inertial forces of a manipulator, and the approach in a three-dimensional space to a target, solutions with a more efficient and optimal point of view have been found. \\
 
 Baxter Bon Appetit MPC strategy is inspired from two contemporary robotic researches that integrated successfully modern control solutions with real-life problems \citep{cite_park_active_robot_assisted_feeding} \citep{cite_reaching_in_clutter_with_whole_arm_tactile_sensing}. 
 
-The controller to be developed for the Baxter Bon Appetit project uses a linear MPC, with a prediction and control horizon which will be chosen in the tuning stage. This controller is based on the discrete-time model:
+The controller to be developed for the Baxter Bon Appetit project uses a linear MPC with a prediction and control horizon which will be chosen in the tuning stage. This controller is based on the discrete-time model:
 
 \begin{equ}[H]
 \begin{equation} \label{eq:general_robot_discrete-time_model}
@@ -3318,9 +3319,9 @@ The controller to be developed for the Baxter Bon Appetit project uses a linear 
 
 Where $x(k)$ are the states of the system and $u(k)$ are the control inputs.\\
 
-This control strategy calculates a series of control inputs every time-step $k$, having as main goal to minimize an objective function which depends on the states and inputs of the system, this optimization problem must consider a series of constraints which map the physical limitations of the robot and its degrees of freedom. $N$ and $M$ are the prediction and control horizon of the model predictive controller respectively. This control strategy defines a quadratic algorithm, that is solved based on a convex optimization problem at each sample time $k$ based on $N$ prediction steps in the future. After that, it saves and applies $M$ calculated control inputs in the system and reformulates the quadratic problem after the already calculated control inputs are applied.\\
+This control strategy calculates a series of control inputs every time-step $k$, with its main goal being to minimize an objective function which depends on the states and inputs of the system. This optimization problem must consider a series of constraints which map the physical limitations of the robot and its degrees of freedom. $N$ and $M$ are the prediction and control horizon of the model predictive controller respectively. This control strategy defines a quadratic algorithm that is solved based on a convex optimization problem at each sample time $k$ based on $N$ prediction steps in the future. After that, it saves and applies $M$ calculated control inputs in the system and reformulates the quadratic problem after the already calculated control inputs are applied.\\
 
-The MPC algorithms and conditions for Baxter Bon Appetit research can be found at the GitHub repository:
+The MPC algorithms and conditions for \say{Baxter Bon Appetit} research can be found at the GitHub repository:
 
 \begin{itemize}
     \color{blue}
@@ -3355,7 +3356,7 @@ The figure fig[\ref{fig_mpc_block_diagram_baxter_bon_appetit}] shows the block d
 \captionof{figure}{Block diagram of the Model Predictive Controller to implement in Baxter Bon Appetit. Own development.}\label{fig_mpc_block_diagram_baxter_bon_appetit}
 \end{minipage} \end{center}
 
-The setpoint of this model predictive controller is a desired Cartesian position and orientation represented mathematically by means of a 6-component vector, where, the first three components represent the Cartesian coordinates of the $x$, $y$ and $z$ positions, and the others, represent the Cartesian orientation in absolute angles representation \citep{cite_craig_robotics}. This controller uses the measurements of the articulations given by the encoders of the robot as feedback to perform the dynamic control of the system.\\
+The setpoint of this model's predictive controller is a desired Cartesian position and orientation represented mathematically by means of a 6-component vector, where the first three components represent the Cartesian coordinates of the $x$, $y$, and $z$ positions. The others represent the Cartesian orientation in absolute angle representation \citep{cite_craig_robotics}. This controller uses the measurements of the articulations given by the encoders of the robot as feedback to perform the dynamic control of the system.\\
 
 \subsection{Linear discrete-time model}
 
@@ -3954,44 +3955,45 @@ To dive deeper into the source code for the implementation of the Graphical User
 
 Mechatronics engineering seeks to assertively integrate multiple technological and scientific pillars through integrated solutions for modern problems. This research project aims to creatively integrate some of these pillars, such as robotics, computer vision, modern control and software integration, in a possible solution to a tangible necessity in today's society.\\
 
-This study developed an active robotic solution designed through Baxter robot for the assistance of patients with upper limb motor disabilities.\\
+This study developed an active robotic solution designed through the Baxter robot for the assistance of patients with upper limb motor disabilities.\\
 
 There are medical devices for feeding patients on the market today, but none of them (currently) have active functionalities through systems that monitor the current position of the user's mouth and have a manipulator with anomaly detection capabilities.\\
 
-Baxter Bon Appetit offers a breakthrough in active patient feeding systems as a theoretical and practical contribution to modern solutions of increasing problems in the world's population. This project is fully open-source and seeks a commitment towards promoting these developments for social inclusion and the continuous improvement of projects that support people with motor disabilities.\\
+Baxter Bon Appetit offers a breakthrough in active patient feeding systems as a theoretical and practical contribution to modern solutions for the increasing problems in the world's population. This project is fully open-source and seeks a commitment towards promoting these developments for social inclusion and the continuous improvement of projects that support people with motor disabilities.\\
 
-Finally, this mechatronics project manages to implement multiple spheres of knowledge in an innovative way, to meet a relevant need of society and thus, continue aiming to encourage the study of these active manipulative systems for the benefit of humanity.\\
+Finally, this mechatronics project manages to implement multiple spheres of knowledge in an innovative way, to meet a relevant societal need and thus, continue aiming to encourage the study of these active manipulative systems for the benefit of humanity.\\
 
 % ---------------------------------------------------------
 \chapter{Ethical Considerations}
 
-Since ancient times, there have been several technological advances that have changed the world in positive and negative ways. It is our job as future Mechatronics Engineers from EIA University, to generate a positive impact on the development of society, where technological, social, environmental, cultural and legal areas, in our country and in the world, can be enhanced.\\
+Since ancient times, there have been several technological advances that have changed the world in both positive and negative ways. It is our job as future Mechatronic Engineers from EIA University, to generate a positive impact on the development of society, where technological, social, environmental, cultural, and legal areas in both our country and the world can be enhanced.\\
 
-As students of the EIA University, we have always had as a main pillar the motto of \say{being, knowing and serving}, so this project, from its conception to the final development, is a step towards the pursuit of a more equitable society for a target population that is highly affected by their physiological conditions. From our mechatronics scope, our main purpose will always be to help others and generate knowledge that contributes to improve the quality of life of these individuals with motor disabilities in the upper limbs.\\
+As students of the EIA University, we've always embraced as our a main pillar the motto of \say{being, knowing and serving}, so this project, from its conception to the final development, is a step towards the pursuit of a more equitable society for a target population that is highly affected by their physiological conditions. From our mechatronics scope, our main purpose will always be to help others and generate knowledge that has a positive effect on improving the quality of life of said individuals.\\
 
-Likewise, it is our great responsibility and duty, to abide by each and every one of the existing rules in the country and in the world, for the development of technological solutions that have people as direct elements in the performance tests, so we must rigorously consider the legal conditions related to this ethical reality of utmost importance and should seek to be viable from Ethics Committees around the world.\\
+Likewise, it's our great responsibility and duty to abide by each and every one of the existing rules in the country and in the world for the development of technological solutions that have people as direct elements in the performance tests. Therefore, we must rigorously consider the legal ramifications related to this ethical reality of utmost importance and should seek to be viable from the perspective of Ethics Committees around the world.\\
 
-It is a great pleasure for us to be able to generate a path towards scientific dissemination where a positive social impact is generated, while integrating some of the nuclei of knowledge from the area of Mechatronics Engineering. Therefore, carrying out this project was not just a challenge for us, but also a space for contemplation and continuous projection towards a significant contribution to the society in which we live. These results are a step towards science and the development of a positive influence on society itself.\\
+It's a great pleasure for us to be able to generate a path towards scientific dissemination where a positive social impact is generated, while integrating some of the nuclei of knowledge from the area of Mechatronics Engineering. Thus, carrying out this project was not just a challenge for us, but also a space for contemplation and continuous projection towards a significant contribution for today's society. These results are a step in the right direction for development of a positive influence on society itself.\\
 
-Finally, the aim of this research project was to seek a benefit for people with motor disabilities in the upper extremities and not to remain as a simple proposal, but to be the starting point to generate future projects and disclosures, which will continue and take up the methodologies presented in this article, with the aim of improving the quality of life of these individuals.\\
+Finally, the aim of this research project was to seek a benefit for people with motor disabilities in the upper extremities and not to remain as a simple proposal. To become the starting point for future projects and disclosures, which will further advance the methodologies presented in this article with the aim of improving the quality of life of said individuals.\\
+
 % ---------------------------------------------------------
 
 \chapter{Further investigation}
-Baxter Bon Appetit research project is a starting point for implementing a wide-variety of assisted robotics solutions. The internal algorithms for each of the subsystems that compose the architecture of the project, are subject to possible optimizations and upgrades.\\
+Baxter Bon Appetit research project is a starting point for implementing a wide-variety of assisted robotics solutions. The internal algorithms for each of the subsystems that compose the architecture of the project are subject to possible optimizations and upgrades.\\
 
-One great advantage of the chosen software design, is that the main functionalities are divided into a series of independent micro-services that, gathered together, create a robust system that is most reliable. In addition to that, the architecture supports individual improvements for each one on the nodes, in order to make them faster, more optimal and adding new features. \\
+One great advantage of the chosen software design, is that the main functionalities are divided into a series of independent micro-services that gathered together, create a robust and highly reliable system. In addition, the architecture supports individual improvements for each one on the nodes in order to make them faster, more optimal, and include the ability of adding new features on the go.\\
 
 As any investigation project, there are always possible branches and fields to develop new researches on top of the insights obtained from Baxter Bon Appetit project. Some possible areas of improvement are:
 
 \begin{itemize}
-    \item The development of a web server application that expands the graphical user interface to remote devices such as smartphones, tablets and computers, allowing them to execute Baxter's functionalities remotely.
-    \item Gathering, processing and analysis of soft real-time data in order to build new models that are tweaked for the feeding tasks based on the collected data and its insights.
+    \item The development of a web server application that enhances the graphical user interface allowing execution of Baxter's functionalities remotely to devices such as smartphones, tablets, and computers.
+    \item Gathering, processing, and analysis of soft real-time data in order to build new models that are tweaked for the feeding tasks based on the collected data and its insights.
     \item Creation of an interactive dashboard that works simultaneously with the graphical user interface in order to monitor and watch the desired variables of the system in a pseudo real-time approach.
-    \item Test, train and implement new plausible anomaly detection and classification algorithms that are built with models based on data that is collected from Baxter Bon Appetit tasks and are constantly improving their performance.
-    \item Explore new modern control techniques that are designed based on data and smart system models that seek a better performance,
+    \item Test, train, and implement new plausible anomaly detection and classification algorithms that are built with models based on data that is collected from Baxter Bon Appetit tasks and for constant performance optimization.
+    \item Explore new modern control techniques that are designed based on data and smart system models that seek better performance.
 \end{itemize}
 
-Finally, to develop similar autonomous assisted robotics feeding solutions, it was developed a \say{Manual to replicate Baxter Bon Appetit to other robotic platforms}, which is a general abstraction guide to systematically design and implement the functionalities of Baxter Bon Appetit similar robots. This guide can be found at:
+Finally, to develop similar autonomous assisted robotics feeding solutions, a \say{Manual to replicate Baxter Bon Appetit to other robotic platforms} was developed, which is a general abstraction guide to systematically design and implement the functionalities of Baxter Bon Appetit on similar robots. This guide can be found at:
 
 \begin{itemize}
     \color{blue}
