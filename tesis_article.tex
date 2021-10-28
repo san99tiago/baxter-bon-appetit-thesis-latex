@@ -184,7 +184,7 @@
 \vspace*{1cm}
 \textbf{ACKNOWLEDGMENTS}\\[3.5cm]
 
-\textbf{Acknowledgments 1}\\
+\textbf{Acknowledgments by Santiago}\\
 
 \end{Large}
 
@@ -192,7 +192,7 @@
 
 \vspace*{3cm}
 
-\textbf{Acknowledgments 2}\\
+\textbf{Acknowledgments by Elkin}\\
 
 \end{Large}
 
@@ -3770,6 +3770,108 @@ The results demonstrated that the MPC controller was able to follow the trajecto
 \end{center}
 \end{table}
 
+\subsection{Regulation task with variations in the robot's model}
+
+This experiment consisted in applying Baxter Bon Apetit MPC algorithms to reach a constant location in space using a variation of the original model structure for the MPC strategy. The main goal of this test was to validate how much the system's behavior is affected by the robot's model. \\
+
+The results were the following: 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_model_changed/x_pose.png}
+    \caption{Baxter's end-effector x position during the model's variations test.} 
+    \label{fig_baxter_x_pose_mpc_model_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_model_changed/y_pose.png}
+    \caption{Baxter's end-effector y position during the model's variations test.} 
+    \label{fig_baxter_y_pose_mpc_model_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_model_changed/z_pose.png}
+    \caption{Baxter's end-effector z position during the model's variations test.} 
+    \label{fig_baxter_z_pose_mpc_model_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_model_changed/x_orientation.png}
+    \caption{Baxter's end-effector x orientation during the model's variations test.} 
+    \label{fig_baxter_x_orientation_mpc_model_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_model_changed/y_orientation.png}
+    \caption{Baxter's end-effector y orientation during the model's variations test.} 
+    \label{fig_baxter_y_orientation_mpc_model_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_model_changed/z_orientation.png}
+    \caption{Baxter's end-effector z orientation during the model's variations test.} 
+    \label{fig_baxter_z_orientation_mpc_model_perturbations_experiments}
+\end{figure}
+
+As it can be seen in figs[\ref{fig_baxter_x_pose_mpc_model_perturbations_experiments}, \ref{fig_baxter_y_pose_mpc_model_perturbations_experiments}, \ref{fig_baxter_z_pose_mpc_model_perturbations_experiments}, \ref{fig_baxter_x_orientation_mpc_model_perturbations_experiments}, \ref{fig_baxter_y_orientation_mpc_model_perturbations_experiments}, \ref{fig_baxter_z_orientation_mpc_model_perturbations_experiments}], the time response of the system didn't change too much with respect to its behavior using the original model. This can be explained due to the MPC parameters (prediction horizon and control horizon) that govern the dynamics of the system. The fact that M = 1 means that the model used in the MPC algorithms do not affect drastically the predicted behavior. 
+
+\subsection{Regulation task with virtual perturbations}
+
+This experiment was developed by applying MPC functionalities to reach to a desired position while the control signals of the system were affected with a virtual constant perturbation. The purpose of this test was to have a deeper understanding of the robustness of the system under unpredictable errors or changes in the control signals.\\
+
+The following figures show the results:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_virtual_perturbations/x_pose.png}
+    \caption{Baxter's end-effector x position during the virtual perturbations test.} 
+    \label{fig_baxter_x_pose_mpc_virtual_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_virtual_perturbations/y_pose.png}
+    \caption{Baxter's end-effector y position during the virtual perturbations test.} 
+    \label{fig_baxter_y_pose_mpc_virtual_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_virtual_perturbations/z_pose.png}
+    \caption{Baxter's end-effector z position during the virtual perturbations test.} 
+    \label{fig_baxter_z_pose_mpc_virtual_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_virtual_perturbations/x_orientation.png}
+    \caption{Baxter's end-effector x orientation during the virtual perturbations test.} 
+    \label{fig_baxter_x_orientation_mpc_virtual_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_virtual_perturbations/y_orientation.png}
+    \caption{Baxter's end-effector y orientation during the virtual perturbations test.} 
+    \label{fig_baxter_y_orientation_mpc_virtual_perturbations_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_regulation_virtual_perturbations/z_orientation.png}
+    \caption{Baxter's end-effector z orientation during the virtual perturbations test.} 
+    \label{fig_baxter_z_orientation_mpc_perturbations_perturbations_experiments}
+\end{figure}
+
+One important insight discovered in the experiment is that the system's behavior has acceptable responses with control signals that don't have constant perturbations greater than 3\%. It is important to notice that, in real-world scenarios, it is extremely rare to have constant perturbations of these magnitudes for the encoders of the robot.\\
+
+In order to improve the MPC behavior under control signal perturbations, a robust MPC strategy could be implemented instead such as the Robust tube-based MPC approach.\\  
+
 \subsection{Regulation task with external perturbations}
 
 The regulation task with external perturbations consisted of applying Baxter Bon Appetit MPC algorithms to reach to a constant location in space while the the system was affected by external forces that changed the behavior of the movements (see fig[\ref{fig_real_mpc_mouth_external_perturbations_experiments}]). \\
@@ -3843,30 +3945,6 @@ The quantitative results of these experiments were as follows:
 \caption{\label{tab:performance_metrics_external_perturbations} Performance metrics for regulation experiment with external perturbations.}
 \end{center}
 \end{table}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 % ---------------------------------------------------------
