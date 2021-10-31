@@ -181,10 +181,28 @@
 
 \begin{Large}
 
-\vspace*{1cm}
-\textbf{ACKNOWLEDGMENTS}\\[3.5cm]
-
+\vspace*{0.3cm}
 \textbf{Acknowledgments by Santiago}\\
+\vspace*{0.2cm}
+
+A mi familia, por su apoyo incondicional. Adriana y George con su amor, acompañamiento y ejemplo son los que me han inspirado a esforzarme día a día a luchar por mis sueños. Mariana y Oscar han sido ejemplo claro de disciplina, madurez y enseñanzas. Kike, Papo y Lilo han sido la voz de la experiencia, acompañándome en estos 5 años en las aventuras mecatrónicas y de vida. Coco ha sido mi compañero de trasnochadas, dándome ánimos para seguir. Mis tíos, primos y familiares han estado presentes en mi crecimiento, mostrándome el soporte incondicional de la familia.\\
+
+\vspace*{0.4cm}
+
+A Moni, por su amor y compromiso. Gracias por ser mi compañera de viaje y de vida. Estos 5 años juntos son solo el comienzo de muchísimos retos, proyectos y aventuras más.\\
+
+\vspace*{0.4cm}
+
+A mis amigos por los momentos de risas, crecimiento, apoyo y estudio. A Elkin, Yesid, Upegui y Medina, por ser los compañeros firmes de AU-EU. A Vahos, Isaías, Meli, Cami y Willy, por compartir puntos de trascendencia mecatrónicos y existenciales. A Manuelita, Juanjo, Hans y Manu, por pertenecer a los 6 fantásticos. A Casta y Pipo, por ser mis amigos de toda la vida, motivándome a seguir siendo una gran persona y a realizar proyectos locos.\\
+
+\vspace*{0.4cm}
+
+A nuestros profesores de mecatrónica, por motivarnos a amar cada día más esta profesión. Agradecemos especialmente a Tejada, por enseñarnos con pasión que la robótica es una disciplina increíble.\\
+
+\vspace*{0.4cm}
+
+A Tati por ser nuestra guía en el proceso de desarrollo de la tesis, tu ayuda nos permitió expandir el panorama de los alcances del control y sus aplicaciones avanzadas. Gracias por el acompañamiento continuo y por ser nuestra directora en este gran proyecto.\\
+
 
 \end{Large}
 
@@ -193,6 +211,20 @@
 \vspace*{3cm}
 
 \textbf{Acknowledgments by Elkin}\\
+\vspace*{0.2cm}
+A toda mi familia, por estar siempre conmigo apoyándome en todo momento. Mi mamá Eva Raquel y a mi papá Jesús, por siempre ser un ejemplo para mí y brindarme  todos los valores necesarios para poder ser quien soy actualmente. Mi hermana Lety, por ser siempre un apoyo constante a lo largo de toda mi vida. Mi abuela Eva por estar siempre a mi lado y ser una segunda mamá para mí.
+
+\vspace*{0.4cm}
+
+A mis amigos más cercanos, tanto de Cereté como de Medellín, por todos los estupendos momentos y el apoyo incondicional de su parte. A Mildre, Lucho, Sebastian y Jonathan, por ser los mejores amigos y siempre estar a mi lado durante mi infancia y mi tiempo escolar en Cereté. A Santiago, Upegui, Medina y Yesid, por ser los mejores amigos y compañeros. A Cami Medina, Jhonier, Juanita, Meli y Cami Yepes, por todos los fantásticos momentos vividos durante estos últimos años. 
+
+\vspace*{0.4cm}
+
+A todos nuestros profesores del área de mecatrónica, por sus buenas enseñanzas y conocimientos compartidos. Queremos agradecer especialmente a nuestra directora de trabajo de grado, Tati, y a nuestro profesor de robótica, Tejada, por todo el apoyo mostrado para con nosotros en la realización de nuestro este proyecto.
+
+\vspace*{0.4cm}
+
+Por último, quisiera hacer una mención especial a Diosito que siempre ha estado con nosotros velando nuestro camino.
 
 \end{Large}
 
@@ -1420,7 +1452,7 @@ It is mandatory to have a clear and decent understanding of Baxter components. T
 
 The main Baxter components are:
 
-\subsubsubsection{Robot}
+\subsubsection{Robot}
 
 The Baxter robot has a central computer unit that is located inside of its torso. This
 CPU can run multi-thread programs to perform complex robotic operations that involve multiple applications.\\
@@ -1428,7 +1460,7 @@ CPU can run multi-thread programs to perform complex robotic operations that inv
 It is also important to specify that the most important interactive safety measure is known as the \say{Emergency Button}. This E-Button can completely shut down the Baxter robot and kill all the underlying processes that are being executed at any time. This acts similarly as an \say{Enable/Disable} condition.\\
 
 
-\subsubsubsection{Grippers}
+\subsubsection{Grippers}
 
 Grippers, also known as end effectors, are the final part of a robotic arm. The grippers act as a crucial part of a robot because they enable the manipulation of external elements in a workspace.\\
 
@@ -1436,17 +1468,17 @@ The Baxter robot supports two default types of pre-built grippers. These include
 
 Baxter robot, also allows external \say{own-made} grippers to be attached to its hands, making it possible to design multiple solutions that are not initially considered.\\
 
-\subsubsubsection{Head}
+\subsubsection{Head}
 
 Baxter's head is a subtle but fundamental component of the robot because it can be used as an interactive tool to display friendly images and show possible tasks to the user. The head is also a way to demonstrate that Baxter is designed for collaborative environments that are easily adapted to multiple scenarios with people around him.\\ 
 
 The head is also capable of panning a total of 180\textdegree \space in horizontal directions and nodding vertically as well. This condition is a way to implement an extra layer of interactions with the work space's users.\\
 
-\subsubsubsection{Screen}
+\subsubsection{Screen}
 
 The screen is a 1024 x 600 SVGA LCD that is completely integrated with Baxter internal components. This screen is intended to be an extension of the robot's functionalities.\\
 
-\subsubsubsection{Arms}
+\subsubsection{Arms}
 
 One of the particularities of the Baxter robot is that it has two independent arms (which is different than most industrial robots that only have one). The fact that Baxter was developed in this way, is a design strategy to show that the robot is a \say{friendly system} that looks similar to the human anatomy, increasing the trust that users have for it.\\
 
@@ -1455,7 +1487,7 @@ Each arm is composed of seven degrees of freedom that are moved, controlled, and
 Baxter hands also implement extra signals sensors, such as cameras, infrared sensors, accelerometers and, navigators. These sensors are integrated with the internal electronic and software architecture of the system.\\
 
 
-\subsubsubsection{Cameras}
+\subsubsection{Cameras}
 
 A key component of the whole system is the fact that it has multiple high-resolution cameras. These cameras are named the \say{left\_hand\_camera}, \say{right\_hand\_camera} and \say{head\_camera}. All cameras are internally connected with Baxter software architecture and enable extra processes such as computer vision algorithms based on the analyzed images.\\
 
@@ -1464,7 +1496,7 @@ One important limitation to keep in mind is that the hardware conditions do not 
 Baxter also allows to individually configure camera conditions, i.e, window width, window height, and max frame rate.\\
 
 
-\subsubsubsection{Input and Output}
+\subsubsection{Input and Output}
 
 Although the other components may have internal I/O systems, Rethink Robotics considered the \say{Input/Output} conditions as a key feature of the final solution. These I/O are the direct conditions to interact with the Baxter robot, and are designed in a robust, secure, and easy-to-program way.\\
 
@@ -3302,6 +3334,42 @@ After the results of the experiment were analyzed, some interesting insights wer
     \item The Cartesian orientation has relevant changes and even high-slope segments that are undesired for the feeding task. 
 \end{itemize}
 
+Another experiment was developed to validate the behavior of the system. This test consisted of following the user's mouth with the end-effector through a real user's mouth trajectory. The results can be observed in figs[\ref{fig_yz_view_pid_tracking_experiments}, \ref{fig_xz_view_pid_tracking_experiments}, \ref{fig_general_view_pid_tracking_experiments}].
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tracking/yz_view.png}
+    \caption{Baxter's end-effector trajectories for IPK+PID mouth tracking test in YZ plane.} 
+    \label{fig_yz_view_pid_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tracking/xz_view.png}
+    \caption{Baxter's end-effector trajectories for IPK+PID mouth tracking test in XZ plane.} 
+    \label{fig_xz_view_pid_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tracking/general_view.png}
+    \caption{Baxter's end-effector trajectories for IPK+PID mouth tracking test.} 
+    \label{fig_general_view_pid_tracking_experiments}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/pid_tracking/real_pid_tracking.png}
+    \caption{Frames of the patient's movement during the IPK+PID mouth tracking experiment.} 
+    \label{fig_real_pid_mouth_tracking_experiments}
+\end{figure}
+
+After analysing the results, two relevant insights were observed:
+
+\begin{itemize}
+    \item There is a constant steady-state error due to the simplifications that were considered from the 6 DOF regarding the IPK explained on sec[\ref{sub_sec_ipk}]. 
+    \item The trajectories and the movements of the end-effector are wide-open and could represent high-slope conditions in its derivatives causing jerk problems. 
+\end{itemize}
 
 \section{MPC Control Strategy} \label{cite_mpc_section}
 
@@ -3681,13 +3749,6 @@ The results of the tracking experiment are going to be shown in the following fi
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/real_mouth_tracking.png}
-    \caption{Frames of the patient's movement during the mouth tracking experiment.} 
-    \label{fig_real_mpc_mouth_tracking_experiments}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
     \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/x_pose.png}
     \caption{Baxter's end-effector x position during the mouth tracking test.} 
     \label{fig_baxter_x_pose_mpc_tracking_experiments}
@@ -3749,6 +3810,15 @@ The results of the tracking experiment are going to be shown in the following fi
     \caption{Baxter's end-effector trajectories for MPC mouth tracking test.} 
     \label{fig_general_view_mpc_tracking_experiments}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{assets/imgs/control_theory/mpc_tracking/real_mouth_tracking.png}
+    \caption{Frames of the patient's movement during the mouth tracking experiment.} 
+    \label{fig_real_mpc_mouth_tracking_experiments}
+\end{figure}
+
+As it can be seen in fig[\ref{fig_real_mpc_mouth_tracking_experiments}], each one of those frames corresponds to an individual mouth location that the robot must reach during the tracking experiment. The trajectory of the end-effector can be seen in fig[\ref{fig_general_view_mpc_tracking_experiments}], with the specific labels \say{ti} that match the frames explained above. \\
 
 The results demonstrated that the MPC controller was able to follow the trajectory successfully. Some relevant metrics about the experiment are:
 
